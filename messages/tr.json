@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Teori Sınavı Deneme Testi – Fahrschule Abgefahrn",
+    "description": "Sürücü belgesi teori deneme sınavını kendi dilinde yap. Sınıf A, B, A+B veya Mofa."
+  },
+  "nav": {
+    "home": "Ana sayfa",
+    "exit": "Çıkış",
+    "language": "Dil"
+  },
+  "home": {
+    "tag": "Güçle ehliyete",
+    "headline": "Teori deneme sınavını yap",
+    "subheadline": "Resmi Alman sınav formatını deneyimlemek için dilini ve sınıfını seç.",
+    "cinemaHeadline": "Ehliyetini fethet",
+    "cinemaLine1": "Ehliyetini",
+    "cinemaLine2": "Fethet",
+    "cinemaSubheadline": "Resmi teori deneme sınavı. Dilini ve sınıfını seç — gerisi TÜV ve DEKRA ile aynı.",
+    "mascotSpeech": "Hazır mısın? O zaman başlayalım.",
+    "scrollHint": "Daha fazlasını keşfet",
+    "ctaPrimary": "Hemen başla",
+    "ctaSecondary": "Demoyu izle",
+    "trustReviews": "1380+ 5 yıldızlı değerlendirme",
+    "trustTheory": "Haftada 12 teori dersi",
+    "trustLanguages": "Çok dilli",
+    "languageHeading": "Dilini seç",
+    "classHeading": "Sürücü sınıfını seç",
+    "scrollToStart": "Başla",
+    "infoTitle": "Deneme testi nasıl çalışır?",
+    "infoBody": "2008'den beri Almanya'daki teori sınavı TÜV ve DEKRA tarafından geliştirilen tek tip bir sistem ile yapılır. Deneme testimiz bu formatı birebir yansıtır.",
+    "stats": {
+      "questions": "{count} soru",
+      "categories": "{count} kategori",
+      "languages": "{count} dil"
+    }
+  },
+  "classes": {
+    "A": {
+      "name": "Sınıf A",
+      "description": "Motosikletler – güç sınırlaması olmayan büyük makineler."
+    },
+    "B": {
+      "name": "Sınıf B",
+      "description": "3,5 t'a kadar binek araçlar, 8 yolcu koltuğuna kadar."
+    },
+    "AB": {
+      "name": "Sınıf A + B",
+      "description": "Motosiklet ve binek araç birlikte – tam paket."
+    },
+    "Mofa": {
+      "name": "Sınıf Mofa",
+      "description": "25 km/s'ye kadar moped belgesi."
+    }
+  },
+  "quiz": {
+    "label": "Soru {current} / {total}",
+    "points": "{count} puan",
+    "category": "Kategori",
+    "multiHint": "Birden fazla cevap doğru olabilir.",
+    "previous": "Önceki",
+    "next": "Sonraki soru",
+    "check": "Cevabı kontrol et",
+    "finish": "Sınavı bitir",
+    "exit": "Sınavdan çık",
+    "exitConfirm": "Sınavdan çıkmak istediğine emin misin? İlerlemen silinecek.",
+    "feedback": {
+      "correct": "Doğru!",
+      "partial": "Kısmen doğru",
+      "wrong": "Yanlış"
+    },
+    "explanation": "Açıklama",
+    "loading": "Sorular yükleniyor…",
+    "skipped": "Bu soru cevaplanmadı."
+  },
+  "results": {
+    "title": "Sonucun",
+    "passed": "Geçti",
+    "failed": "Geçemedi",
+    "passedSubtitle": "Harika sürüş! Deneme sınavını geçtin.",
+    "failedSubtitle": "Pes etme – hatalarına bak ve tekrar dene.",
+    "yourScore": "Puanın",
+    "outOf": "{total} üzerinden",
+    "passThreshold": "Geçme sınırı: {points} puan",
+    "totalQuestions": "Soru",
+    "correct": "Doğru",
+    "wrong": "Yanlış",
+    "skipped": "Atlandı",
+    "timeTaken": "Süre",
+    "byCategory": "Kategoriye göre",
+    "review": "Yanlış cevapları incele",
+    "reviewEmpty": "Yanlış cevap yok – mükemmel!",
+    "yourAnswer": "Cevabın",
+    "correctAnswer": "Doğru cevap",
+    "tryAgain": "Tekrar dene",
+    "chooseAnother": "Başka sınıf seç",
+    "share": "Sonucu paylaş",
+    "shareCopied": "Bağlantı kopyalandı",
+    "backHome": "Ana sayfaya dön"
+  },
+  "footer": {
+    "imprint": "Künye",
+    "privacy": "Gizlilik",
+    "contact": "İletişim",
+    "tagline": "Güçle ehliyete.",
+    "copyright": "© {year} Fahrschule Mocktest"
+  },
+  "categories": {
+    "signs": "Trafik işaretleri",
+    "rightOfWay": "Geçiş önceliği",
+    "speed": "Hız sınırları",
+    "behavior": "Davranış",
+    "environment": "Çevre",
+    "tech": "Teknik",
+    "firstAid": "İlk yardım",
+    "alcohol": "Alkol ve uyuşturucu"
+  },
+  "common": {
+    "back": "Geri",
+    "continue": "Devam",
+    "close": "Kapat",
+    "minutes": "dk",
+    "seconds": "sn",
+    "or": "veya",
+    "loading": "Yükleniyor…"
+  }
+}

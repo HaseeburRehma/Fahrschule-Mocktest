@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Theory Exam Mock Test – Fahrschule Abgefahrn",
+    "description": "Take your theoretical driving licence mock exam in your language. Class A, B, A+B or Mofa. With power to your licence."
+  },
+  "nav": {
+    "home": "Home",
+    "exit": "Exit",
+    "language": "Language"
+  },
+  "home": {
+    "tag": "With power to your licence",
+    "headline": "Carry out your mock theory exam",
+    "subheadline": "Pick your language and licence class to experience the official German exam format.",
+    "cinemaHeadline": "Conquer your licence",
+    "cinemaLine1": "Conquer your",
+    "cinemaLine2": "Licence",
+    "cinemaSubheadline": "The official mock theory exam. Pick a language, pick a class — the rest mirrors TÜV and DEKRA.",
+    "mascotSpeech": "Ready? Let's get you behind the wheel.",
+    "scrollHint": "Explore more",
+    "ctaPrimary": "Start now",
+    "ctaSecondary": "Watch demo",
+    "trustReviews": "1380+ 5-star reviews",
+    "trustTheory": "12× theory classes per week",
+    "trustLanguages": "Multilingual",
+    "languageHeading": "Select your language",
+    "classHeading": "Select your licence class",
+    "scrollToStart": "Get started",
+    "infoTitle": "How does the mock test work?",
+    "infoBody": "Since 2008, the theoretical driving licence test in Germany has been conducted using a uniform system developed by TÜV and DEKRA. Our mock test mirrors that exam format so you can prepare realistically.",
+    "stats": {
+      "questions": "{count} questions",
+      "categories": "{count} categories",
+      "languages": "{count} languages"
+    }
+  },
+  "classes": {
+    "A": {
+      "name": "Class A",
+      "description": "Motorcycles – large bikes with no power limit."
+    },
+    "B": {
+      "name": "Class B",
+      "description": "Cars up to 3.5 t and up to 8 passenger seats."
+    },
+    "AB": {
+      "name": "Class A + B",
+      "description": "Motorcycle and car combined – the full programme."
+    },
+    "Mofa": {
+      "name": "Class Mofa",
+      "description": "Moped certificate up to 25 km/h."
+    }
+  },
+  "quiz": {
+    "label": "Question {current} of {total}",
+    "points": "{count} points",
+    "category": "Category",
+    "multiHint": "More than one answer can be correct.",
+    "previous": "Back",
+    "next": "Next question",
+    "check": "Check answer",
+    "finish": "Finish exam",
+    "exit": "Exit exam",
+    "exitConfirm": "Do you really want to exit the exam? Your progress will be lost.",
+    "feedback": {
+      "correct": "Correct!",
+      "partial": "Partially correct",
+      "wrong": "Incorrect"
+    },
+    "explanation": "Explanation",
+    "loading": "Loading questions…",
+    "skipped": "This question was not answered."
+  },
+  "results": {
+    "title": "Your result",
+    "passed": "Passed",
+    "failed": "Not passed",
+    "passedSubtitle": "Great driving! You passed the mock test.",
+    "failedSubtitle": "Don't give up – review your mistakes and try again.",
+    "yourScore": "Your points",
+    "outOf": "of {total}",
+    "passThreshold": "Pass threshold: {points} points",
+    "totalQuestions": "Questions",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "skipped": "Skipped",
+    "timeTaken": "Time",
+    "byCategory": "By category",
+    "review": "Review wrong answers",
+    "reviewEmpty": "No wrong answers – excellent!",
+    "yourAnswer": "Your answer",
+    "correctAnswer": "Correct answer",
+    "tryAgain": "Try again",
+    "chooseAnother": "Choose another class",
+    "share": "Share result",
+    "shareCopied": "Link copied to clipboard",
+    "backHome": "Back to home"
+  },
+  "footer": {
+    "imprint": "Imprint",
+    "privacy": "Privacy",
+    "contact": "Contact",
+    "tagline": "With power to your licence.",
+    "copyright": "© {year} Fahrschule Mocktest"
+  },
+  "categories": {
+    "signs": "Traffic signs",
+    "rightOfWay": "Right of way",
+    "speed": "Speed limits",
+    "behavior": "Behaviour",
+    "environment": "Environment",
+    "tech": "Technology",
+    "firstAid": "First aid",
+    "alcohol": "Alcohol & drugs"
+  },
+  "common": {
+    "back": "Back",
+    "continue": "Continue",
+    "close": "Close",
+    "minutes": "min",
+    "seconds": "sec",
+    "or": "or",
+    "loading": "Loading…"
+  }
+}

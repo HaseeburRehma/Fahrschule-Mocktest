@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Próbny egzamin teoretyczny – Fahrschule Abgefahrn",
+    "description": "Zrób próbny egzamin teoretyczny na prawo jazdy w swoim języku. Klasa A, B, A+B lub Mofa."
+  },
+  "nav": {
+    "home": "Start",
+    "exit": "Wyjdź",
+    "language": "Język"
+  },
+  "home": {
+    "tag": "Z mocą po prawko",
+    "headline": "Zrób próbny egzamin teoretyczny",
+    "subheadline": "Wybierz język i kategorię prawa jazdy, aby doświadczyć oficjalnego niemieckiego formatu egzaminu.",
+    "cinemaHeadline": "Pokonaj swoje prawo jazdy",
+    "cinemaLine1": "Pokonaj swoje",
+    "cinemaLine2": "Prawo jazdy",
+    "cinemaSubheadline": "Oficjalny próbny egzamin teoretyczny. Wybierz język i kategorię — reszta wygląda jak u TÜV i DEKRA.",
+    "mascotSpeech": "Gotowy? To startujemy.",
+    "scrollHint": "Odkryj więcej",
+    "ctaPrimary": "Zacznij teraz",
+    "ctaSecondary": "Zobacz demo",
+    "trustReviews": "Ponad 1380 recenzji 5★",
+    "trustTheory": "12× teoria w tygodniu",
+    "trustLanguages": "Wielojęzyczna",
+    "languageHeading": "Wybierz język",
+    "classHeading": "Wybierz kategorię",
+    "scrollToStart": "Zaczynaj",
+    "infoTitle": "Jak działa test próbny?",
+    "infoBody": "Od 2008 roku egzamin teoretyczny w Niemczech odbywa się w jednolitym systemie opracowanym przez TÜV i DEKRA. Nasz test próbny dokładnie odzwierciedla ten format.",
+    "stats": {
+      "questions": "{count} pytań",
+      "categories": "{count} kategorii",
+      "languages": "{count} języków"
+    }
+  },
+  "classes": {
+    "A": {
+      "name": "Klasa A",
+      "description": "Motocykle – duże maszyny bez ograniczenia mocy."
+    },
+    "B": {
+      "name": "Klasa B",
+      "description": "Samochody do 3,5 t, do 8 pasażerów."
+    },
+    "AB": {
+      "name": "Klasa A + B",
+      "description": "Motocykl i samochód razem – pełen pakiet."
+    },
+    "Mofa": {
+      "name": "Klasa Mofa",
+      "description": "Karta motoroweru do 25 km/h."
+    }
+  },
+  "quiz": {
+    "label": "Pytanie {current} z {total}",
+    "points": "{count} pkt",
+    "category": "Kategoria",
+    "multiHint": "Poprawnych może być więcej niż jedna odpowiedź.",
+    "previous": "Wstecz",
+    "next": "Następne pytanie",
+    "check": "Sprawdź odpowiedź",
+    "finish": "Zakończ egzamin",
+    "exit": "Wyjdź z egzaminu",
+    "exitConfirm": "Na pewno wyjść? Twój postęp zostanie utracony.",
+    "feedback": {
+      "correct": "Dobrze!",
+      "partial": "Częściowo poprawnie",
+      "wrong": "Źle"
+    },
+    "explanation": "Wyjaśnienie",
+    "loading": "Ładowanie pytań…",
+    "skipped": "Na to pytanie nie udzielono odpowiedzi."
+  },
+  "results": {
+    "title": "Twój wynik",
+    "passed": "Zaliczone",
+    "failed": "Niezaliczone",
+    "passedSubtitle": "Świetna jazda! Zaliczyłeś próbny egzamin.",
+    "failedSubtitle": "Nie poddawaj się – przeanalizuj błędy i spróbuj jeszcze raz.",
+    "yourScore": "Twoje punkty",
+    "outOf": "z {total}",
+    "passThreshold": "Próg zaliczenia: {points} pkt",
+    "totalQuestions": "Pytania",
+    "correct": "Poprawne",
+    "wrong": "Błędne",
+    "skipped": "Pominięte",
+    "timeTaken": "Czas",
+    "byCategory": "Według kategorii",
+    "review": "Przegląd błędnych odpowiedzi",
+    "reviewEmpty": "Brak błędów – wzorowo!",
+    "yourAnswer": "Twoja odpowiedź",
+    "correctAnswer": "Poprawna odpowiedź",
+    "tryAgain": "Spróbuj ponownie",
+    "chooseAnother": "Wybierz inną klasę",
+    "share": "Udostępnij wynik",
+    "shareCopied": "Skopiowano link",
+    "backHome": "Wróć na stronę główną"
+  },
+  "footer": {
+    "imprint": "Impressum",
+    "privacy": "Prywatność",
+    "contact": "Kontakt",
+    "tagline": "Z mocą po prawko.",
+    "copyright": "© {year} Fahrschule Mocktest"
+  },
+  "categories": {
+    "signs": "Znaki drogowe",
+    "rightOfWay": "Pierwszeństwo",
+    "speed": "Prędkość",
+    "behavior": "Zachowanie",
+    "environment": "Środowisko",
+    "tech": "Technika",
+    "firstAid": "Pierwsza pomoc",
+    "alcohol": "Alkohol i narkotyki"
+  },
+  "common": {
+    "back": "Wstecz",
+    "continue": "Dalej",
+    "close": "Zamknij",
+    "minutes": "min",
+    "seconds": "s",
+    "or": "lub",
+    "loading": "Ładowanie…"
+  }
+}

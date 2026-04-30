@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "اختبار النظري التجريبي – مدرسة القيادة Abgefahrn",
+    "description": "قم بإجراء اختبار رخصة القيادة النظري التجريبي بلغتك. الفئة A، B، A+B أو Mofa."
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "exit": "خروج",
+    "language": "اللغة"
+  },
+  "home": {
+    "tag": "بالقوة إلى الرخصة",
+    "headline": "قم بإجراء اختبارك النظري التجريبي",
+    "subheadline": "اختر لغتك وفئة الرخصة لتجربة شكل الاختبار الألماني الرسمي.",
+    "cinemaHeadline": "انتصر على رخصتك",
+    "cinemaLine1": "انتصر على",
+    "cinemaLine2": "رخصتك",
+    "cinemaSubheadline": "اختبار النظري التجريبي الرسمي. اختر اللغة والفئة — والباقي مطابق لـ TÜV و DEKRA.",
+    "mascotSpeech": "جاهز؟ هيا نبدأ.",
+    "scrollHint": "اكتشف المزيد",
+    "ctaPrimary": "ابدأ الآن",
+    "ctaSecondary": "شاهد العرض",
+    "trustReviews": "أكثر من 1380 تقييم 5 نجوم",
+    "trustTheory": "12 درسًا نظريًا أسبوعيًا",
+    "trustLanguages": "متعدد اللغات",
+    "languageHeading": "اختر لغتك",
+    "classHeading": "اختر فئة الرخصة",
+    "scrollToStart": "ابدأ الآن",
+    "infoTitle": "كيف يعمل الاختبار التجريبي؟",
+    "infoBody": "منذ عام 2008، يُجرى اختبار رخصة القيادة النظري في ألمانيا وفق نظام موحد طورته TÜV و DEKRA. اختبارنا التجريبي يحاكي هذا النمط بدقة.",
+    "stats": {
+      "questions": "{count} سؤال",
+      "categories": "{count} فئات",
+      "languages": "{count} لغات"
+    }
+  },
+  "classes": {
+    "A": {
+      "name": "الفئة A",
+      "description": "الدراجات النارية الكبيرة بدون حد للقدرة."
+    },
+    "B": {
+      "name": "الفئة B",
+      "description": "السيارات حتى 3.5 طن وحتى 8 ركاب."
+    },
+    "AB": {
+      "name": "الفئة A + B",
+      "description": "الدراجة النارية والسيارة معًا – البرنامج الكامل."
+    },
+    "Mofa": {
+      "name": "فئة Mofa",
+      "description": "شهادة الموبد حتى 25 كم/س."
+    }
+  },
+  "quiz": {
+    "label": "السؤال {current} من {total}",
+    "points": "{count} نقاط",
+    "category": "الفئة",
+    "multiHint": "قد تكون أكثر من إجابة صحيحة.",
+    "previous": "السابق",
+    "next": "السؤال التالي",
+    "check": "تحقق من الإجابة",
+    "finish": "إنهاء الاختبار",
+    "exit": "الخروج من الاختبار",
+    "exitConfirm": "هل تريد فعلاً الخروج؟ سيتم فقدان تقدمك.",
+    "feedback": {
+      "correct": "صحيح!",
+      "partial": "صحيح جزئيًا",
+      "wrong": "إجابة خاطئة"
+    },
+    "explanation": "الشرح",
+    "loading": "جاري تحميل الأسئلة…",
+    "skipped": "لم تتم الإجابة على هذا السؤال."
+  },
+  "results": {
+    "title": "نتيجتك",
+    "passed": "ناجح",
+    "failed": "غير ناجح",
+    "passedSubtitle": "قيادة رائعة! لقد نجحت في الاختبار التجريبي.",
+    "failedSubtitle": "لا تستسلم – راجع أخطاءك وحاول مرة أخرى.",
+    "yourScore": "نقاطك",
+    "outOf": "من أصل {total}",
+    "passThreshold": "حد النجاح: {points} نقطة",
+    "totalQuestions": "الأسئلة",
+    "correct": "صحيح",
+    "wrong": "خطأ",
+    "skipped": "متخطى",
+    "timeTaken": "الوقت",
+    "byCategory": "حسب الفئة",
+    "review": "مراجعة الإجابات الخاطئة",
+    "reviewEmpty": "لا إجابات خاطئة – ممتاز!",
+    "yourAnswer": "إجابتك",
+    "correctAnswer": "الإجابة الصحيحة",
+    "tryAgain": "حاول مرة أخرى",
+    "chooseAnother": "اختر فئة أخرى",
+    "share": "شارك النتيجة",
+    "shareCopied": "تم نسخ الرابط",
+    "backHome": "العودة للرئيسية"
+  },
+  "footer": {
+    "imprint": "بصمة قانونية",
+    "privacy": "الخصوصية",
+    "contact": "اتصل بنا",
+    "tagline": "بالقوة إلى الرخصة.",
+    "copyright": "© {year} Fahrschule Mocktest"
+  },
+  "categories": {
+    "signs": "إشارات المرور",
+    "rightOfWay": "الأولوية",
+    "speed": "حدود السرعة",
+    "behavior": "السلوك",
+    "environment": "البيئة",
+    "tech": "التقنية",
+    "firstAid": "الإسعافات الأولية",
+    "alcohol": "الكحول والمخدرات"
+  },
+  "common": {
+    "back": "رجوع",
+    "continue": "متابعة",
+    "close": "إغلاق",
+    "minutes": "د",
+    "seconds": "ث",
+    "or": "أو",
+    "loading": "جاري التحميل…"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Theorieprüfung Mocktest – Fahrschule Abgefahrn",
+    "description": "Mache deine theoretische Führerschein-Probeprüfung in deiner Sprache. Klasse A, B, A+B oder Mofa. Mit Power zum Lappen."
+  },
+  "nav": {
+    "home": "Start",
+    "exit": "Beenden",
+    "language": "Sprache"
+  },
+  "home": {
+    "tag": "Mit Power zum Lappen",
+    "headline": "Mache deine theoretische Probeprüfung",
+    "subheadline": "Wähle deine Sprache und Führerscheinklasse, um den offiziellen Prüfungsstil zu erleben.",
+    "cinemaHeadline": "Besiege deinen Führerschein",
+    "cinemaLine1": "Besiege deinen",
+    "cinemaLine2": "Führerschein",
+    "cinemaSubheadline": "Die offizielle Theorie-Probeprüfung. Wähle Sprache und Klasse — der Rest läuft wie bei TÜV und DEKRA.",
+    "mascotSpeech": "Bereit? Dann lass uns starten!",
+    "scrollHint": "Mehr entdecken",
+    "ctaPrimary": "Jetzt starten",
+    "ctaSecondary": "Demo ansehen",
+    "trustReviews": "1380+ 5-Sterne-Bewertungen",
+    "trustTheory": "12× Theorie pro Woche",
+    "trustLanguages": "Mehrsprachig",
+    "languageHeading": "Sprache wählen",
+    "classHeading": "Führerscheinklasse wählen",
+    "scrollToStart": "Loslegen",
+    "infoTitle": "Wie funktioniert der Mocktest?",
+    "infoBody": "Seit 2008 wird die Theorieprüfung in Deutschland bundesweit einheitlich nach den Vorgaben von TÜV und DEKRA durchgeführt. Unser Mocktest spiegelt diesen Prüfungsstil wider, damit du dich realistisch vorbereiten kannst.",
+    "stats": {
+      "questions": "{count} Fragen",
+      "categories": "{count} Kategorien",
+      "languages": "{count} Sprachen"
+    }
+  },
+  "classes": {
+    "A": {
+      "name": "Klasse A",
+      "description": "Motorrad – große Krafträder ohne Leistungsbeschränkung."
+    },
+    "B": {
+      "name": "Klasse B",
+      "description": "Pkw bis 3,5 t mit bis zu 8 Fahrgastplätzen."
+    },
+    "AB": {
+      "name": "Klasse A + B",
+      "description": "Motorrad und Pkw kombiniert – das volle Programm."
+    },
+    "Mofa": {
+      "name": "Klasse Mofa",
+      "description": "Mofa-Prüfbescheinigung bis 25 km/h."
+    }
+  },
+  "quiz": {
+    "label": "Frage {current} von {total}",
+    "points": "{count} Punkte",
+    "category": "Kategorie",
+    "multiHint": "Mehrere Antworten können richtig sein.",
+    "previous": "Zurück",
+    "next": "Nächste Frage",
+    "check": "Antwort prüfen",
+    "finish": "Prüfung abschließen",
+    "exit": "Prüfung verlassen",
+    "exitConfirm": "Möchtest du die Prüfung wirklich verlassen? Dein Fortschritt geht verloren.",
+    "feedback": {
+      "correct": "Richtig!",
+      "partial": "Teilweise richtig",
+      "wrong": "Leider falsch"
+    },
+    "explanation": "Erklärung",
+    "loading": "Fragen werden geladen…",
+    "skipped": "Diese Frage wurde nicht beantwortet."
+  },
+  "results": {
+    "title": "Dein Ergebnis",
+    "passed": "Bestanden",
+    "failed": "Nicht bestanden",
+    "passedSubtitle": "Stark gefahren! Du hast den Mocktest bestanden.",
+    "failedSubtitle": "Nicht aufgeben – schau dir deine Fehler an und versuch es erneut.",
+    "yourScore": "Deine Punkte",
+    "outOf": "von {total}",
+    "passThreshold": "Bestehensgrenze: {points} Punkte",
+    "totalQuestions": "Fragen",
+    "correct": "Richtig",
+    "wrong": "Falsch",
+    "skipped": "Übersprungen",
+    "timeTaken": "Zeit",
+    "byCategory": "Nach Kategorie",
+    "review": "Falsche Antworten überprüfen",
+    "reviewEmpty": "Keine falschen Antworten – sehr gut!",
+    "yourAnswer": "Deine Antwort",
+    "correctAnswer": "Richtige Antwort",
+    "tryAgain": "Erneut versuchen",
+    "chooseAnother": "Andere Klasse wählen",
+    "share": "Ergebnis teilen",
+    "shareCopied": "Link in Zwischenablage kopiert",
+    "backHome": "Zur Startseite"
+  },
+  "footer": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "contact": "Kontakt",
+    "tagline": "Mit Power zum Lappen.",
+    "copyright": "© {year} Fahrschule Mocktest"
+  },
+  "categories": {
+    "signs": "Verkehrszeichen",
+    "rightOfWay": "Vorfahrt",
+    "speed": "Geschwindigkeit",
+    "behavior": "Verhalten",
+    "environment": "Umweltschutz",
+    "tech": "Technik",
+    "firstAid": "Erste Hilfe",
+    "alcohol": "Alkohol & Drogen"
+  },
+  "common": {
+    "back": "Zurück",
+    "continue": "Weiter",
+    "close": "Schließen",
+    "minutes": "Min",
+    "seconds": "Sek",
+    "or": "oder",
+    "loading": "Lädt…"
+  }
+}
