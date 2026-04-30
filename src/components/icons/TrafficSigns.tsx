@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import type { SignId } from '@/data/types';
 
 /**
@@ -125,7 +126,7 @@ function MandatoryRightSign() {
   );
 }
 
-const map: Record<SignId, () => JSX.Element> = {
+const map: Record<SignId, () => ReactElement> = {
   stop: StopSign,
   yield: YieldSign,
   priorityRoad: PriorityRoadSign,

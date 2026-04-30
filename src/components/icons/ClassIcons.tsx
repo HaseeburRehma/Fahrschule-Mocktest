@@ -1,4 +1,5 @@
 import type { LicenseClass } from '@/data/types';
+import type { ReactElement } from 'react';
 
 /* Bold filled-silhouette SVG icons for the licence-class tiles.
    They use `currentColor` so they pick up text colour from the parent. */
@@ -214,7 +215,7 @@ function MofaIcon() {
   );
 }
 
-const icons: Record<LicenseClass, () => JSX.Element> = {
+const icons: Record<LicenseClass, () => ReactElement> = {
   A: MotorcycleIcon,
   B: CarIcon,
   AB: ComboIcon,

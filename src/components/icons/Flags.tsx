@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import type { Locale } from '@/i18n/routing';
 
 /* Minimal flag SVGs — clean enough at small sizes, no external assets. */
@@ -70,7 +71,7 @@ function FlagPL() {
   );
 }
 
-const map: Record<Locale, () => JSX.Element> = {
+const map: Record<Locale, () => ReactElement> = {
   de: FlagDE,
   en: FlagEN,
   ar: FlagAR,
