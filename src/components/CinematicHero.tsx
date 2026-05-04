@@ -200,15 +200,17 @@ export function CinematicHero() {
                   className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent"
                 />
 
-                {/* Corner brand chip */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-black/65 backdrop-blur px-3 py-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-glow" />
-                    <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-white/90">
+                {/* Corner brand chip — pinned bottom, never wraps internally.
+                    On the very narrowest phones the "Düsseldorf" tag tucks
+                    under the chip in a stack instead of fighting for width. */}
+                <div className="absolute inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4 flex flex-col-reverse sm:flex-row items-start sm:items-end sm:justify-between gap-2 sm:gap-3">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-black/70 backdrop-blur px-2.5 sm:px-3 py-1 sm:py-1.5 max-w-full">
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-glow shrink-0" />
+                    <span className="text-[9px] sm:text-[11px] font-semibold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-white/90 whitespace-nowrap">
                       Mit Power zum Lappen
                     </span>
                   </div>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/55">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white/55 self-end sm:self-auto whitespace-nowrap">
                     Düsseldorf
                   </span>
                 </div>

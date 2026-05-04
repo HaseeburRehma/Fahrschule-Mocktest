@@ -44,7 +44,7 @@ export function QuestionCard({ question, selected, onToggle }: Props) {
       )}
 
       {/* Question */}
-      <h2 className="display text-xl sm:text-2xl md:text-3xl leading-snug mb-3">
+      <h2 className="display text-lg sm:text-2xl md:text-3xl leading-snug mb-3 break-words">
         {pickText(question.question, locale)}
       </h2>
 
