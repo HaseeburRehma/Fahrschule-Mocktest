@@ -107,7 +107,7 @@ export function GlassHeadline({
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       style={tiltStyle}
-      className="glass-headline display uppercase font-normal leading-[0.92] text-[clamp(2.1rem,9.5vw,7.25rem)] tracking-[0.005em] text-center lg:text-left"
+      className="glass-headline display uppercase font-normal leading-[0.95] text-[clamp(1.85rem,7.5vw,5.5rem)] tracking-[0.005em] text-center lg:text-left max-w-full break-words [hyphens:auto]"
       aria-label={lines.map((l) => l.text).join(' ')}
     >
       {lines.map((line, li) => (

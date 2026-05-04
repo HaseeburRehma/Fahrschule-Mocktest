@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Fahrschule Abgefahrn">
+  <!-- 180×180 version for iOS home-screen pin. Same brand mark, scaled. -->
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#01FE21"/>
+      <stop offset="1" stop-color="#00d615"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="38" fill="url(#g2)"/>
+  <rect x="9" y="9" width="162" height="162" rx="32" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="3"/>
+  <text
+    x="90"
+    y="124"
+    text-anchor="middle"
+    font-family="Helvetica, Arial, sans-serif"
+    font-weight="900"
+    font-size="96"
+    letter-spacing="-4"
+    fill="#000">FA</text>
+</svg>

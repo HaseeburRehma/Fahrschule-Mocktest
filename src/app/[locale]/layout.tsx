@@ -22,15 +22,23 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    icons: {
+      icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+      shortcut: '/favicon.svg',
+      apple: [{ url: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml' }]
+    },
+    themeColor: '#01FE21',
     openGraph: {
       title: t('title'),
       description: t('description'),
-      type: 'website'
+      type: 'website',
+      images: [{ url: '/apple-touch-icon.svg', width: 180, height: 180 }]
     },
     twitter: {
       card: 'summary_large_image',
       title: t('title'),
-      description: t('description')
+      description: t('description'),
+      images: ['/apple-touch-icon.svg']
     }
   };
 }
