@@ -86,8 +86,11 @@ export function TestimonialSlider() {
   return (
     <>
       {/* Page-aligned wrapper — matches the rest of the home sections */}
-      <section className="w-full max-w-6xl mx-auto px-6 pb-20">
-        <div className="ab-outer rounded-3xl border border-white/10">
+      <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20">
+        {/* dir="ltr" prevents the marquee from breaking on RTL locales (Arabic):
+            without it, `width: max-content` rows anchor to the right edge of
+            the wrap and the translateX(-50%) cycle ends up off-screen. */}
+        <div dir="ltr" className="ab-outer rounded-3xl border border-white/10">
           <div className="ab-wrap">
             <MarqueeRow items={row1Items} variant="l1" />
             <MarqueeRow items={row2Items} variant="r" />
@@ -104,6 +107,9 @@ export function TestimonialSlider() {
           width: 100%;
           overflow: hidden;
           background: #0a0a0a;
+          /* Belt-and-suspenders alongside dir="ltr" — guarantees the
+             marquee runs left-to-right even inside an RTL locale tree. */
+          direction: ltr;
         }
         .ab-wrap {
           overflow: hidden;
@@ -112,6 +118,7 @@ export function TestimonialSlider() {
           display: flex;
           flex-direction: column;
           gap: 16px;
+          direction: ltr;
         }
         .ab-row {
           display: flex;
@@ -133,9 +140,9 @@ export function TestimonialSlider() {
         }
         .ab-card {
           flex-shrink: 0;
-          width: 220px;
-          height: 260px;
-          border-radius: 18px;
+          width: 150px;
+          height: 180px;
+          border-radius: 14px;
           overflow: hidden;
           border: 2px solid rgba(100, 230, 60, 0.18);
           box-shadow:
@@ -147,6 +154,19 @@ export function TestimonialSlider() {
             box-shadow 0.3s ease,
             border-color 0.3s ease;
           cursor: pointer;
+        }
+        @media (min-width: 640px) {
+          .ab-card {
+            width: 200px;
+            height: 240px;
+            border-radius: 18px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .ab-card {
+            width: 220px;
+            height: 260px;
+          }
         }
         .ab-card:hover {
           transform: scale(1.06) translateY(-4px);

@@ -33,6 +33,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
+  /* Mobile: prevent any rogue child from triggering a horizontal scrollbar */
+  overflow-x: hidden;
+  /* Stop iOS auto-scaling text on landscape rotation */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Kill the default mobile tap-highlight so brand-coloured CTAs don't flash */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch buttons keep at least a 44×44 target without us having to repeat it */
+button, a {
+  touch-action: manipulation;
 }
 
 body {
@@ -184,6 +198,132 @@ h1, h2, h3, h4, .display {
   text-shadow:
     0 0 22px rgba(1, 254, 33, 0.55),
     0 0 60px rgba(1, 254, 33, 0.25);
+}
+
+/* ───────────────────────────────────────────────────────────────────────
+   GlassHeadline — premium 3D glass hover for hero (and re-usable
+   wherever you want the same treatment). Uses CSS custom properties
+   --mx / --my (set by the React component on mouse move) to drive the
+   shine gradient. Layered text-shadow gives the glass depth; a second
+   span overlay carries the cursor-following highlight masked to text.
+   ─────────────────────────────────────────────────────────────────── */
+
+.glass-headline {
+  --mx: 50%;
+  --my: 50%;
+  cursor: default;
+  display: inline-block;
+  will-change: transform;
+}
+
+.glass-line {
+  display: block;
+  position: relative;
+}
+
+/* — Base text layer (white default) — */
+.glass-line--base .glass-base {
+  color: #ffffff;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.10),
+    0 2px 0 rgba(255, 255, 255, 0.08),
+    0 3px 0 rgba(255, 255, 255, 0.06),
+    0 4px 0 rgba(0, 0, 0, 0.20),
+    0 6px 12px rgba(0, 0, 0, 0.45);
+  transition: text-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.glass-headline:hover .glass-line--base .glass-base {
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.20),
+    0 2px 0 rgba(255, 255, 255, 0.15),
+    0 4px 0 rgba(255, 255, 255, 0.10),
+    0 6px 0 rgba(0, 0, 0, 0.30),
+    0 12px 24px rgba(1, 254, 33, 0.40),
+    0 0 40px rgba(1, 254, 33, 0.30);
+}
+
+/* — Accent (green) line — neon treatment — */
+.glass-line--accent .glass-base {
+  color: #01FE21;
+  text-shadow:
+    0 0 8px rgba(1, 254, 33, 0.55),
+    0 0 22px rgba(1, 254, 33, 0.35),
+    0 4px 24px rgba(1, 254, 33, 0.20);
+  transition: text-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.glass-headline:hover .glass-line--accent .glass-base {
+  text-shadow:
+    0 0 12px rgba(1, 254, 33, 0.85),
+    0 0 32px rgba(1, 254, 33, 0.60),
+    0 0 64px rgba(1, 254, 33, 0.35),
+    0 6px 30px rgba(1, 254, 33, 0.30);
+}
+
+/* — Shine layer — radial-gradient masked to the text shape — */
+.glass-shine {
+  background-image: radial-gradient(
+    180px 140px at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(1, 254, 33, 0.45) 30%,
+    transparent 60%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  mix-blend-mode: screen;
+  /* Inherit all type metrics from the parent so glyphs align over the base */
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+}
+.glass-line--accent .glass-shine {
+  background-image: radial-gradient(
+    180px 140px at var(--mx) var(--my),
+    rgba(220, 255, 220, 0.95) 0%,
+    rgba(1, 254, 33, 0.75) 22%,
+    transparent 55%
+  );
+}
+.glass-headline:hover .glass-shine {
+  opacity: 1;
+}
+
+/* — Touch / no-hover devices: auto-shimmer linear gradient — */
+@media (hover: none) {
+  .glass-shine {
+    opacity: 0.65;
+    background-image: linear-gradient(
+      120deg,
+      transparent 28%,
+      rgba(255, 255, 255, 0.75) 50%,
+      transparent 72%
+    );
+    background-size: 250% 100%;
+    background-position: -100% 0%;
+    animation: glassShimmer 4.5s linear infinite;
+  }
+  .glass-line--accent .glass-shine {
+    background-image: linear-gradient(
+      120deg,
+      transparent 28%,
+      rgba(180, 255, 180, 0.85) 50%,
+      transparent 72%
+    );
+  }
+}
+@keyframes glassShimmer {
+  0%   { background-position: -100% 0%; }
+  100% { background-position:  200% 0%; }
+}
+
+/* — Reduced-motion: keep the static depth, kill movement — */
+@media (prefers-reduced-motion: reduce) {
+  .glass-headline { perspective: none; transform: none !important; }
+  .glass-shine { display: none; }
+  .glass-base { transition: none; }
 }
 
 /* Cursor follower */

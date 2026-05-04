@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Check, AlertCircle } from 'lucide-react';
 import { TrafficSign } from './icons/TrafficSigns';
 import type { Question } from '@/data/types';
+import { pickText } from '@/data/types';
 
 interface Props {
   question: Question;
@@ -20,11 +21,10 @@ interface Props {
 export function QuestionCard({ question, selected, onToggle }: Props) {
   const t = useTranslations();
   const locale = useLocale();
-  const lang = locale === 'de' ? 'de' : 'en';
   const multi = question.correctIds.length > 1;
 
   return (
-    <article className="rounded-3xl border border-white/10 bg-ink-100 p-6 md:p-10 max-w-3xl mx-auto w-full">
+    <article className="rounded-2xl sm:rounded-3xl border border-white/10 bg-ink-100 p-4 sm:p-6 md:p-10 max-w-3xl mx-auto w-full">
       {/* Meta row */}
       <div className="flex items-center justify-between text-xs uppercase tracking-widest text-white/50 mb-4">
         <span className="text-brand">{t(`categories.${question.category}`)}</span>
@@ -44,8 +44,8 @@ export function QuestionCard({ question, selected, onToggle }: Props) {
       )}
 
       {/* Question */}
-      <h2 className="display text-2xl md:text-3xl leading-snug mb-3">
-        {question.question[lang]}
+      <h2 className="display text-xl sm:text-2xl md:text-3xl leading-snug mb-3">
+        {pickText(question.question, locale)}
       </h2>
 
       {multi && (
@@ -65,8 +65,8 @@ export function QuestionCard({ question, selected, onToggle }: Props) {
                 onClick={() => onToggle(opt.id)}
                 aria-pressed={isSelected}
                 className={[
-                  'focus-brand w-full text-left rounded-2xl border px-5 py-4 transition-all',
-                  'flex items-start gap-4 hover:bg-white/[0.03]',
+                  'focus-brand w-full text-left rounded-xl sm:rounded-2xl border px-4 sm:px-5 py-3.5 sm:py-4 min-h-[52px] transition-all',
+                  'flex items-start gap-3 sm:gap-4 hover:bg-white/[0.03]',
                   isSelected
                     ? 'border-brand bg-brand/10 shadow-glow-soft'
                     : 'border-white/10 bg-white/[0.02] hover:border-white/30'
@@ -83,7 +83,7 @@ export function QuestionCard({ question, selected, onToggle }: Props) {
                 >
                   {isSelected && <Check className="w-4 h-4" />}
                 </span>
-                <span className="flex-1 text-base leading-relaxed">{opt.text[lang]}</span>
+                <span className="flex-1 text-sm sm:text-base leading-relaxed">{pickText(opt.text, locale)}</span>
               </button>
             </li>
           );

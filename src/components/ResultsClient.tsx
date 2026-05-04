@@ -18,6 +18,7 @@ import { useQuiz } from '@/store/quiz';
 import { evaluate } from '@/lib/scoring';
 import { getQuestionsForClass } from '@/data/questions';
 import type { LicenseClass } from '@/data/types';
+import { pickText } from '@/data/types';
 import { AnimatedNumber } from './AnimatedNumber';
 import { Confetti } from './Confetti';
 
@@ -28,7 +29,6 @@ interface Props {
 export function ResultsClient({ licenseClass }: Props) {
   const t = useTranslations();
   const locale = useLocale();
-  const lang = locale === 'de' ? 'de' : 'en';
   const router = useRouter();
   const { current, reset } = useQuiz();
   const [shareOk, setShareOk] = useState(false);
@@ -81,7 +81,7 @@ export function ResultsClient({ licenseClass }: Props) {
       <Confetti active={result.passed} />
 
       {/* Hero score */}
-      <section className="relative max-w-4xl mx-auto px-6 pt-16 pb-10 text-center">
+      <section className="relative max-w-4xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-8 sm:pb-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ export function ResultsClient({ licenseClass }: Props) {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="display text-5xl md:text-7xl uppercase mb-2"
+          className="display text-[clamp(2.25rem,7vw,4.5rem)] uppercase mb-2"
         >
           {t('results.title')}
         </motion.h1>
@@ -106,10 +106,10 @@ export function ResultsClient({ licenseClass }: Props) {
           transition={{ delay: 0.2 }}
           className="mt-8 mb-6 flex items-baseline justify-center gap-3"
         >
-          <span className="display text-7xl md:text-9xl text-brand drop-shadow-[0_0_24px_rgba(1,254,33,0.45)]">
+          <span className="display text-[clamp(3.5rem,15vw,8rem)] text-brand drop-shadow-[0_0_24px_rgba(1,254,33,0.45)]">
             <AnimatedNumber value={result.earned} />
           </span>
-          <span className="text-white/50 text-2xl md:text-3xl">
+          <span className="text-white/50 text-xl sm:text-2xl md:text-3xl">
             {t('results.outOf', { total: result.total })}
           </span>
         </motion.div>
@@ -139,7 +139,7 @@ export function ResultsClient({ licenseClass }: Props) {
       </section>
 
       {/* KPI grid */}
-      <section className="max-w-4xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         <Kpi
           label={t('results.totalQuestions')}
           value={result.perQuestion.length}
@@ -164,7 +164,7 @@ export function ResultsClient({ licenseClass }: Props) {
       </section>
 
       {/* By category */}
-      <section className="max-w-4xl mx-auto px-6 mt-10">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-10">
         <h2 className="display text-2xl uppercase mb-4">{t('results.byCategory')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {Object.entries(result.byCategory).map(([cat, val]) => {
@@ -195,7 +195,7 @@ export function ResultsClient({ licenseClass }: Props) {
       </section>
 
       {/* Review */}
-      <section className="max-w-4xl mx-auto px-6 mt-12">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
         <h2 className="display text-2xl uppercase mb-4">{t('results.review')}</h2>
         {result.perQuestion.filter((p) => p.verdict !== 'correct').length === 0 ? (
           <p className="text-brand text-sm">{t('results.reviewEmpty')}</p>
@@ -206,11 +206,11 @@ export function ResultsClient({ licenseClass }: Props) {
               .map(({ question, selectedIds, verdict }) => {
                 const correctText = question.options
                   .filter((o) => question.correctIds.includes(o.id))
-                  .map((o) => o.text[lang])
+                  .map((o) => pickText(o.text, locale))
                   .join(' • ');
                 const yours = question.options
                   .filter((o) => selectedIds.includes(o.id))
-                  .map((o) => o.text[lang])
+                  .map((o) => pickText(o.text, locale))
                   .join(' • ');
                 return (
                   <li
@@ -220,7 +220,7 @@ export function ResultsClient({ licenseClass }: Props) {
                     <p className="text-xs uppercase tracking-widest text-white/50 mb-1">
                       {t(`categories.${question.category}`)}
                     </p>
-                    <p className="font-semibold mb-3">{question.question[lang]}</p>
+                    <p className="font-semibold mb-3">{pickText(question.question, locale)}</p>
                     <p className="text-sm text-white/60 mb-1">
                       <span className="text-danger">{t('results.yourAnswer')}:</span>{' '}
                       {yours || (verdict === 'skipped' ? '—' : '')}
@@ -230,7 +230,7 @@ export function ResultsClient({ licenseClass }: Props) {
                       {correctText}
                     </p>
                     <p className="text-xs text-white/60 leading-relaxed">
-                      {question.explanation[lang]}
+                      {pickText(question.explanation, locale)}
                     </p>
                   </li>
                 );
@@ -240,7 +240,7 @@ export function ResultsClient({ licenseClass }: Props) {
       </section>
 
       {/* Actions */}
-      <section className="max-w-4xl mx-auto px-6 mt-12 flex flex-wrap gap-3">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-12 flex flex-wrap gap-3">
         <button
           onClick={onRetry}
           className="focus-brand inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-black hover:shadow-glow transition"

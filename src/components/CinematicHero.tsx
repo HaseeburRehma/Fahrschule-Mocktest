@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ArrowRight, Play, Star } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { SplitHeadline } from './cinematic/SplitHeadline';
+import { GlassHeadline } from './cinematic/GlassHeadline';
 import { MagneticCTA } from './cinematic/MagneticCTA';
 import { ScrollIndicator } from './cinematic/ScrollIndicator';
 
@@ -82,11 +82,11 @@ export function CinematicHero() {
       className="relative bg-grain hero-vignette overflow-hidden"
       style={{ minHeight: 'calc(100vh - 4rem)' }}
     >
-      {/* Atmospheric glows */}
-      <div className="pointer-events-none absolute -top-20 right-[-12rem] h-[40rem] w-[40rem] rounded-full bg-brand/15 blur-3xl stage-light" />
-      <div className="pointer-events-none absolute -bottom-32 -left-32 h-[28rem] w-[28rem] rounded-full bg-brand/10 blur-3xl" />
+      {/* Atmospheric glows — slightly smaller on mobile to keep blur cheap */}
+      <div className="pointer-events-none absolute -top-20 right-[-10rem] h-[24rem] w-[24rem] sm:h-[40rem] sm:w-[40rem] rounded-full bg-brand/15 blur-3xl stage-light" />
+      <div className="pointer-events-none absolute -bottom-32 -left-20 h-[18rem] w-[18rem] sm:h-[28rem] sm:w-[28rem] rounded-full bg-brand/10 blur-3xl" />
 
-      <div className="relative z-[2] max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center pt-10 pb-24 md:pt-14 md:pb-28 min-h-[inherit]">
+      <div className="relative z-[2] max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-6 pb-20 sm:pt-10 sm:pb-24 md:pt-14 md:pb-28 min-h-[inherit]">
         {/* LEFT — copy */}
         <div ref={copyRef} className="lg:col-span-7 relative z-10 text-center lg:text-left">
           <motion.div
@@ -101,7 +101,7 @@ export function CinematicHero() {
             </span>
           </motion.div>
 
-          <SplitHeadline
+          <GlassHeadline
             lines={[
               { text: t('cinemaLine1') },
               { text: t('cinemaLine2'), accent: true }
@@ -113,7 +113,7 @@ export function CinematicHero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="mt-6 text-base md:text-lg text-white/65 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-white/65 max-w-xl mx-auto lg:mx-0 leading-relaxed px-1"
           >
             {t('cinemaSubheadline')}
           </motion.p>
@@ -122,7 +122,7 @@ export function CinematicHero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 1.4 }}
-            className="mt-8 flex flex-wrap gap-3 items-center justify-center lg:justify-start"
+            className="mt-7 sm:mt-8 flex flex-wrap gap-3 items-center justify-center lg:justify-start"
           >
             <MagneticCTA href="#classes" variant="primary">
               {t('ctaPrimary')}
@@ -138,7 +138,7 @@ export function CinematicHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.6 }}
-            className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/55 justify-center lg:justify-start"
+            className="mt-6 sm:mt-7 flex flex-wrap gap-x-4 sm:gap-x-5 gap-y-2 text-[11px] sm:text-xs text-white/55 justify-center lg:justify-start"
           >
             <li className="inline-flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5 fill-brand text-brand" />
@@ -161,7 +161,7 @@ export function CinematicHero() {
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto max-w-[420px] lg:max-w-none"
+            className="relative mx-auto max-w-[clamp(240px,72vw,420px)] lg:max-w-none"
           >
             {/* Soft brand halo behind the frame */}
             <div

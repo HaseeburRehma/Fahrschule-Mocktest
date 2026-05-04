@@ -81,7 +81,7 @@ export function QuizClient({ licenseClass }: Props) {
     <main className="flex-1 flex flex-col">
       {/* Progress / exit bar — sits below the global header */}
       <div className="sticky top-16 z-30 bg-ink-0/85 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-4xl mx-auto px-6 py-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex items-center justify-between gap-4 mb-3">
             <span className="text-xs uppercase tracking-widest text-white/50">
               {t('quiz.label', { current: idx + 1, total })}
@@ -100,7 +100,7 @@ export function QuizClient({ licenseClass }: Props) {
       </div>
 
       {/* Question */}
-      <div className="flex-1 px-6 py-10 md:py-14">
+      <div className="flex-1 px-4 sm:px-6 py-6 sm:py-10 md:py-14">
         <AnimatePresence mode="wait">
           <motion.div
             key={questionId}
@@ -122,7 +122,7 @@ export function QuizClient({ licenseClass }: Props) {
           <button
             onClick={onPrev}
             disabled={idx === 0}
-            className="focus-brand inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition"
+            className="focus-brand inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white/80 min-h-[44px] hover:border-white/40 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition"
           >
             <ArrowLeft className="w-4 h-4" />
             {t('quiz.previous')}
@@ -131,7 +131,7 @@ export function QuizClient({ licenseClass }: Props) {
           {isLast ? (
             <button
               onClick={onFinish}
-              className="focus-brand inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-black hover:shadow-glow-lg transition"
+              className="focus-brand inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-black min-h-[44px] hover:shadow-glow-lg transition"
             >
               <FlagIcon className="w-4 h-4" />
               {t('quiz.finish')}
@@ -139,7 +139,7 @@ export function QuizClient({ licenseClass }: Props) {
           ) : (
             <button
               onClick={onNext}
-              className="focus-brand inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-black hover:shadow-glow-lg transition"
+              className="focus-brand inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3 text-sm font-bold text-black min-h-[44px] hover:shadow-glow-lg transition"
             >
               {t('quiz.next')}
               <ArrowRight className="w-4 h-4" />

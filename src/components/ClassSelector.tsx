@@ -30,13 +30,13 @@ export function ClassSelector() {
     <section
       id="classes"
       aria-labelledby="class-heading"
-      className="relative w-full max-w-6xl mx-auto px-6 py-14 md:py-16 bg-honeycomb"
+      className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14 md:py-16 bg-honeycomb"
     >
-      <div className="flex items-end justify-between mb-8">
+      <div className="flex items-end justify-between mb-6 sm:mb-8">
         <div>
           <h2
             id="class-heading"
-            className="display text-3xl md:text-5xl uppercase"
+            className="display text-[clamp(1.5rem,5vw,3rem)] uppercase leading-tight"
           >
             {t('home.classHeading')}
           </h2>
@@ -45,7 +45,7 @@ export function ClassSelector() {
       </div>
 
       {/* 2 cols on small, 4 cols from md+ — single row on desktop */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4">
         {tiles.map(({ id, photo }, idx) => {
           const count = getQuestionsForClass(id).length;
           return (

@@ -12,15 +12,21 @@ export type Category =
 
 export type LicenseClass = 'A' | 'B' | 'AB' | 'Mofa';
 
-export type QuestionLocale = 'de' | 'en';
+export type QuestionLocale = 'de' | 'en' | 'ar' | 'tr' | 'ru' | 'pl';
 
 /**
- * Localized strings. We always require DE + EN; other locales fall back
- * to EN at runtime (the spec asked for UI in 6 languages, content in DE/EN).
+ * Localized strings. DE + EN are required (EN is the runtime fallback);
+ * AR / TR / RU / PL are optional. The QuestionCard / ResultsClient will
+ * render the active locale's text and gracefully fall back to EN if
+ * a translation hasn't been provided yet.
  */
 export type LocalizedText = {
   de: string;
   en: string;
+  ar?: string;
+  tr?: string;
+  ru?: string;
+  pl?: string;
 };
 
 export interface QuestionOption {
@@ -54,4 +60,10 @@ export interface Question {
   /** IDs of the correct option(s). Multiple = multi-select. */
   correctIds: string[];
   explanation: LocalizedText;
+}
+
+/** Pick the right string for the active locale, falling back to EN. */
+export function pickText(text: LocalizedText, locale: string): string {
+  const key = locale as keyof LocalizedText;
+  return (text[key] as string | undefined) ?? text.en;
 }

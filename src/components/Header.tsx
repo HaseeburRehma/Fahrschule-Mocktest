@@ -95,7 +95,7 @@ export function Header() {
               aria-haspopup="menu"
               aria-expanded={open}
               aria-label={t('nav.language')}
-              className="focus-brand inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm hover:border-brand/60 transition"
+              className="focus-brand inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/[0.03] px-2.5 sm:px-3 py-1.5 text-sm hover:border-brand/60 transition min-h-[40px]"
             >
               <Globe className="w-4 h-4 text-white/60 hidden sm:block" />
               <Flag locale={current} className="w-7 h-4" />
@@ -111,7 +111,7 @@ export function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.15 }}
                 role="menu"
-                className="absolute right-0 mt-2 w-52 rounded-2xl border border-white/10 bg-ink-100 shadow-xl shadow-black/40 p-1.5 z-50"
+                className="absolute right-0 mt-2 w-[min(13rem,calc(100vw-2rem))] rounded-2xl border border-white/10 bg-ink-100 shadow-xl shadow-black/40 p-1.5 z-50"
               >
                 {locales.map((loc) => {
                   const active = loc === current;

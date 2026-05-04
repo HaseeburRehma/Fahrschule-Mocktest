@@ -7,9 +7,9 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 border-t border-white/10">
-      <div className="max-w-6xl mx-auto px-6 py-12 grid gap-8 md:grid-cols-3">
-        <div>
+    <footer className="mt-16 sm:mt-20 border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12 grid gap-6 sm:gap-8 md:grid-cols-3 text-center md:text-left">
+        <div className="flex flex-col items-center md:items-start">
           {/* Same Fahrschule Abgefahrn logos used in the header —
               mark on mobile, full wordmark on sm+. */}
           <div className="inline-flex items-center">
@@ -35,7 +35,7 @@ export function Footer() {
           </p>
         </div>
 
-        <ul className="flex flex-wrap items-start gap-x-8 gap-y-3 text-sm md:justify-center">
+        <ul className="flex flex-wrap items-start gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-3 text-sm justify-center">
           <li>
             <a href="#" className="text-white/70 hover:text-brand transition-colors">
               {t('footer.imprint')}
@@ -53,7 +53,7 @@ export function Footer() {
           </li>
         </ul>
 
-        <ul className="flex items-start gap-3 md:justify-end">
+        <ul className="flex items-start gap-3 justify-center md:justify-end">
           {[
             { Icon: Instagram, label: 'Instagram', href: '#' },
             { Icon: Facebook, label: 'Facebook', href: '#' },
@@ -72,7 +72,7 @@ export function Footer() {
         </ul>
       </div>
       <div className="border-t border-white/5 py-4">
-        <p className="max-w-6xl mx-auto px-6 text-xs text-white/40">
+        <p className="max-w-6xl mx-auto px-4 sm:px-6 text-[11px] sm:text-xs text-white/40 text-center md:text-left">
           {t('footer.copyright', { year })}
         </p>
       </div>

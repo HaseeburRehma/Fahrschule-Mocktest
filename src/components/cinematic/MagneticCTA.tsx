@@ -56,7 +56,7 @@ export function MagneticCTA({
   };
 
   const base =
-    'focus-brand inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold transition-colors duration-200 active:scale-[0.98]';
+    'focus-brand inline-flex items-center justify-center gap-2 rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-sm font-bold min-h-[44px] transition-colors duration-200 active:scale-[0.98]';
   const variants = {
     primary:
       'bg-brand text-black hover:shadow-glow-lg shadow-glow-soft',
