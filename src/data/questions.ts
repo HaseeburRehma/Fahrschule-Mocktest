@@ -15,14 +15,13 @@ export const questions: Question[] = [
     category: 'signs',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 3,
-    signId: 'stop',
     question: {
-      de: 'Wie verhalten Sie sich an diesem Verkehrszeichen?',
-      en: 'How do you behave at this traffic sign?',
-      ar: 'كيف تتصرف عند هذه الإشارة المرورية؟',
-      tr: 'Bu trafik işaretinde nasıl davranırsınız?',
-      ru: 'Как вы поступите у этого знака?',
-      pl: 'Jak się zachowujesz przy tym znaku drogowym?'
+      de: 'Was müssen Sie am Stoppschild (rotes Achteck mit der Aufschrift „STOP") tun?',
+      en: 'What must you do at a stop sign (red octagon with the word "STOP")?',
+      ar: 'ماذا يجب أن تفعل عند إشارة التوقف (ثماني الأضلاع الأحمر المكتوب عليه "STOP")؟',
+      tr: 'Dur tabelasında (üzerinde "STOP" yazan kırmızı sekizgen) ne yapmalısınız?',
+      ru: 'Что необходимо сделать у знака STOP (красный восьмиугольник с надписью «STOP»)?',
+      pl: 'Co musisz zrobić przy znaku STOP (czerwony ośmiokąt z napisem "STOP")?'
     },
     options: [
       {
@@ -74,14 +73,13 @@ export const questions: Question[] = [
     category: 'signs',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 3,
-    signId: 'yield',
     question: {
-      de: 'Was bedeutet dieses Verkehrszeichen?',
-      en: 'What does this traffic sign mean?',
-      ar: 'ماذا تعني هذه الإشارة المرورية؟',
-      tr: 'Bu trafik işareti ne anlama gelir?',
-      ru: 'Что означает этот знак?',
-      pl: 'Co oznacza ten znak drogowy?'
+      de: 'Was bedeutet das Schild „Vorfahrt gewähren" (umgekehrtes rotes Dreieck)?',
+      en: 'What does the "Give way" sign (inverted red triangle) require of you?',
+      ar: 'ماذا تتطلب منك لوحة "إعطاء الأولوية" (المثلث الأحمر المقلوب)؟',
+      tr: '"Yol Ver" işareti (ters kırmızı üçgen) sizden ne ister?',
+      ru: 'Что требует от вас знак «Уступи дорогу» (перевёрнутый красный треугольник)?',
+      pl: 'Czego wymaga od Ciebie znak „Ustąp pierwszeństwa" (odwrócony czerwony trójkąt)?'
     },
     options: [
       {
@@ -133,14 +131,13 @@ export const questions: Question[] = [
     category: 'signs',
     classes: ['A', 'B', 'AB'],
     points: 2,
-    signId: 'priorityRoad',
     question: {
-      de: 'Was bedeutet dieses Verkehrszeichen?',
-      en: 'What does this traffic sign mean?',
-      ar: 'ماذا تعني هذه الإشارة المرورية؟',
-      tr: 'Bu trafik işareti ne anlama gelir?',
-      ru: 'Что означает этот знак?',
-      pl: 'Co oznacza ten znak drogowy?'
+      de: 'Welche Aussage zum Schild „Vorfahrtstraße" (gelbes Quadrat auf der Spitze) ist richtig?',
+      en: 'Which statement about the "Priority road" sign (yellow diamond standing on a corner) is correct?',
+      ar: 'أي عبارة عن لوحة "طريق الأولوية" (المعين الأصفر القائم على رأسه) صحيحة؟',
+      tr: '"Ana yol" işareti (köşesi üstte sarı eşkenar dörtgen) hakkında hangi ifade doğrudur?',
+      ru: 'Какое утверждение о знаке «Главная дорога» (жёлтый ромб, стоящий на углу) верно?',
+      pl: 'Które stwierdzenie o znaku „Droga z pierwszeństwem" (żółty romb na wierzchołku) jest poprawne?'
     },
     options: [
       {
@@ -192,14 +189,13 @@ export const questions: Question[] = [
     category: 'rightOfWay',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 3,
-    signId: 'roundabout',
     question: {
-      de: 'Sie nähern sich diesem Kreisverkehr. Wer hat Vorfahrt?',
-      en: 'You approach this roundabout. Who has the right of way?',
-      ar: 'تقترب من هذه الدوّار. من له الأولوية؟',
-      tr: 'Bu döner kavşağa yaklaşıyorsunuz. Kimin geçiş önceliği vardır?',
-      ru: 'Вы подъезжаете к этому кольцу. Кто имеет приоритет?',
-      pl: 'Zbliżasz się do tego ronda. Kto ma pierwszeństwo?'
+      de: 'Sie nähern sich einem Kreisverkehr, der zusätzlich mit „Vorfahrt gewähren" beschildert ist. Wer hat Vorfahrt?',
+      en: 'You approach a roundabout that is additionally signed with "Give way". Who has the right of way?',
+      ar: 'تقترب من دوّار يحمل أيضًا لوحة "إعطاء الأولوية". من له الأولوية؟',
+      tr: 'Ek olarak "Yol Ver" tabelası bulunan bir döner kavşağa yaklaşıyorsunuz. Kimin geçiş önceliği vardır?',
+      ru: 'Вы подъезжаете к кольцу, дополнительно обозначенному знаком «Уступи дорогу». Кто имеет приоритет?',
+      pl: 'Zbliżasz się do ronda, dodatkowo oznaczonego znakiem „Ustąp pierwszeństwa". Kto ma pierwszeństwo?'
     },
     options: [
       {
@@ -251,14 +247,13 @@ export const questions: Question[] = [
     category: 'signs',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 3,
-    signId: 'noEntry',
     question: {
-      de: 'Was zeigt dieses Verkehrszeichen an?',
-      en: 'What does this traffic sign indicate?',
-      ar: 'ماذا تشير إليه هذه الإشارة المرورية؟',
-      tr: 'Bu trafik işareti neyi gösterir?',
-      ru: 'Что обозначает этот знак?',
-      pl: 'Co oznacza ten znak drogowy?'
+      de: 'Welches Verbot bedeutet das Schild „Verbot der Einfahrt" (roter Kreis mit weißem waagerechtem Balken)?',
+      en: 'Which prohibition does the "No entry" sign (red circle with a white horizontal bar) express?',
+      ar: 'ما المنع الذي تعبّر عنه لوحة "ممنوع الدخول" (دائرة حمراء بشريط أبيض أفقي)؟',
+      tr: '"Giriş Yasak" işareti (üzerinde beyaz yatay çubuk olan kırmızı daire) hangi yasağı bildirir?',
+      ru: 'Какой запрет выражает знак «Въезд запрещён» (красный круг с белой горизонтальной полосой)?',
+      pl: 'Jaki zakaz wyraża znak „Zakaz wjazdu" (czerwone koło z białym poziomym pasem)?'
     },
     options: [
       {
@@ -310,14 +305,13 @@ export const questions: Question[] = [
     category: 'behavior',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 4,
-    signId: 'children',
     question: {
-      de: 'Was beachten Sie an diesem Verkehrszeichen?',
-      en: 'What do you watch out for at this traffic sign?',
-      ar: 'ما الذي تنتبه إليه عند هذه الإشارة؟',
-      tr: 'Bu trafik işaretinde neye dikkat edersiniz?',
-      ru: 'На что обратить внимание у этого знака?',
-      pl: 'Na co zwracasz uwagę przy tym znaku?'
+      de: 'Was beachten Sie am Gefahrenzeichen „Kinder" (rotes Dreieck mit Kindersymbol, z. B. vor Schulen)?',
+      en: 'What do you watch out for at the "Children" warning sign (red triangle with a child symbol, e.g. near schools)?',
+      ar: 'ما الذي تنتبه إليه عند لوحة "الأطفال" التحذيرية (مثلث أحمر برمز طفل، مثلًا قرب المدارس)؟',
+      tr: '"Çocuklar" uyarı işaretinde (üzerinde çocuk sembolü olan kırmızı üçgen, ör. okul yakını) nelere dikkat edersiniz?',
+      ru: 'На что обращать внимание у предупреждающего знака «Дети» (красный треугольник с фигурками детей, у школ и т. п.)?',
+      pl: 'Na co zwracasz uwagę przy znaku ostrzegawczym „Dzieci" (czerwony trójkąt z sylwetką dziecka, np. przy szkołach)?'
     },
     options: [
       {
@@ -489,7 +483,7 @@ export const questions: Question[] = [
     category: 'speed',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 2,
-    signId: 'speed50',
+    imagePath: '/images/quiz/sign-50.jpg',
     question: {
       de: 'Welche allgemeine Höchstgeschwindigkeit gilt innerorts?',
       en: 'What is the general speed limit inside built-up areas?',
@@ -527,14 +521,13 @@ export const questions: Question[] = [
     category: 'speed',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 2,
-    signId: 'speed30',
     question: {
-      de: 'In einer Tempo-30-Zone — was ist außer der Geschwindigkeit zu beachten?',
-      en: 'In a 30 km/h zone — what else applies besides the speed?',
-      ar: 'في منطقة 30 كم/س — ما الذي ينطبق إلى جانب السرعة؟',
-      tr: '30 km/s bölgesinde — hız dışında ne geçerlidir?',
-      ru: 'В зоне 30 км/ч — что ещё действует, помимо скорости?',
-      pl: 'W strefie 30 km/h — co poza prędkością obowiązuje?'
+      de: 'In einer Tempo-30-Zone — was gilt zusätzlich zum Tempolimit von 30 km/h?',
+      en: 'In a 30 km/h zone — what else applies in addition to the 30 km/h speed limit?',
+      ar: 'في منطقة 30 كم/س — ما الذي ينطبق إضافةً إلى حد السرعة 30 كم/س؟',
+      tr: '30 km/s bölgesinde — 30 km/s hız sınırına ek olarak ne geçerlidir?',
+      ru: 'В зоне 30 км/ч — что ещё действует, помимо ограничения 30 км/ч?',
+      pl: 'W strefie 30 km/h — co obowiązuje dodatkowo poza ograniczeniem do 30 km/h?'
     },
     options: [
       {
@@ -1300,7 +1293,6 @@ export const questions: Question[] = [
     category: 'behavior',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 4,
-    signId: 'pedestrianCrossing',
     question: {
       de: 'Wie verhalten Sie sich an einem Fußgängerüberweg (Zebrastreifen)?',
       en: 'How do you behave at a pedestrian crossing (zebra crossing)?',
@@ -1359,14 +1351,13 @@ export const questions: Question[] = [
     category: 'signs',
     classes: ['A', 'B', 'AB', 'Mofa'],
     points: 2,
-    signId: 'mandatoryRight',
     question: {
-      de: 'Was bedeutet dieses Verkehrszeichen?',
-      en: 'What does this traffic sign mean?',
-      ar: 'ماذا تعني هذه الإشارة المرورية؟',
-      tr: 'Bu trafik işareti ne anlama gelir?',
-      ru: 'Что означает этот знак?',
-      pl: 'Co oznacza ten znak drogowy?'
+      de: 'Was bedeutet das blaue runde Schild „Vorgeschriebene Fahrtrichtung rechts" (weißer Pfeil zeigt nach rechts)?',
+      en: 'What does the blue circular "Mandatory direction — right" sign (white arrow pointing right) mean?',
+      ar: 'ماذا تعني اللوحة الزرقاء المستديرة "اتجاه السير الإلزامي يمين" (سهم أبيض نحو اليمين)؟',
+      tr: 'Mavi yuvarlak "Zorunlu yön: sağ" işareti (sağa bakan beyaz ok) ne anlama gelir?',
+      ru: 'Что означает синий круглый знак «Направление движения направо» (белая стрелка вправо)?',
+      pl: 'Co oznacza niebieski okrągły znak „Nakazany kierunek w prawo" (biała strzałka w prawo)?'
     },
     options: [
       {
@@ -1411,6 +1402,693 @@ export const questions: Question[] = [
       tr: 'Mavi yuvarlak işaret yönü zorunlu kılar — burada sağa. Öneri değil, zorunluluk.',
       ru: 'Синий круглый знак предписывает направление — здесь направо. Это обязательно, а не совет.',
       pl: 'Niebieski okrągły znak nakazuje kierunek — tu w prawo. Jest obowiązkowy, nie sugerujący.'
+    }
+  },
+
+  // ═════════════════════════════════════════════════════════════════════════
+  // Warning signs (Gefahrenzeichen) — added pass based on the StVO catalogue
+  // ═════════════════════════════════════════════════════════════════════════
+  {
+    id: 'sign-right-curve',
+    category: 'signs',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 3,
+    imagePath: '/images/quiz/sign-right-curve.jpg',
+    question: {
+      de: 'Wovor warnt dieses Gefahrenzeichen?',
+      en: 'What does this warning sign caution against?',
+      ar: 'مما تحذر هذه الإشارة؟',
+      tr: 'Bu uyarı işareti neye karşı uyarır?',
+      ru: 'О чём предупреждает этот знак?',
+      pl: 'Przed czym ostrzega ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Vor einer Rechtskurve',
+          en: 'A right-hand curve ahead',
+          ar: 'منعطف يمين',
+          tr: 'Sağa virajlı yol',
+          ru: 'Поворот направо',
+          pl: 'Zakręt w prawo'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Vor einer Linkskurve',
+          en: 'A left-hand curve ahead',
+          ar: 'منعطف يسار',
+          tr: 'Sola virajlı yol',
+          ru: 'Поворот налево',
+          pl: 'Zakręt w lewo'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Vor einer Sackgasse',
+          en: 'A dead end',
+          ar: 'طريق مسدود',
+          tr: 'Çıkmaz yol',
+          ru: 'Тупик',
+          pl: 'Ślepa ulica'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Das Zeichen kündigt eine Rechtskurve an. Geschwindigkeit rechtzeitig anpassen und vor der Kurve bremsen.',
+      en: 'The sign announces a right-hand curve. Adjust your speed and brake before the curve.',
+      ar: 'تنذر الإشارة بمنعطف يمين. اضبط السرعة وافرمل قبل المنعطف.',
+      tr: 'İşaret sağa viraj olduğunu bildirir. Hızı önceden ayarlayın ve virajdan önce frenleyin.',
+      ru: 'Знак предупреждает о повороте направо. Заранее снизьте скорость и тормозите до поворота.',
+      pl: 'Znak zapowiada zakręt w prawo. Wcześnie dostosuj prędkość i hamuj przed zakrętem.'
+    }
+  },
+  {
+    id: 'sign-double-bend',
+    category: 'signs',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 3,
+    imagePath: '/images/quiz/sign-double-bend.jpg',
+    question: {
+      de: 'Was sagt Ihnen dieses Zeichen?',
+      en: 'What does this sign tell you?',
+      ar: 'ماذا تخبرك هذه الإشارة؟',
+      tr: 'Bu işaret size ne söylüyor?',
+      ru: 'О чём сообщает этот знак?',
+      pl: 'Co mówi ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Doppelkurve — zuerst nach rechts',
+          en: 'Double bend — first to the right',
+          ar: 'منعطف مزدوج — أولاً إلى اليمين',
+          tr: 'Çift viraj — önce sağa',
+          ru: 'Двойной поворот — сначала направо',
+          pl: 'Podwójny zakręt — najpierw w prawo'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Schleudergefahr',
+          en: 'Skid hazard',
+          ar: 'خطر الانزلاق',
+          tr: 'Kayma tehlikesi',
+          ru: 'Опасность заноса',
+          pl: 'Niebezpieczeństwo poślizgu'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Einbahnstraße',
+          en: 'One-way street',
+          ar: 'طريق باتجاه واحد',
+          tr: 'Tek yönlü yol',
+          ru: 'Односторонняя дорога',
+          pl: 'Ulica jednokierunkowa'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Das Zeichen warnt vor einer Doppelkurve, die zuerst nach rechts und dann nach links verläuft. Vorausschauend bremsen.',
+      en: 'The sign warns of a double bend that goes right first, then left. Brake in good time.',
+      ar: 'الإشارة تحذر من منعطف مزدوج، يبدأ يمينًا ثم يسارًا. افرمل في الوقت المناسب.',
+      tr: 'İşaret çift virajı uyarır — önce sağa, sonra sola. Zamanında frenleyin.',
+      ru: 'Знак предупреждает о двойном повороте — сначала направо, затем налево. Тормозите заранее.',
+      pl: 'Znak ostrzega przed podwójnym zakrętem — najpierw w prawo, potem w lewo. Hamuj odpowiednio wcześnie.'
+    }
+  },
+  {
+    id: 'right-crossing-priority',
+    category: 'rightOfWay',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 4,
+    imagePath: '/images/quiz/sign-crossroads.jpg',
+    question: {
+      de: 'Welche Vorfahrtsregel kündigt dieses Zeichen an?',
+      en: 'Which right-of-way rule does this sign announce?',
+      ar: 'ما قاعدة الأولوية التي تعلنها هذه الإشارة؟',
+      tr: 'Bu işaret hangi geçiş hakkı kuralını bildirir?',
+      ru: 'Какое правило приоритета объявляет этот знак?',
+      pl: 'Jaką zasadę pierwszeństwa zapowiada ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Kreuzung mit Vorfahrt von rechts (rechts vor links)',
+          en: 'Crossing — right before left applies',
+          ar: 'تقاطع — اليمين قبل اليسار',
+          tr: 'Kavşak — sağdan gelene yol',
+          ru: 'Перекрёсток — правый имеет приоритет',
+          pl: 'Skrzyżowanie — prawej ręki'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Sie haben Vorfahrt vor allen Querstraßen',
+          en: 'You have priority over all crossing roads',
+          ar: 'لديك الأولوية على جميع الطرق المتقاطعة',
+          tr: 'Bütün kesişen yollara karşı geçiş hakkınız var',
+          ru: 'У вас приоритет перед всеми пересекающими дорогами',
+          pl: 'Masz pierwszeństwo przed wszystkimi drogami poprzecznymi'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Sie müssen anhalten',
+          en: 'You must stop',
+          ar: 'يجب أن تتوقف',
+          tr: 'Durmalısınız',
+          ru: 'Вы должны остановиться',
+          pl: 'Musisz się zatrzymać'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Das Zeichen kündigt eine Kreuzung ohne Vorfahrtsregelung an — es gilt „rechts vor links". Bremsbereit annähern.',
+      en: 'The sign warns of an unregulated crossing — "right before left" applies. Approach ready to brake.',
+      ar: 'الإشارة تنذر بتقاطع غير منظم — تطبّق قاعدة "اليمين قبل اليسار". اقترب بحذر.',
+      tr: 'İşaret düzensiz bir kavşağı bildirir — "sağdan gelene yol" geçerlidir. Frene hazır yaklaşın.',
+      ru: 'Знак предупреждает о нерегулируемом перекрёстке — действует «правый имеет приоритет». Подъезжайте готовым тормозить.',
+      pl: 'Znak zapowiada skrzyżowanie bez znaków pierwszeństwa — obowiązuje zasada prawej ręki. Zbliżaj się gotów hamować.'
+    }
+  },
+  {
+    id: 'sign-narrow-road',
+    category: 'signs',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 2,
+    imagePath: '/images/quiz/sign-narrow-road.jpg',
+    question: {
+      de: 'Was kündigt dieses Zeichen an?',
+      en: 'What does this sign announce?',
+      ar: 'ماذا تعلن هذه الإشارة؟',
+      tr: 'Bu işaret neyi bildirir?',
+      ru: 'О чём предупреждает этот знак?',
+      pl: 'Co zapowiada ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Beidseitig verengte Fahrbahn',
+          en: 'Road narrows on both sides',
+          ar: 'الطريق يضيق من الجانبين',
+          tr: 'Yol her iki yandan daralıyor',
+          ru: 'Дорога сужается с обеих сторон',
+          pl: 'Zwężenie jezdni z obu stron'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Einbahnstraße',
+          en: 'One-way street',
+          ar: 'طريق باتجاه واحد',
+          tr: 'Tek yönlü yol',
+          ru: 'Одностороннее движение',
+          pl: 'Ulica jednokierunkowa'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Überholverbot',
+          en: 'No overtaking',
+          ar: 'ممنوع التجاوز',
+          tr: 'Geçme yasağı',
+          ru: 'Обгон запрещён',
+          pl: 'Zakaz wyprzedzania'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Die Fahrbahn wird auf beiden Seiten enger. Geschwindigkeit reduzieren und auf Gegenverkehr achten.',
+      en: 'The road narrows on both sides. Slow down and watch for oncoming traffic.',
+      ar: 'يضيق الطريق من الجانبين. خفّف السرعة وانتبه للسيارات القادمة.',
+      tr: 'Yol her iki taraftan daralır. Yavaşlayın ve karşıdan gelen trafiğe dikkat edin.',
+      ru: 'Дорога сужается с обеих сторон. Снизьте скорость и следите за встречным движением.',
+      pl: 'Jezdnia zwęża się z obu stron. Zwolnij i uważaj na ruch z przeciwka.'
+    }
+  },
+  {
+    id: 'sign-uneven-road',
+    category: 'behavior',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 3,
+    imagePath: '/images/quiz/sign-uneven-road.jpg',
+    question: {
+      de: 'Wie reagieren Sie auf dieses Zeichen?',
+      en: 'How do you respond to this sign?',
+      ar: 'كيف تتصرف عند هذه الإشارة؟',
+      tr: 'Bu işarete nasıl tepki verirsiniz?',
+      ru: 'Как реагировать на этот знак?',
+      pl: 'Jak reagujesz na ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Geschwindigkeit verringern',
+          en: 'Reduce speed',
+          ar: 'تخفيف السرعة',
+          tr: 'Hızı azalt',
+          ru: 'Снизить скорость',
+          pl: 'Zmniejszyć prędkość'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Lenkrad fest in beiden Händen halten',
+          en: 'Hold the steering wheel firmly with both hands',
+          ar: 'أمسك المقود بثبات بكلتا اليدين',
+          tr: 'Direksiyonu iki elinle sağlam tut',
+          ru: 'Крепко держать руль обеими руками',
+          pl: 'Trzymać kierownicę mocno oburącz'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Vollgas geben',
+          en: 'Accelerate at full throttle',
+          ar: 'الإسراع بأقصى سرعة',
+          tr: 'Tam gaz hızlan',
+          ru: 'Резко разогнаться',
+          pl: 'Mocno przyspieszyć'
+        }
+      }
+    ],
+    correctIds: ['a', 'b'],
+    explanation: {
+      de: 'Eine unebene Fahrbahn kann die Fahrzeugführung erschweren. Geschwindigkeit anpassen und das Lenkrad sicher halten.',
+      en: 'An uneven road can upset vehicle handling. Slow down and keep a firm grip on the wheel.',
+      ar: 'الطريق غير المستوي يصعّب التحكم. خفّف السرعة وأمسك المقود جيدًا.',
+      tr: 'Engebeli yol aracın hâkimiyetini zorlaştırır. Hızı düşürün ve direksiyonu sıkı tutun.',
+      ru: 'Неровная дорога ухудшает управляемость. Снизьте скорость и крепко держите руль.',
+      pl: 'Nierówna jezdnia utrudnia prowadzenie. Zwolnij i trzymaj mocno kierownicę.'
+    }
+  },
+  {
+    id: 'sign-two-way',
+    category: 'behavior',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 3,
+    imagePath: '/images/quiz/sign-two-way-traffic.jpg',
+    question: {
+      de: 'Worauf weist dieses Zeichen hin?',
+      en: 'What does this sign indicate?',
+      ar: 'ماذا تشير إليه هذه الإشارة؟',
+      tr: 'Bu işaret neye işaret eder?',
+      ru: 'На что указывает этот знак?',
+      pl: 'Na co wskazuje ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Gegenverkehr — vorsichtig fahren',
+          en: 'Oncoming traffic — drive carefully',
+          ar: 'مرور قادم من الاتجاه المقابل — قُد بحذر',
+          tr: 'Karşıdan gelen trafik — dikkatli sürün',
+          ru: 'Встречное движение — двигайтесь осторожно',
+          pl: 'Ruch z przeciwka — jedź ostrożnie'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Ende einer Einbahnstraße — Gegenverkehr ist möglich',
+          en: 'End of one-way street — oncoming traffic possible',
+          ar: 'نهاية طريق باتجاه واحد — قد توجد سيارات قادمة',
+          tr: 'Tek yönlü yol sonu — karşıdan gelen olabilir',
+          ru: 'Конец одностороннего движения — возможно встречное',
+          pl: 'Koniec ulicy jednokierunkowej — możliwy ruch z przeciwka'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Überholen erlaubt',
+          en: 'Overtaking permitted',
+          ar: 'مسموح بالتجاوز',
+          tr: 'Geçmek serbest',
+          ru: 'Обгон разрешён',
+          pl: 'Wyprzedzanie dozwolone'
+        }
+      }
+    ],
+    correctIds: ['a', 'b'],
+    explanation: {
+      de: 'Das Zeichen kündigt Gegenverkehr an — beim Überholen ist besondere Vorsicht geboten, häufig nach einer Einbahnstraße.',
+      en: 'The sign warns of oncoming traffic — extra caution when overtaking, often at the end of a one-way street.',
+      ar: 'تنذر الإشارة بسيارات قادمة من الاتجاه المقابل — انتبه عند التجاوز، غالبًا بعد نهاية طريق باتجاه واحد.',
+      tr: 'İşaret karşıdan gelen trafiği bildirir — geçerken çok dikkatli olun, sıklıkla tek yönlü yolun bitiminden sonra.',
+      ru: 'Знак предупреждает о встречном движении — будьте особенно осторожны при обгоне, часто стоит после односторонней улицы.',
+      pl: 'Znak ostrzega o ruchu z przeciwka — szczególna ostrożność przy wyprzedzaniu, często po końcu ulicy jednokierunkowej.'
+    }
+  },
+  {
+    id: 'sign-wild-animals',
+    category: 'signs',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 4,
+    question: {
+      de: 'Wann ist die Gefahr durch das Gefahrenzeichen „Wildwechsel" (rotes Dreieck mit springendem Hirsch) besonders groß?',
+      en: 'When is the hazard from the "Wildlife crossing" warning sign (red triangle with a leaping deer) especially high?',
+      ar: 'متى تكون خطورة لوحة "عبور الحيوانات البرية" (مثلث أحمر بداخله غزال يقفز) كبيرة بشكل خاص؟',
+      tr: '"Yaban hayvanı geçişi" uyarı işaretinde (zıplayan geyik simgeli kırmızı üçgen) tehlike ne zaman özellikle yüksektir?',
+      ru: 'Когда опасность по знаку «Дикие животные» (красный треугольник с прыгающим оленем) особенно высока?',
+      pl: 'Kiedy zagrożenie przy znaku „Zwierzęta dzikie" (czerwony trójkąt z sylwetką skaczącego jelenia) jest szczególnie wysokie?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'In der Dämmerung und nachts',
+          en: 'At dusk and at night',
+          ar: 'عند الغسق وليلًا',
+          tr: 'Alacakaranlık ve geceleri',
+          ru: 'В сумерки и ночью',
+          pl: 'O zmierzchu i w nocy'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Mittags bei voller Sonne',
+          en: 'At midday in bright sunshine',
+          ar: 'منتصف النهار في الشمس الساطعة',
+          tr: 'Öğle vakti güneşli havada',
+          ru: 'В полдень при ярком солнце',
+          pl: 'W południe w pełnym słońcu'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Nur im Sommer',
+          en: 'Only in summer',
+          ar: 'في الصيف فقط',
+          tr: 'Yalnızca yazın',
+          ru: 'Только летом',
+          pl: 'Tylko latem'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Wildwechsel tritt am häufigsten in der Dämmerung und nachts auf. Geschwindigkeit reduzieren und bremsbereit sein.',
+      en: 'Wildlife crossings happen most often at dusk and at night. Reduce speed and be ready to brake.',
+      ar: 'عبور الحيوانات البرية يحدث في الغالب عند الغسق وفي الليل. خفّف السرعة وكن جاهزًا للفرملة.',
+      tr: 'Yaban hayvanı geçişleri en sık alacakaranlık ve geceleri olur. Hızı düşürün ve frene hazır olun.',
+      ru: 'Дикие животные чаще всего выходят на дорогу в сумерках и ночью. Снизьте скорость и будьте готовы тормозить.',
+      pl: 'Dzikie zwierzęta najczęściej wychodzą na drogę o zmierzchu i nocą. Zmniejsz prędkość i bądź gotów hamować.'
+    }
+  },
+  {
+    id: 'sign-road-works',
+    category: 'behavior',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 4,
+    imagePath: '/images/quiz/sign-road-works.jpg',
+    question: {
+      de: 'Was beachten Sie an einer Arbeitsstelle?',
+      en: 'What do you watch out for at a road-works site?',
+      ar: 'ما الذي تنتبه إليه عند موقع عمل في الطريق؟',
+      tr: 'Yol çalışması yerinde nelere dikkat edersiniz?',
+      ru: 'На что обращать внимание у дорожных работ?',
+      pl: 'Na co zwracać uwagę w miejscu robót drogowych?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Geschwindigkeit deutlich reduzieren',
+          en: 'Significantly reduce speed',
+          ar: 'خفّف السرعة بوضوح',
+          tr: 'Hızı belirgin şekilde düşür',
+          ru: 'Значительно снизить скорость',
+          pl: 'Wyraźnie zmniejszyć prędkość'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Sicherheitsabstand vergrößern',
+          en: 'Increase your following distance',
+          ar: 'زيادة مسافة الأمان',
+          tr: 'Takip mesafesini artırın',
+          ru: 'Увеличить дистанцию',
+          pl: 'Zwiększyć odstęp od poprzedzającego'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Mit Bauarbeitern und Maschinen auf der Fahrbahn rechnen',
+          en: 'Expect workers and machinery on the road',
+          ar: 'توقّع وجود عمال وآلات على الطريق',
+          tr: 'Yolda işçi ve makine olabileceğini bekleyin',
+          ru: 'Ожидать рабочих и техники на дороге',
+          pl: 'Spodziewać się robotników i maszyn na jezdni'
+        }
+      }
+    ],
+    correctIds: ['a', 'b', 'c'],
+    explanation: {
+      de: 'An Baustellen können Fahrbahnen verengt sein, Personen und Maschinen unerwartet auftreten. Geschwindigkeit, Abstand und Aufmerksamkeit erhöhen.',
+      en: 'Road-works can narrow lanes and bring workers or machines onto the road. Cut speed, lengthen the gap, stay alert.',
+      ar: 'في مواقع الإصلاح قد تضيق المسارات وتظهر آلات أو عمال فجأة. خفّف السرعة، زِد المسافة، وانتبه.',
+      tr: 'Çalışma alanlarında şeritler daralabilir, işçi ve makineler ansızın yola çıkabilir. Hızı düşürün, mesafeyi açın, dikkatli olun.',
+      ru: 'На дорожных работах полосы сужаются, могут появиться рабочие и техника. Снижайте скорость, увеличивайте дистанцию, будьте внимательны.',
+      pl: 'Przy robotach drogowych pasy mogą się zwężać, na drodze pojawiają się robotnicy i maszyny. Zmniejsz prędkość, zwiększ odstęp, bądź czujny.'
+    }
+  },
+  {
+    id: 'sign-cattle',
+    category: 'signs',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 3,
+    imagePath: '/images/quiz/sign-cattle.jpg',
+    question: {
+      de: 'Was warnt dieses Zeichen?',
+      en: 'What does this sign warn about?',
+      ar: 'مما تحذر هذه الإشارة؟',
+      tr: 'Bu işaret neye karşı uyarır?',
+      ru: 'О чём предупреждает этот знак?',
+      pl: 'Przed czym ostrzega ten znak?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Viehtrieb — Tiere können die Fahrbahn kreuzen',
+          en: 'Cattle crossing — animals may cross the road',
+          ar: 'مرور ماشية — قد تعبر الحيوانات الطريق',
+          tr: 'Hayvan geçişi — hayvanlar yolu geçebilir',
+          ru: 'Перегон скота — животные могут выйти на дорогу',
+          pl: 'Przepęd bydła — zwierzęta mogą przechodzić przez jezdnię'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Tierarztpraxis',
+          en: 'Veterinary practice',
+          ar: 'عيادة بيطرية',
+          tr: 'Veteriner kliniği',
+          ru: 'Ветеринарная клиника',
+          pl: 'Lecznica weterynaryjna'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Bauernhof in der Nähe',
+          en: 'Farm nearby',
+          ar: 'مزرعة قريبة',
+          tr: 'Yakında çiftlik',
+          ru: 'Ферма рядом',
+          pl: 'Gospodarstwo w pobliżu'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Das Zeichen warnt vor Viehtrieb. Geschwindigkeit anpassen und auf querende Tiere achten.',
+      en: 'The sign warns of cattle crossings. Reduce speed and watch for animals crossing.',
+      ar: 'الإشارة تحذر من مرور المواشي. خفّف السرعة وانتبه للحيوانات.',
+      tr: 'İşaret hayvan geçişi konusunda uyarır. Hızı düşürün, geçen hayvanlara dikkat edin.',
+      ru: 'Знак предупреждает о перегоне скота. Снизьте скорость и следите за пересекающими дорогу животными.',
+      pl: 'Znak ostrzega przed przepędem bydła. Zmniejsz prędkość i uważaj na zwierzęta na jezdni.'
+    }
+  },
+  {
+    id: 'sign-one-way',
+    category: 'signs',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 2,
+    question: {
+      de: 'Was bedeutet das Schild „Einbahnstraße" (blaues Rechteck mit weißem, waagerechtem Pfeil)?',
+      en: 'What does the "One-way street" sign (blue rectangle with a white horizontal arrow) mean?',
+      ar: 'ماذا تعني لوحة "طريق باتجاه واحد" (مستطيل أزرق بسهم أبيض أفقي)؟',
+      tr: '"Tek Yönlü Yol" işareti (üzerinde beyaz yatay ok olan mavi dikdörtgen) ne anlama gelir?',
+      ru: 'Что означает знак «Одностороннее движение» (синий прямоугольник с белой горизонтальной стрелкой)?',
+      pl: 'Co oznacza znak „Ulica jednokierunkowa" (niebieski prostokąt z białą poziomą strzałką)?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'Einbahnstraße — nur in Pfeilrichtung befahrbar',
+          en: 'One-way street — only in the direction of the arrow',
+          ar: 'طريق باتجاه واحد — السير في اتجاه السهم فقط',
+          tr: 'Tek yönlü yol — yalnızca ok yönünde geçerli',
+          ru: 'Одностороннее движение — только в направлении стрелки',
+          pl: 'Ulica jednokierunkowa — tylko w kierunku strzałki'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Vorfahrtstraße',
+          en: 'Priority road',
+          ar: 'طريق ذو أولوية',
+          tr: 'Ana yol',
+          ru: 'Главная дорога',
+          pl: 'Droga z pierwszeństwem'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Fahrradstraße',
+          en: 'Bicycle road',
+          ar: 'طريق دراجات',
+          tr: 'Bisiklet yolu',
+          ru: 'Велосипедная дорога',
+          pl: 'Droga rowerowa'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Einbahnstraße: Verkehr ist nur in Pfeilrichtung erlaubt. In die Gegenrichtung fahren oder einfahren ist verboten.',
+      en: 'One-way street: traffic is only allowed in the direction of the arrow. Driving against the arrow is forbidden.',
+      ar: 'طريق باتجاه واحد: السير مسموح فقط في اتجاه السهم. القيادة في الاتجاه المعاكس ممنوعة.',
+      tr: 'Tek yönlü yol: yalnızca ok yönünde trafik akar. Ters yöne girmek yasaktır.',
+      ru: 'Одностороннее движение: разрешено только в направлении стрелки. Ехать навстречу запрещено.',
+      pl: 'Ulica jednokierunkowa: ruch tylko w kierunku strzałki. Wjazd lub jazda w przeciwnym kierunku są zabronione.'
+    }
+  },
+  {
+    id: 'speed-outside-builtup',
+    category: 'speed',
+    classes: ['B', 'AB'],
+    points: 3,
+    question: {
+      de: 'Welche allgemeine Höchstgeschwindigkeit gilt für Pkw außerorts (außerhalb von Autobahnen und Kraftfahrstraßen)?',
+      en: 'What is the general speed limit for cars outside built-up areas (excluding motorways)?',
+      ar: 'ما الحد الأقصى العام للسرعة للسيارات خارج المدن (باستثناء الطرق السريعة)؟',
+      tr: 'Yerleşim yeri dışında (otoyol hariç) otomobiller için genel azami hız nedir?',
+      ru: 'Какова общая максимальная скорость для легковых вне населённого пункта (вне автомагистралей)?',
+      pl: 'Jakie jest ogólne ograniczenie prędkości dla samochodów osobowych poza obszarem zabudowanym (poza autostradą)?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: { de: '80 km/h', en: '80 km/h', ar: '80 كم/س', tr: '80 km/s', ru: '80 км/ч', pl: '80 km/h' }
+      },
+      {
+        id: 'b',
+        text: { de: '100 km/h', en: '100 km/h', ar: '100 كم/س', tr: '100 km/s', ru: '100 км/ч', pl: '100 km/h' }
+      },
+      {
+        id: 'c',
+        text: { de: '130 km/h', en: '130 km/h', ar: '130 كم/س', tr: '130 km/s', ru: '130 км/ч', pl: '130 km/h' }
+      }
+    ],
+    correctIds: ['b'],
+    explanation: {
+      de: 'Außerorts dürfen Pkw maximal 100 km/h fahren, sofern keine niedrigere Beschilderung gilt. 130 km/h ist die Richtgeschwindigkeit auf Autobahnen.',
+      en: 'Outside built-up areas the limit for cars is 100 km/h unless a lower sign applies. 130 km/h is the advisory speed on motorways.',
+      ar: 'خارج المدن، الحد الأقصى للسيارات هو 100 كم/س ما لم تظهر لوحة أقل. 130 كم/س هي السرعة المنصوحة على الطرق السريعة.',
+      tr: 'Yerleşim dışında otomobiller için azami hız 100 km/s\'dir; daha düşük tabela varsa o geçerli. 130 km/s otoyolda tavsiye edilen hızdır.',
+      ru: 'Вне населённых пунктов для легковых 100 км/ч, если нет меньшего знака. 130 км/ч — рекомендованная скорость на автомагистралях.',
+      pl: 'Poza obszarem zabudowanym dla aut limit to 100 km/h, chyba że oznaczono mniej. 130 km/h to zalecana prędkość na autostradzie.'
+    }
+  },
+  {
+    id: 'firstaid-recovery',
+    category: 'firstAid',
+    classes: ['A', 'B', 'AB', 'Mofa'],
+    points: 4,
+    question: {
+      de: 'In welche Lage bringen Sie eine bewusstlose Person, die noch atmet?',
+      en: 'In which position do you place an unconscious person who is still breathing?',
+      ar: 'في أي وضع تضع شخصًا فاقدًا للوعي لكنه يتنفس؟',
+      tr: 'Bilinçsiz ama nefes alan kişiyi hangi pozisyona koyarsınız?',
+      ru: 'В какое положение переводят пострадавшего без сознания, но дышащего?',
+      pl: 'W jakiej pozycji układasz osobę nieprzytomną, która oddycha?'
+    },
+    options: [
+      {
+        id: 'a',
+        text: {
+          de: 'In die stabile Seitenlage',
+          en: 'In the recovery (stable side) position',
+          ar: 'وضعية الإفاقة الجانبية المستقرة',
+          tr: 'Yan yatış (kurtarma) pozisyonu',
+          ru: 'В устойчивое боковое положение',
+          pl: 'W pozycji bocznej ustalonej'
+        }
+      },
+      {
+        id: 'b',
+        text: {
+          de: 'Auf den Rücken mit erhöhten Beinen',
+          en: 'On the back with legs raised',
+          ar: 'على الظهر مع رفع الساقين',
+          tr: 'Sırt üstü, bacaklar yukarıda',
+          ru: 'На спине с приподнятыми ногами',
+          pl: 'Na plecach z uniesionymi nogami'
+        }
+      },
+      {
+        id: 'c',
+        text: {
+          de: 'Auf den Bauch, Gesicht nach unten',
+          en: 'Face down on the stomach',
+          ar: 'على البطن، الوجه إلى الأسفل',
+          tr: 'Yüz üstü, karın üstüne',
+          ru: 'На животе, лицом вниз',
+          pl: 'Na brzuchu, twarzą do dołu'
+        }
+      }
+    ],
+    correctIds: ['a'],
+    explanation: {
+      de: 'Die stabile Seitenlage hält die Atemwege frei und verhindert das Verschlucken bei Erbrechen. Atmung weiter überwachen, Notruf 112 absetzen.',
+      en: 'The recovery position keeps the airway clear and prevents choking on vomit. Keep monitoring breathing and call 112.',
+      ar: 'وضعية الإفاقة تحافظ على فتح المجرى التنفسي وتمنع الاختناق بالقيء. راقب التنفس واتصل بـ 112.',
+      tr: 'Yan yatış pozisyonu hava yolunu açık tutar ve kusmuktan boğulmayı önler. Solunumu izlemeye devam edin, 112\'yi arayın.',
+      ru: 'Боковое положение сохраняет дыхательные пути открытыми и предотвращает захлёбывание при рвоте. Следите за дыханием и звоните 112.',
+      pl: 'Pozycja boczna utrzymuje drogi oddechowe drożne i chroni przed zachłyśnięciem wymiotami. Kontroluj oddech i zadzwoń pod 112.'
     }
   }
 ];

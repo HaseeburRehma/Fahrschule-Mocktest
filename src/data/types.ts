@@ -34,18 +34,6 @@ export interface QuestionOption {
   text: LocalizedText;
 }
 
-export type SignId =
-  | 'stop'
-  | 'yield'
-  | 'priorityRoad'
-  | 'noEntry'
-  | 'speed30'
-  | 'speed50'
-  | 'roundabout'
-  | 'children'
-  | 'pedestrianCrossing'
-  | 'mandatoryRight';
-
 export interface Question {
   id: string;
   category: Category;
@@ -53,8 +41,11 @@ export interface Question {
   classes: LicenseClass[];
   /** 1–5 — drives weighting in the score. */
   points: 1 | 2 | 3 | 4 | 5;
-  /** Optional sign rendered above the question. */
-  signId?: SignId;
+  /**
+   * Optional image path (must reference a file inside /public/images/quiz).
+   * No external URLs or procedural SVGs are rendered in the quiz.
+   */
+  imagePath?: string;
   question: LocalizedText;
   options: QuestionOption[];
   /** IDs of the correct option(s). Multiple = multi-select. */

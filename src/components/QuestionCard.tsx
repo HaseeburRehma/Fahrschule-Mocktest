@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import { Check, AlertCircle } from 'lucide-react';
-import { TrafficSign } from './icons/TrafficSigns';
+import Image from 'next/image';
 import type { Question } from '@/data/types';
 import { pickText } from '@/data/types';
 
@@ -31,15 +31,34 @@ export function QuestionCard({ question, selected, onToggle }: Props) {
         <span>{t('quiz.points', { count: question.points })}</span>
       </div>
 
-      {/* Sign */}
-      {question.signId && (
+      {/* Custom Image — only renders from /public/images/quiz */}
+      {question.imagePath && (
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4 }}
           className="my-2 mb-6"
         >
-          <TrafficSign id={question.signId} />
+          <div className="relative mx-auto aspect-square w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px]">
+            {/* Scenery vignette */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -m-4 rounded-[28px] bg-gradient-to-br from-slate-800/35 via-slate-900/15 to-slate-700/35 blur-xl"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-3 -bottom-3 h-6 rounded-full bg-brand/25 blur-2xl"
+            />
+            <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-white/10 bg-white shadow-2xl">
+              <Image
+                src={question.imagePath}
+                alt="Question image"
+                fill
+                sizes="(max-width: 640px) 140px, (max-width: 768px) 180px, 220px"
+                className="object-contain p-2"
+              />
+            </div>
+          </div>
         </motion.div>
       )}
 
