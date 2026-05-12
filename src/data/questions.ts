@@ -1,4 +1,8 @@
 import type { Question, LicenseClass } from './types';
+import { extraQuestions } from './extra-questions';
+import { extraQuestions2 } from './extra-questions-2';
+import { extraQuestions3 } from './extra-questions-3';
+import { extraQuestions4 } from './extra-questions-4';
 
 /**
  * Original mock-style theory questions. They're inspired by the official
@@ -8,7 +12,7 @@ import type { Question, LicenseClass } from './types';
  * Each `LocalizedText` carries DE + EN (required) and AR / TR / RU / PL
  * (optional, with EN fallback at runtime via `pickText`).
  */
-export const questions: Question[] = [
+const baseQuestions: Question[] = [
   // ───────────────── Traffic signs ────────────────────────────────────────────
   {
     id: 'sign-stop-1',
@@ -2091,6 +2095,14 @@ export const questions: Question[] = [
       pl: 'Pozycja boczna utrzymuje drogi oddechowe drożne i chroni przed zachłyśnięciem wymiotami. Kontroluj oddech i zadzwoń pod 112.'
     }
   }
+];
+
+export const questions: Question[] = [
+  ...baseQuestions,
+  ...extraQuestions,
+  ...extraQuestions2,
+  ...extraQuestions3,
+  ...extraQuestions4
 ];
 
 /**
