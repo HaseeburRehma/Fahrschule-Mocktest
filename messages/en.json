@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Theory Exam Mock Test – Fahrschule Abgefahrn",
-    "description": "Take your theoretical driving licence mock exam in your language. Class A, B, A+B or Mofa. With power to your licence."
+    "title": "German Driving Theory Mock Test – Class A, B, AB & Mofa | Abgefahrn",
+    "description": "Free online mock test for the German driving licence theory exam (Führerschein-Theorieprüfung). 6 languages, class A / B / AB / Mofa, picture and video questions just like TÜV and DEKRA."
   },
   "nav": {
     "home": "Home",
@@ -10,12 +10,12 @@
   },
   "home": {
     "tag": "With power to your licence",
-    "headline": "Carry out your mock theory exam",
-    "subheadline": "Pick your language and licence class to experience the official German exam format.",
-    "cinemaHeadline": "Conquer your driving test",
-    "cinemaLine1": "Conquer your",
-    "cinemaLine2": "Driving test",
-    "cinemaSubheadline": "A pixel-perfect mock of the official German theory exam. Pick a language, pick a class — the rest mirrors TÜV and DEKRA.",
+    "headline": "German driving theory — mock test online",
+    "subheadline": "Practise the official German Führerschein theory exam in your language — for class A, B, A+B or Mofa.",
+    "cinemaHeadline": "German Driving Theory — Mock Test Online",
+    "cinemaLine1": "Driving Theory",
+    "cinemaLine2": "Mock Test Online",
+    "cinemaSubheadline": "Practise the official German Führerschein theory exam for free in 6 languages — class A, B, A+B and Mofa. Over 250 original questions with picture and video items, just like the TÜV and DEKRA exam.",
     "mascotSpeech": "Ready? Let's get you behind the wheel.",
     "scrollHint": "Explore more",
     "ctaPrimary": "Start now",
@@ -32,6 +32,21 @@
       "questions": "{count} questions",
       "categories": "{count} categories",
       "languages": "{count} languages"
+    },
+    "filter": {
+      "heading": "Practice by topic",
+      "subheading": "Pick a filter to drill a specific kind of question.",
+      "topics":    "Learn topics",
+      "search":    "Search",
+      "signs":     "Traffic signs",
+      "wrong":     "Wrong questions",
+      "marked":    "Marked questions",
+      "picture":   "Picture question",
+      "video":     "Video question",
+      "selection": "Selection question",
+      "numbers":   "Numbers question",
+      "new":       "New questions",
+      "random":    "Random"
     }
   },
   "classes": {
@@ -70,7 +85,39 @@
     },
     "explanation": "Explanation",
     "loading": "Loading questions…",
-    "skipped": "This question was not answered."
+    "skipped": "This question was not answered.",
+    "startVideo": "Start video",
+    "replay": "Play again",
+    "videoRemaining": "You can still see the video {count}× more.",
+    "videoIntro": "Please start the film to become familiar with the situation.",
+    "goToQuestion": "Go to question",
+    "mark": "Mark",
+    "marked": "Marked",
+    "submit": "Submit",
+    "navigator": "Questions",
+    "empty": {
+      "title": "No questions in \"{filter}\" yet",
+      "titleGeneric": "No questions yet",
+      "body": "Take a quiz first — once you mark or answer questions, they'll show up here.",
+      "startRandom": "Start random test",
+      "backHome": "Back to home"
+    }
+  },
+  "topics": {
+    "title": "Learn by topic",
+    "subtitle": "Pick a topic to drill down. Each topic links to the questions tagged with that catalogue code.",
+    "questionsHere": "{count} in pool",
+    "practiceTopic": "Practice topic",
+    "grundstoff": "Basic (Grundstoff)",
+    "zusatzstoff": "Class-specific (Zusatzstoff)"
+  },
+  "search": {
+    "title": "Search questions",
+    "subtitle": "Type a word, phrase, or rule — we'll match against question text, answer options and explanations.",
+    "placeholder": "Search… e.g. zebra crossing, blood alcohol, 50 km/h",
+    "noResults": "No matches. Try a different word.",
+    "resultsCount": "{count} match | {count} matches",
+    "practiceThis": "Practice this"
   },
   "results": {
     "title": "Your result",
@@ -81,6 +128,9 @@
     "yourScore": "Your points",
     "outOf": "of {total}",
     "passThreshold": "Pass threshold: {points} points",
+    "errorPointsLabel": "Error points",
+    "errorPointsThreshold": "Pass threshold: at most {points} error points",
+    "twoFivePointersFailed": "Two 5-point questions answered wrong — automatic fail under the official rule.",
     "totalQuestions": "Questions",
     "correct": "Correct",
     "wrong": "Wrong",

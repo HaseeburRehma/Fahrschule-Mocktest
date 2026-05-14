@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Teori Sınavı Deneme Testi – Fahrschule Abgefahrn",
-    "description": "Sürücü belgesi teori deneme sınavını kendi dilinde yap. Sınıf A, B, A+B veya Mofa."
+    "title": "Alman Ehliyet Teori Deneme Sınavı – A, B, AB & Mofa Sınıfları | Abgefahrn",
+    "description": "Alman ehliyet teori sınavı için ücretsiz çevrimiçi deneme. 6 dilde, A / B / AB / Mofa sınıfları, TÜV ve DEKRA gibi resimli ve videolu sorular."
   },
   "nav": {
     "home": "Ana sayfa",
@@ -10,12 +10,12 @@
   },
   "home": {
     "tag": "Güçle ehliyete",
-    "headline": "Teori deneme sınavını yap",
-    "subheadline": "Resmi Alman sınav formatını deneyimlemek için dilini ve sınıfını seç.",
-    "cinemaHeadline": "Teori sınavını fethet",
-    "cinemaLine1": "Teori sınavını",
-    "cinemaLine2": "Fethet",
-    "cinemaSubheadline": "Resmi Alman teori sınavının birebir simülasyonu. Dilini ve sınıfını seç — gerisi TÜV ve DEKRA ile aynı.",
+    "headline": "Alman ehliyet teorisi — çevrimiçi deneme sınavı",
+    "subheadline": "Resmi Alman ehliyet teori sınavını kendi dilinde dene — A, B, A+B veya Mofa sınıfları.",
+    "cinemaHeadline": "Ehliyet Teorisi — Çevrimiçi Deneme",
+    "cinemaLine1": "Ehliyet Teorisi",
+    "cinemaLine2": "Deneme Sınavı",
+    "cinemaSubheadline": "Resmi Alman ehliyet teori sınavını 6 dilde ücretsiz çalış — A, B, A+B ve Mofa sınıfları. 250'den fazla özgün soru, TÜV ve DEKRA'daki gibi resimli ve videolu soruları içerir.",
     "mascotSpeech": "Hazır mısın? O zaman başlayalım.",
     "scrollHint": "Daha fazlasını keşfet",
     "ctaPrimary": "Hemen başla",
@@ -32,6 +32,21 @@
       "questions": "{count} soru",
       "categories": "{count} kategori",
       "languages": "{count} dil"
+    },
+    "filter": {
+      "heading": "Konuya göre çalış",
+      "subheading": "Belirli bir soru tipini çalışmak için bir filtre seç.",
+      "topics":    "Konuları öğren",
+      "search":    "Ara",
+      "signs":     "Trafik işaretleri",
+      "wrong":     "Yanlış sorular",
+      "marked":    "İşaretli sorular",
+      "picture":   "Resimli soru",
+      "video":     "Videolu soru",
+      "selection": "Seçim sorusu",
+      "numbers":   "Sayı sorusu",
+      "new":       "Yeni sorular",
+      "random":    "Rastgele"
     }
   },
   "classes": {
@@ -70,7 +85,39 @@
     },
     "explanation": "Açıklama",
     "loading": "Sorular yükleniyor…",
-    "skipped": "Bu soru cevaplanmadı."
+    "skipped": "Bu soru cevaplanmadı.",
+    "startVideo": "Videoyu başlat",
+    "replay": "Tekrar oynat",
+    "videoRemaining": "Videoyu hâlâ {count}× izleyebilirsin.",
+    "videoIntro": "Durumu tanımak için filmi başlat.",
+    "goToQuestion": "Soruya geç",
+    "mark": "İşaretle",
+    "marked": "İşaretli",
+    "submit": "Teslim et",
+    "navigator": "Sorular",
+    "empty": {
+      "title": "„{filter}“ altında soru yok",
+      "titleGeneric": "Henüz soru yok",
+      "body": "Önce bir sınav çöz — işaretlediğin ve yanlış cevapladığın sorular burada görünür.",
+      "startRandom": "Rastgele test başlat",
+      "backHome": "Ana sayfaya dön"
+    }
+  },
+  "topics": {
+    "title": "Konuya göre öğren",
+    "subtitle": "Bir konu seç. Her konu, o konunun kataloğuna bağlı sorulara gider.",
+    "questionsHere": "Havuzda {count}",
+    "practiceTopic": "Konuyu çalış",
+    "grundstoff": "Temel",
+    "zusatzstoff": "Sınıfa özel"
+  },
+  "search": {
+    "title": "Soru ara",
+    "subtitle": "Bir kelime veya kural yaz — soru, cevap ve açıklamada ararız.",
+    "placeholder": "Ara… ör: yaya geçidi, kan alkol, 50 km/s",
+    "noResults": "Sonuç yok. Farklı bir kelime dene.",
+    "resultsCount": "{count} sonuç | {count} sonuç",
+    "practiceThis": "Bunu çalış"
   },
   "results": {
     "title": "Sonucun",
@@ -81,6 +128,9 @@
     "yourScore": "Puanın",
     "outOf": "{total} üzerinden",
     "passThreshold": "Geçme sınırı: {points} puan",
+    "errorPointsLabel": "Hata puanı",
+    "errorPointsThreshold": "Geçme sınırı: en fazla {points} hata puanı",
+    "twoFivePointersFailed": "İki adet 5 puanlık soru yanlış — resmî kurala göre otomatik başarısız.",
     "totalQuestions": "Soru",
     "correct": "Doğru",
     "wrong": "Yanlış",

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, useRouter } from '@/i18n/routing';
@@ -30,10 +30,40 @@ export function ResultsClient({ licenseClass }: Props) {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
-  const { current, reset } = useQuiz();
+  const { current, reset, recordWrong, clearWrong } = useQuiz();
   const [shareOk, setShareOk] = useState(false);
+  const recordedRef = useRef<string | null>(null);
 
   const pool = useMemo(() => getQuestionsForClass(licenseClass), [licenseClass]);
+
+  // Persist this attempt's wrong/skipped IDs into the global "wrong" set so
+  // the home-page "Wrong questions" filter has real content. Correctly
+  // answered questions are removed from the set (they've been mastered).
+  // We key the side-effect by `startedAt` so a single attempt is only
+  // recorded once even if the component re-renders.
+  useEffect(() => {
+    if (!current || !current.finishedAt) return;
+    const attemptKey = `${current.licenseClass}:${current.startedAt}`;
+    if (recordedRef.current === attemptKey) return;
+    recordedRef.current = attemptKey;
+    const wrongIds: string[] = [];
+    const masteredIds: string[] = [];
+    for (const id of current.order) {
+      const q = pool.find((p) => p.id === id);
+      if (!q) continue;
+      const sel = current.answers[id]?.selectedIds ?? [];
+      const correctSet = new Set(q.correctIds);
+      const selectedSet = new Set(sel);
+      const exact =
+        sel.length > 0 &&
+        correctSet.size === selectedSet.size &&
+        [...correctSet].every((x) => selectedSet.has(x));
+      if (exact) masteredIds.push(id);
+      else wrongIds.push(id);
+    }
+    if (wrongIds.length) recordWrong(wrongIds);
+    for (const id of masteredIds) clearWrong(id);
+  }, [current, pool, recordWrong, clearWrong]);
 
   if (!current || current.licenseClass !== licenseClass || !current.finishedAt) {
     return (
@@ -104,18 +134,25 @@ export function ResultsClient({ licenseClass }: Props) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mt-8 mb-6 flex items-baseline justify-center gap-3"
+          className="mt-8 mb-3 flex items-baseline justify-center gap-3"
         >
-          <span className="display text-[clamp(3.5rem,15vw,8rem)] text-brand drop-shadow-[0_0_24px_rgba(1,254,33,0.45)]">
-            <AnimatedNumber value={result.earned} />
+          <span
+            className={`display text-[clamp(3.5rem,15vw,8rem)] drop-shadow-[0_0_24px_rgba(1,254,33,0.45)] ${
+              result.passed ? 'text-brand' : 'text-danger'
+            }`}
+          >
+            <AnimatedNumber value={result.errorPoints} />
           </span>
           <span className="text-white/50 text-xl sm:text-2xl md:text-3xl">
-            {t('results.outOf', { total: result.total })}
+            / {result.maxErrorPoints}
           </span>
         </motion.div>
 
+        <p className="text-xs uppercase tracking-widest text-white/45 mb-2">
+          {t('results.errorPointsLabel')}
+        </p>
         <p className="text-sm text-white/50 mb-6">
-          {t('results.passThreshold', { points: result.passThreshold })}
+          {t('results.errorPointsThreshold', { points: result.maxErrorPoints })}
         </p>
 
         {/* Verdict badge */}
@@ -136,6 +173,12 @@ export function ResultsClient({ licenseClass }: Props) {
         <p className="mt-5 text-white/70 max-w-md mx-auto">
           {result.passed ? t('results.passedSubtitle') : t('results.failedSubtitle')}
         </p>
+
+        {result.failureReason === 'twoFivePointersFailed' && (
+          <p className="mt-3 text-xs text-danger/90 max-w-md mx-auto">
+            {t('results.twoFivePointersFailed')}
+          </p>
+        )}
       </section>
 
       {/* KPI grid */}

@@ -3,6 +3,8 @@ import { extraQuestions } from './extra-questions';
 import { extraQuestions2 } from './extra-questions-2';
 import { extraQuestions3 } from './extra-questions-3';
 import { extraQuestions4 } from './extra-questions-4';
+import { extraQuestions5 } from './extra-questions-5';
+import { extraQuestions6 } from './extra-questions-6';
 
 /**
  * Original mock-style theory questions. They're inspired by the official
@@ -2102,7 +2104,9 @@ export const questions: Question[] = [
   ...extraQuestions,
   ...extraQuestions2,
   ...extraQuestions3,
-  ...extraQuestions4
+  ...extraQuestions4,
+  ...extraQuestions5,
+  ...extraQuestions6
 ];
 
 /**

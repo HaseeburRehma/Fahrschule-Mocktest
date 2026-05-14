@@ -17,10 +17,10 @@ interface Tile {
 }
 
 const tiles: Tile[] = [
-  { id: 'A' }, // motorcycle — no real photo, use SVG
-  { id: 'B', photo: { src: '/images/car-audi-q3.webp', alt: 'Audi Q3 — Klasse B' } },
-  { id: 'AB', photo: { src: '/images/car-vw-tiguan.webp', alt: 'Klasse A + B' } },
-  { id: 'Mofa' } // moped — no real photo, use SVG
+  { id: 'A',    photo: { src: '/images/moto-class-a.png',    alt: 'Sport motorcycle — Klasse A' } },
+  { id: 'B',    photo: { src: '/images/car-class-b.png',     alt: 'Premium compact SUV — Klasse B' } },
+  { id: 'AB',   photo: { src: '/images/combo-class-ab.png',  alt: 'Motorrad und PKW — Klasse A + B' } },
+  { id: 'Mofa', photo: { src: '/images/moped-class-mofa.png', alt: '50cc Moped — Klasse Mofa' } }
 ];
 
 export function ClassSelector() {

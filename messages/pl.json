@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Próbny egzamin teoretyczny – Fahrschule Abgefahrn",
-    "description": "Zrób próbny egzamin teoretyczny na prawo jazdy w swoim języku. Klasa A, B, A+B lub Mofa."
+    "title": "Niemiecki Egzamin Teoretyczny na Prawo Jazdy – Kategorie A, B, AB i Mofa | Abgefahrn",
+    "description": "Bezpłatny online test próbny niemieckiego egzaminu teoretycznego na prawo jazdy. 6 języków, kategorie A / B / AB / Mofa, pytania z obrazami i filmami jak w TÜV i DEKRA."
   },
   "nav": {
     "home": "Start",
@@ -10,12 +10,12 @@
   },
   "home": {
     "tag": "Z mocą po prawko",
-    "headline": "Zrób próbny egzamin teoretyczny",
-    "subheadline": "Wybierz język i kategorię prawa jazdy, aby doświadczyć oficjalnego niemieckiego formatu egzaminu.",
-    "cinemaHeadline": "Pokonaj swoje prawo jazdy",
-    "cinemaLine1": "Pokonaj swoje",
-    "cinemaLine2": "Prawo jazdy",
-    "cinemaSubheadline": "Wierna symulacja oficjalnego niemieckiego egzaminu teoretycznego. Wybierz język i kategorię — reszta wygląda jak u TÜV i DEKRA.",
+    "headline": "Niemiecka teoria prawa jazdy — próbny test online",
+    "subheadline": "Ćwicz oficjalny niemiecki egzamin teoretyczny w swoim języku — kategorie A, B, A+B lub Mofa.",
+    "cinemaHeadline": "Teoria Prawa Jazdy — Test Próbny Online",
+    "cinemaLine1": "Teoria Prawa Jazdy",
+    "cinemaLine2": "Test Próbny Online",
+    "cinemaSubheadline": "Ćwicz oficjalny niemiecki egzamin teoretyczny bezpłatnie w 6 językach — kategorie A, B, A+B i Mofa. Ponad 250 oryginalnych pytań z obrazami i filmami, dokładnie jak w TÜV i DEKRA.",
     "mascotSpeech": "Gotowy? To startujemy.",
     "scrollHint": "Odkryj więcej",
     "ctaPrimary": "Zacznij teraz",
@@ -32,6 +32,21 @@
       "questions": "{count} pytań",
       "categories": "{count} kategorii",
       "languages": "{count} języków"
+    },
+    "filter": {
+      "heading": "Ucz się tematycznie",
+      "subheading": "Wybierz filtr, aby ćwiczyć konkretny typ pytań.",
+      "topics":    "Ucz tematów",
+      "search":    "Szukaj",
+      "signs":     "Znaki drogowe",
+      "wrong":     "Błędne pytania",
+      "marked":    "Oznaczone pytania",
+      "picture":   "Pytanie obrazowe",
+      "video":     "Pytanie wideo",
+      "selection": "Pytanie wyboru",
+      "numbers":   "Pytanie liczbowe",
+      "new":       "Nowe pytania",
+      "random":    "Losowe"
     }
   },
   "classes": {
@@ -70,7 +85,39 @@
     },
     "explanation": "Wyjaśnienie",
     "loading": "Ładowanie pytań…",
-    "skipped": "Na to pytanie nie udzielono odpowiedzi."
+    "skipped": "Na to pytanie nie udzielono odpowiedzi.",
+    "startVideo": "Włącz film",
+    "replay": "Odtwórz ponownie",
+    "videoRemaining": "Możesz obejrzeć film jeszcze {count}× razy.",
+    "videoIntro": "Uruchom film, aby zapoznać się z sytuacją.",
+    "goToQuestion": "Przejdź do pytania",
+    "mark": "Oznacz",
+    "marked": "Oznaczone",
+    "submit": "Oddaj",
+    "navigator": "Pytania",
+    "empty": {
+      "title": "Brak pytań w „{filter}“",
+      "titleGeneric": "Brak pytań",
+      "body": "Najpierw zrób test — pytania oznaczone i błędne pojawią się tutaj.",
+      "startRandom": "Losowy test",
+      "backHome": "Strona główna"
+    }
+  },
+  "topics": {
+    "title": "Ucz się po tematach",
+    "subtitle": "Wybierz temat. Każdy temat prowadzi do pytań oznaczonych tym kodem.",
+    "questionsHere": "{count} w puli",
+    "practiceTopic": "Ćwicz temat",
+    "grundstoff": "Podstawowy",
+    "zusatzstoff": "Dla kategorii"
+  },
+  "search": {
+    "title": "Szukaj pytań",
+    "subtitle": "Wpisz słowo lub regułę — szukamy w pytaniach, odpowiedziach i wyjaśnieniach.",
+    "placeholder": "Szukaj… np. przejście dla pieszych, 50 km/h",
+    "noResults": "Brak wyników. Spróbuj innego słowa.",
+    "resultsCount": "{count} wynik | {count} wyników",
+    "practiceThis": "Ćwicz to"
   },
   "results": {
     "title": "Twój wynik",
@@ -81,6 +128,9 @@
     "yourScore": "Twoje punkty",
     "outOf": "z {total}",
     "passThreshold": "Próg zaliczenia: {points} pkt",
+    "errorPointsLabel": "Punkty błędne",
+    "errorPointsThreshold": "Próg zaliczenia: najwyżej {points} punktów błędnych",
+    "twoFivePointersFailed": "Dwa pytania po 5 punktów odpowiedziano błędnie — automatyczna porażka zgodnie z oficjalną regułą.",
     "totalQuestions": "Pytania",
     "correct": "Poprawne",
     "wrong": "Błędne",

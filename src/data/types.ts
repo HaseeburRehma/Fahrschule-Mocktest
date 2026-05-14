@@ -34,6 +34,8 @@ export interface QuestionOption {
   text: LocalizedText;
 }
 
+export type TopicType = 'grundstoff' | 'zusatzstoff';
+
 export interface Question {
   id: string;
   category: Category;
@@ -42,10 +44,27 @@ export interface Question {
   /** 1–5 — drives weighting in the score. */
   points: 1 | 2 | 3 | 4 | 5;
   /**
+   * Optional topic code from the official taxonomy in `src/data/topics.ts`
+   * (e.g. "G.06", "2.1.06"). The exam engine uses this to draw a balanced
+   * 30-question paper across Grundstoff / Zusatzstoff topics.
+   */
+  topicCode?: string;
+  /** Grundstoff (basic material) or Zusatzstoff (class-specific). */
+  topicType?: TopicType;
+  /**
    * Optional image path (must reference a file inside /public/images/quiz).
    * No external URLs or procedural SVGs are rendered in the quiz.
    */
   imagePath?: string;
+  /**
+   * Optional video path (must reference a file inside
+   * /public/images/quiz/trafic-video). Mirrors the official video-question
+   * UX: the user can replay the clip a limited number of times before
+   * answering. All media must be original or licensed for redistribution.
+   */
+  videoPath?: string;
+  /** Max replays for video questions. Defaults to 5 (matches the catalogue). */
+  videoMaxReplays?: number;
   question: LocalizedText;
   options: QuestionOption[];
   /** IDs of the correct option(s). Multiple = multi-select. */

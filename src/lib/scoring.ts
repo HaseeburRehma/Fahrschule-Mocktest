@@ -1,5 +1,6 @@
 import type { Question, LicenseClass } from '@/data/types';
 import { getQuestionsForClass, maxScoreFor, passThresholdFor } from '@/data/questions';
+import { EXAM_RULES } from '@/lib/exam';
 import type { QuizSnapshot } from '@/store/quiz';
 
 export type Verdict = 'correct' | 'partial' | 'wrong' | 'skipped';
@@ -13,10 +14,26 @@ export interface PerQuestionResult {
 
 export interface QuizResult {
   perQuestion: PerQuestionResult[];
+
+  /** Sum of point-values gained on correct answers. */
   earned: number;
+  /** Sum of point-values of every paper question (=== max score). */
   total: number;
+  /** Legacy 80% threshold (kept for any old callers / Mofa fallback). */
   passThreshold: number;
+
+  // ── German error-point scoring (the official rule) ─────────────────────
+  /** Sum of point-values of every wrong / skipped answer. */
+  errorPoints: number;
+  /** Max tolerated error points to still pass (10 for class B). */
+  maxErrorPoints: number;
+  /** Number of 5-point questions answered wrong. */
+  failedFivePointers: number;
+  /** True if the candidate passes by the official rules. */
   passed: boolean;
+  /** Reason for failure when applicable. */
+  failureReason?: 'tooManyErrorPoints' | 'twoFivePointersFailed';
+
   correctCount: number;
   wrongCount: number;
   skippedCount: number;
@@ -31,6 +48,8 @@ export function evaluate(
   const perQuestion: PerQuestionResult[] = [];
   const byCategory: Record<string, { correct: number; total: number }> = {};
   let earned = 0;
+  let errorPoints = 0;
+  let failedFivePointers = 0;
   let correctCount = 0;
   let wrongCount = 0;
   let skippedCount = 0;
@@ -43,31 +62,33 @@ export function evaluate(
 
     let verdict: Verdict = 'skipped';
     let questionEarned = 0;
+    let questionWrong = false;
 
     if (selectedIds.length === 0) {
       verdict = 'skipped';
       skippedCount++;
+      questionWrong = true;
     } else {
       const correctSet = new Set(q.correctIds);
       const selectedSet = new Set(selectedIds);
       const exact =
         correctSet.size === selectedSet.size &&
         [...correctSet].every((id) => selectedSet.has(id));
-      const subset =
-        [...selectedSet].every((id) => correctSet.has(id)) && selectedSet.size > 0;
       if (exact) {
         verdict = 'correct';
         questionEarned = q.points;
         correctCount++;
-      } else if (subset && selectedSet.size < correctSet.size) {
-        // partial credit when user picked only correct answers but missed some
-        verdict = 'partial';
-        questionEarned = Math.floor((q.points * selectedSet.size) / correctSet.size);
-        wrongCount++;
       } else {
+        // Strict German exam: anything other than exact selection is wrong.
         verdict = 'wrong';
         wrongCount++;
+        questionWrong = true;
       }
+    }
+
+    if (questionWrong) {
+      errorPoints += q.points;
+      if (q.points === 5) failedFivePointers++;
     }
 
     earned += questionEarned;
@@ -83,12 +104,29 @@ export function evaluate(
     .filter((q) => snapshot.order.includes(q.id))
     .reduce((s, q) => s + q.points, 0);
 
+  // Apply German pass rules.
+  let passed = errorPoints <= EXAM_RULES.maxErrorPoints;
+  let failureReason: QuizResult['failureReason'];
+  if (!passed) failureReason = 'tooManyErrorPoints';
+  if (
+    passed &&
+    EXAM_RULES.autoFailOnTwoFivePointers &&
+    failedFivePointers >= 2
+  ) {
+    passed = false;
+    failureReason = 'twoFivePointersFailed';
+  }
+
   return {
     perQuestion,
     earned,
     total,
     passThreshold: Math.ceil(total * 0.8),
-    passed: earned >= Math.ceil(total * 0.8),
+    errorPoints,
+    maxErrorPoints: EXAM_RULES.maxErrorPoints,
+    failedFivePointers,
+    passed,
+    failureReason,
     correctCount,
     wrongCount,
     skippedCount,

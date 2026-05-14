@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { ArrowRight, Play, Star } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { GlassHeadline } from './cinematic/GlassHeadline';
 import { MagneticCTA } from './cinematic/MagneticCTA';
@@ -127,10 +127,6 @@ export function CinematicHero() {
             <MagneticCTA href="#classes" variant="primary">
               {t('ctaPrimary')}
               <ArrowRight className="w-4 h-4" />
-            </MagneticCTA>
-            <MagneticCTA href="#video" variant="ghost">
-              <Play className="w-4 h-4" />
-              {t('ctaSecondary')}
             </MagneticCTA>
           </motion.div>
 

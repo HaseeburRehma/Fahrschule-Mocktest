@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { CinematicHero } from '@/components/CinematicHero';
 import { ClassSelector } from '@/components/ClassSelector';
+import { QuestionFilter } from '@/components/QuestionFilter';
 import { InfoCard } from '@/components/InfoCard';
 import { SocialProof } from '@/components/SocialProof';
 import { TestimonialSlider } from '@/components/TestimonialSlider';
@@ -17,6 +18,7 @@ export default async function HomePage({
     <main className="flex-1">
       <CinematicHero />
       <ClassSelector />
+      <QuestionFilter />
       <InfoCard />
       <SocialProof />
       <TestimonialSlider />

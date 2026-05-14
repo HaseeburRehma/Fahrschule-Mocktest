@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Theorieprüfung Mocktest – Fahrschule Abgefahrn",
-    "description": "Mache deine theoretische Führerschein-Probeprüfung in deiner Sprache. Klasse A, B, A+B oder Mofa. Mit Power zum Lappen."
+    "title": "Führerschein Theorie Probeprüfung – Klasse A, B, AB & Mofa | Abgefahrn",
+    "description": "Kostenlose Online-Probeprüfung für die Führerschein-Theorieprüfung in Deutschland. 6 Sprachen, Klasse A / B / AB / Mofa, Bild- und Videofragen wie bei TÜV und DEKRA."
   },
   "nav": {
     "home": "Start",
@@ -10,12 +10,12 @@
   },
   "home": {
     "tag": "Mit Power zum Lappen",
-    "headline": "Mache deine theoretische Probeprüfung",
-    "subheadline": "Wähle deine Sprache und Führerscheinklasse, um den offiziellen Prüfungsstil zu erleben.",
-    "cinemaHeadline": "Besiege deinen Führerschein",
-    "cinemaLine1": "Besiege deinen",
-    "cinemaLine2": "Führerschein",
-    "cinemaSubheadline": "Die realitätsnahe Theorie-Probeprüfung. Sprache wählen, Klasse wählen — der Rest läuft wie bei TÜV und DEKRA.",
+    "headline": "Führerschein-Theorie — Probeprüfung online",
+    "subheadline": "Übe die offizielle Theorieprüfung in deiner Sprache — für Klasse A, B, A+B oder Mofa.",
+    "cinemaHeadline": "Führerschein Theorie Probeprüfung",
+    "cinemaLine1": "Führerschein",
+    "cinemaLine2": "Theorie Probeprüfung",
+    "cinemaSubheadline": "Übe die offizielle deutsche Theorieprüfung kostenlos in 6 Sprachen — Klasse A, B, A+B oder Mofa. Über 250 originale Fragen mit Bild- und Videofragen wie bei TÜV und DEKRA.",
     "mascotSpeech": "Bereit? Dann lass uns starten!",
     "scrollHint": "Mehr entdecken",
     "ctaPrimary": "Jetzt starten",
@@ -32,6 +32,21 @@
       "questions": "{count} Fragen",
       "categories": "{count} Kategorien",
       "languages": "{count} Sprachen"
+    },
+    "filter": {
+      "heading": "Gezielt üben",
+      "subheading": "Wähle einen Filter, um einen bestimmten Fragetyp zu trainieren.",
+      "topics":    "Themen lernen",
+      "search":    "Suchen",
+      "signs":     "Verkehrszeichen",
+      "wrong":     "Falsche Fragen",
+      "marked":    "Markierte Fragen",
+      "picture":   "Bilderfrage",
+      "video":     "Videofrage",
+      "selection": "Auswahlfrage",
+      "numbers":   "Zahlenfrage",
+      "new":       "Neue Fragen",
+      "random":    "Zufällig"
     }
   },
   "classes": {
@@ -70,7 +85,39 @@
     },
     "explanation": "Erklärung",
     "loading": "Fragen werden geladen…",
-    "skipped": "Diese Frage wurde nicht beantwortet."
+    "skipped": "Diese Frage wurde nicht beantwortet.",
+    "startVideo": "Video starten",
+    "replay": "Erneut abspielen",
+    "videoRemaining": "Du kannst das Video noch {count}× ansehen.",
+    "videoIntro": "Bitte starte den Film, um dich mit der Situation vertraut zu machen.",
+    "goToQuestion": "Zur Frage",
+    "mark": "Markieren",
+    "marked": "Markiert",
+    "submit": "Abgeben",
+    "navigator": "Fragen",
+    "empty": {
+      "title": "Noch keine Fragen unter „{filter}“",
+      "titleGeneric": "Noch keine Fragen",
+      "body": "Lege zuerst einen Test ab — markierte und falsch beantwortete Fragen erscheinen dann hier.",
+      "startRandom": "Zufallstest starten",
+      "backHome": "Zur Startseite"
+    }
+  },
+  "topics": {
+    "title": "Themen lernen",
+    "subtitle": "Wähle ein Thema. Jedes Thema verlinkt auf die Fragen mit diesem Themen-Code.",
+    "questionsHere": "{count} im Pool",
+    "practiceTopic": "Thema üben",
+    "grundstoff": "Grundstoff",
+    "zusatzstoff": "Zusatzstoff"
+  },
+  "search": {
+    "title": "Fragen durchsuchen",
+    "subtitle": "Tippe ein Wort, einen Satz oder eine Regel — wir durchsuchen Frage, Antworten und Erklärung.",
+    "placeholder": "Suchen… z. B. Zebrastreifen, Promille, 50 km/h",
+    "noResults": "Keine Treffer. Versuche ein anderes Wort.",
+    "resultsCount": "{count} Treffer | {count} Treffer",
+    "practiceThis": "Diese üben"
   },
   "results": {
     "title": "Dein Ergebnis",
@@ -81,6 +128,9 @@
     "yourScore": "Deine Punkte",
     "outOf": "von {total}",
     "passThreshold": "Bestehensgrenze: {points} Punkte",
+    "errorPointsLabel": "Fehlerpunkte",
+    "errorPointsThreshold": "Bestehensgrenze: höchstens {points} Fehlerpunkte",
+    "twoFivePointersFailed": "Zwei Fragen mit 5 Punkten falsch — nicht bestanden, auch wenn die 10 Fehlerpunkte erreicht wären.",
     "totalQuestions": "Fragen",
     "correct": "Richtig",
     "wrong": "Falsch",
