@@ -7,19 +7,21 @@ import { motion } from 'framer-motion';
 import { ChevronRight, GraduationCap } from 'lucide-react';
 import { grundstoffTopics, zusatzstoffTopicsB } from '@/data/topics';
 import { getQuestionsForClass } from '@/data/questions';
-import { pickText } from '@/data/types';
+import { pickText, isClassEnabled } from '@/data/types';
 import type { LicenseClass } from '@/data/types';
 
 interface Props {
   licenseClass: LicenseClass;
 }
 
-const CLASSES: { id: LicenseClass; key: string }[] = [
-  { id: 'A',    key: 'A' },
-  { id: 'B',    key: 'B' },
-  { id: 'AB',   key: 'AB' },
-  { id: 'Mofa', key: 'Mofa' }
-];
+const CLASSES: { id: LicenseClass; key: string }[] = (
+  [
+    { id: 'A',    key: 'A' },
+    { id: 'B',    key: 'B' },
+    { id: 'AB',   key: 'AB' },
+    { id: 'Mofa', key: 'Mofa' }
+  ] as const
+).filter((c) => isClassEnabled(c.id));
 
 export function TopicsClient({ licenseClass: initialClass }: Props) {
   const t = useTranslations();
@@ -50,21 +52,23 @@ export function TopicsClient({ licenseClass: initialClass }: Props) {
         </h1>
         <p className="text-white/60 mt-3 max-w-2xl">{t('topics.subtitle')}</p>
 
-        <div className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
-          {CLASSES.map(({ id, key }) => (
-            <button
-              key={id}
-              onClick={() => setLicenseClass(id)}
-              aria-pressed={licenseClass === id}
-              className={[
-                'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
-                licenseClass === id ? 'bg-brand text-black' : 'text-white/65 hover:text-white'
-              ].join(' ')}
-            >
-              {t(`classes.${key}.name`)}
-            </button>
-          ))}
-        </div>
+        {CLASSES.length > 1 && (
+          <div className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
+            {CLASSES.map(({ id, key }) => (
+              <button
+                key={id}
+                onClick={() => setLicenseClass(id)}
+                aria-pressed={licenseClass === id}
+                className={[
+                  'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
+                  licenseClass === id ? 'bg-brand text-black' : 'text-white/65 hover:text-white'
+                ].join(' ')}
+              >
+                {t(`classes.${key}.name`)}
+              </button>
+            ))}
+          </div>
+        )}
       </header>
 
       <Section

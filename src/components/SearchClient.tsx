@@ -5,18 +5,20 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Search as SearchIcon, ChevronRight } from 'lucide-react';
 import { questions } from '@/data/questions';
-import { pickText, type LicenseClass } from '@/data/types';
+import { pickText, isClassEnabled, type LicenseClass } from '@/data/types';
 
 interface Props {
   licenseClass: LicenseClass;
 }
 
-const CLASSES: { id: LicenseClass; key: string }[] = [
-  { id: 'A',    key: 'A' },
-  { id: 'B',    key: 'B' },
-  { id: 'AB',   key: 'AB' },
-  { id: 'Mofa', key: 'Mofa' }
-];
+const CLASSES: { id: LicenseClass; key: string }[] = (
+  [
+    { id: 'A',    key: 'A' },
+    { id: 'B',    key: 'B' },
+    { id: 'AB',   key: 'AB' },
+    { id: 'Mofa', key: 'Mofa' }
+  ] as const
+).filter((c) => isClassEnabled(c.id));
 
 const MAX_RESULTS = 30;
 
@@ -70,21 +72,23 @@ export function SearchClient({ licenseClass: initialClass }: Props) {
         </h1>
         <p className="text-white/60 mt-3 max-w-2xl">{t('search.subtitle')}</p>
 
-        <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
-          {CLASSES.map(({ id, key }) => (
-            <button
-              key={id}
-              onClick={() => setLicenseClass(id)}
-              aria-pressed={licenseClass === id}
-              className={[
-                'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
-                licenseClass === id ? 'bg-brand text-black' : 'text-white/65 hover:text-white'
-              ].join(' ')}
-            >
-              {t(`classes.${key}.name`)}
-            </button>
-          ))}
-        </div>
+        {CLASSES.length > 1 && (
+          <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
+            {CLASSES.map(({ id, key }) => (
+              <button
+                key={id}
+                onClick={() => setLicenseClass(id)}
+                aria-pressed={licenseClass === id}
+                className={[
+                  'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
+                  licenseClass === id ? 'bg-brand text-black' : 'text-white/65 hover:text-white'
+                ].join(' ')}
+              >
+                {t(`classes.${key}.name`)}
+              </button>
+            ))}
+          </div>
+        )}
 
         <label className="mt-6 block">
           <div className="relative">

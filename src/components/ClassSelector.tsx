@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { ClassIcon } from './icons/ClassIcons';
 import type { LicenseClass } from '@/data/types';
+import { isClassEnabled } from '@/data/types';
 import { getQuestionsForClass } from '@/data/questions';
 import { ChevronRight } from 'lucide-react';
 
@@ -44,9 +45,11 @@ export function ClassSelector() {
         </div>
       </div>
 
-      {/* 2 cols on small, 4 cols from md+ — single row on desktop */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4">
-        {tiles.map(({ id, photo }, idx) => {
+      {/* Hidden classes (A, AB, Mofa) are kept in the data layer but
+          excluded from the rendered tiles. Adjust `enabledClasses` in
+          src/data/types.ts to re-enable them. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4">
+        {tiles.filter((t) => isClassEnabled(t.id)).map(({ id, photo }, idx) => {
           const count = getQuestionsForClass(id).length;
           return (
             <motion.div

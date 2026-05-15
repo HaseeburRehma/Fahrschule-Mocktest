@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import {
   Search,
   Signpost,
-  XCircle,
+  Flame,
   BookmarkCheck,
   Image as ImageIcon,
   Play,
@@ -18,11 +18,16 @@ import {
   GraduationCap
 } from 'lucide-react';
 import type { LicenseClass } from '@/data/types';
+import { isClassEnabled } from '@/data/types';
 
 export type FilterId =
   | 'topics'
   | 'search'
   | 'signs'
+  | 'tough'
+  // `wrong` is kept as a valid filter ID so legacy bookmarks still work,
+  // but it is no longer surfaced on the home page. The store still
+  // tracks wrong answers — it just isn't a tile anymore.
   | 'wrong'
   | 'marked'
   | 'picture'
@@ -47,7 +52,7 @@ const filters: Filter[] = [
   { id: 'topics',   icon: GraduationCap,  labelKey: 'topics',    tone: 'brand',  topicsOnly: true },
   { id: 'search',   icon: Search,         labelKey: 'search',    tone: 'sky' },
   { id: 'signs',    icon: Signpost,       labelKey: 'signs',     tone: 'brand' },
-  { id: 'wrong',    icon: XCircle,        labelKey: 'wrong',     tone: 'danger' },
+  { id: 'tough',    icon: Flame,          labelKey: 'tough',     tone: 'danger' },
   { id: 'marked',   icon: BookmarkCheck,  labelKey: 'marked',    tone: 'amber' },
   { id: 'picture',  icon: ImageIcon,      labelKey: 'picture',   tone: 'sky' },
   { id: 'video',    icon: Play,           labelKey: 'video',     tone: 'violet' },
@@ -65,12 +70,14 @@ const toneClass: Record<Filter['tone'], { ring: string; icon: string; glow: stri
   violet: { ring: 'group-hover:border-violet-400',   icon: 'text-violet-300',   glow: 'group-hover:shadow-[0_0_20px_rgba(167,139,250,0.25)]' }
 };
 
-const CLASSES: { id: LicenseClass; key: string }[] = [
-  { id: 'A',    key: 'A' },
-  { id: 'B',    key: 'B' },
-  { id: 'AB',   key: 'AB' },
-  { id: 'Mofa', key: 'Mofa' }
-];
+const CLASSES: { id: LicenseClass; key: string }[] = (
+  [
+    { id: 'A',    key: 'A' },
+    { id: 'B',    key: 'B' },
+    { id: 'AB',   key: 'AB' },
+    { id: 'Mofa', key: 'Mofa' }
+  ] as const
+).filter((c) => isClassEnabled(c.id));
 
 export function QuestionFilter() {
   const t = useTranslations();
@@ -107,24 +114,26 @@ export function QuestionFilter() {
           <div className="h-[2px] w-12 bg-brand mt-3" />
         </div>
 
-        {/* Class chooser */}
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
-          {CLASSES.map(({ id, key }) => (
-            <button
-              key={id}
-              onClick={() => setLicenseClass(id)}
-              aria-pressed={licenseClass === id}
-              className={[
-                'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
-                licenseClass === id
-                  ? 'bg-brand text-black'
-                  : 'text-white/65 hover:text-white'
-              ].join(' ')}
-            >
-              {t(`classes.${key}.name`)}
-            </button>
-          ))}
-        </div>
+        {/* Class chooser — hidden when only one class is enabled. */}
+        {CLASSES.length > 1 && (
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
+            {CLASSES.map(({ id, key }) => (
+              <button
+                key={id}
+                onClick={() => setLicenseClass(id)}
+                aria-pressed={licenseClass === id}
+                className={[
+                  'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
+                  licenseClass === id
+                    ? 'bg-brand text-black'
+                    : 'text-white/65 hover:text-white'
+                ].join(' ')}
+              >
+                {t(`classes.${key}.name`)}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-3">

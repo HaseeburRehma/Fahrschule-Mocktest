@@ -371,6 +371,7 @@ export function maxErrorPointsFor(paper: ExamPaper, pool: Question[]): number {
  */
 export type FilterId =
   | 'signs'
+  | 'tough'
   | 'wrong'
   | 'marked'
   | 'picture'
@@ -446,6 +447,15 @@ export function buildFilteredExam(
       break;
     case 'wrong':
       subset = eligible.filter((q) => wrongSet.has(q.id));
+      break;
+    case 'tough':
+      // "Tough" = high-value (4 or 5 points) AND multi-select (correctIds.length >= 2).
+      // These are the questions that typically fail candidates because the
+      // strict scoring gives zero for any partial selection, AND they carry
+      // the most weight in the error-point budget (2 failed 5-pointers auto-fail).
+      subset = eligible
+        .filter((q) => q.points >= 4 && q.correctIds.length >= 2)
+        .sort((a, b) => b.points - a.points);
       break;
     case 'numbers':
       subset = eligible.filter((q) => {

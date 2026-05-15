@@ -12,6 +12,20 @@ export type Category =
 
 export type LicenseClass = 'A' | 'B' | 'AB' | 'Mofa';
 
+/**
+ * Single source of truth for which licence classes are currently exposed
+ * to users in the UI. Other classes still exist in the data layer (so the
+ * question bank is unaffected) but they are hidden from the home page,
+ * topics page, search page and the practice-by-topic class chooser.
+ *
+ * Add a class back to this list to re-enable it everywhere.
+ */
+export const enabledClasses: readonly LicenseClass[] = ['B'] as const;
+
+export function isClassEnabled(id: LicenseClass): boolean {
+  return enabledClasses.includes(id);
+}
+
 export type QuestionLocale = 'de' | 'en' | 'ar' | 'tr' | 'ru' | 'pl';
 
 /**

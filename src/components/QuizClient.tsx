@@ -18,7 +18,7 @@ interface Props {
 }
 
 const VALID_FILTERS: FilterId[] = [
-  'signs', 'wrong', 'marked', 'picture', 'video',
+  'signs', 'tough', 'wrong', 'marked', 'picture', 'video',
   'selection', 'numbers', 'new', 'random', 'search', 'topics'
 ];
 
