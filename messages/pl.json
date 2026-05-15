@@ -102,6 +102,13 @@
       "body": "Najpierw zrób test — pytania oznaczone i błędne pojawią się tutaj.",
       "startRandom": "Losowy test",
       "backHome": "Strona główna"
+    },
+    "errorBoundary": {
+      "title": "Coś poszło nie tak",
+      "body": "Nie udało się załadować tego pytania. Zwykle dzieje się to, gdy w przeglądarce pozostaje stara sesja po aktualizacji aplikacji. Resetowanie ją wyczyści, a Ty zaczniesz świeży test.",
+      "details": "Szczegóły techniczne",
+      "reset": "Resetuj i zacznij od nowa",
+      "home": "Strona główna"
     }
   },
   "topics": {

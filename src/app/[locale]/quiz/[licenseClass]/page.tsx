@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { QuizClient } from '@/components/QuizClient';
+import { QuizErrorBoundary } from '@/components/QuizErrorBoundary';
 import type { LicenseClass } from '@/data/types';
 
 const validClasses: LicenseClass[] = ['A', 'B', 'AB', 'Mofa'];
@@ -17,5 +18,9 @@ export default async function QuizPage({
     notFound();
   }
 
-  return <QuizClient licenseClass={licenseClass as LicenseClass} />;
+  return (
+    <QuizErrorBoundary>
+      <QuizClient licenseClass={licenseClass as LicenseClass} />
+    </QuizErrorBoundary>
+  );
 }

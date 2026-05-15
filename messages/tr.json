@@ -102,6 +102,13 @@
       "body": "Önce bir sınav çöz — işaretlediğin ve yanlış cevapladığın sorular burada görünür.",
       "startRandom": "Rastgele test başlat",
       "backHome": "Ana sayfaya dön"
+    },
+    "errorBoundary": {
+      "title": "Bir şeyler ters gitti",
+      "body": "Bu soru yüklenemedi. Bu genellikle uygulama güncellendikten sonra tarayıcıda eski bir oturum kalmasından kaynaklanır. Sıfırlamak bunu temizler ve yeni bir teste başlayabilirsin.",
+      "details": "Teknik detaylar",
+      "reset": "Sıfırla ve yeniden başla",
+      "home": "Ana sayfa"
     }
   },
   "topics": {

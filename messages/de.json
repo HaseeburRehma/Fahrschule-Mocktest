@@ -102,6 +102,13 @@
       "body": "Lege zuerst einen Test ab — markierte und falsch beantwortete Fragen erscheinen dann hier.",
       "startRandom": "Zufallstest starten",
       "backHome": "Zur Startseite"
+    },
+    "errorBoundary": {
+      "title": "Etwas ist schiefgelaufen",
+      "body": "Diese Frage konnte nicht geladen werden. Meistens liegt das an einem alten Test, der noch im Browser gespeichert ist, nachdem die App aktualisiert wurde. Beim Zurücksetzen wird er gelöscht und du startest mit einem frischen Test.",
+      "details": "Technische Details",
+      "reset": "Zurücksetzen & neu starten",
+      "home": "Zur Startseite"
     }
   },
   "topics": {

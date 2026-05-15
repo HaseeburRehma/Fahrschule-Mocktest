@@ -102,6 +102,13 @@
       "body": "Take a quiz first — once you mark or answer questions, they'll show up here.",
       "startRandom": "Start random test",
       "backHome": "Back to home"
+    },
+    "errorBoundary": {
+      "title": "Something went wrong",
+      "body": "We couldn't load this question. This usually happens when an older session is stored in your browser after the app has been updated. Resetting will clear that and let you start a fresh test.",
+      "details": "Technical details",
+      "reset": "Reset & start fresh",
+      "home": "Back to home"
     }
   },
   "topics": {
