@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from '@/i18n/routing';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Flag as FlagIcon, BookmarkCheck, Bookmark, LogOut } from 'lucide-react';
 import { useQuiz } from '@/store/quiz';
 import { ProgressBar } from './ProgressBar';
@@ -133,23 +133,30 @@ export function QuizClient({ licenseClass }: Props) {
 
       {/* Question card */}
       <div className="flex-1 px-4 sm:px-6 py-6 sm:py-10 md:py-14">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${questionId}:${inPreview ? 'p' : 'q'}`}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
-          >
-            <QuestionCard
-              question={question}
-              selected={selected}
-              onToggle={toggle}
-              videoPhase={inPreview ? 'preview' : 'question'}
-              onAdvanceFromPreview={advancePastPreview}
-            />
-          </motion.div>
-        </AnimatePresence>
+        {/*
+          Previously wrapped in <AnimatePresence mode="wait"> with an exit
+          animation. That pattern was racing with Framer Motion under React
+          19's concurrent rendering and crashing with
+          "Failed to execute 'removeChild' on 'Node'" when the question
+          changed type (e.g. picture → video) at the same time the user
+          jumped via the navigator. The exit orchestration is dropped —
+          the question still gets a clean enter animation because the
+          `key` change remounts the div.
+        */}
+        <motion.div
+          key={`${questionId}:${inPreview ? 'p' : 'q'}`}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <QuestionCard
+            question={question}
+            selected={selected}
+            onToggle={toggle}
+            videoPhase={inPreview ? 'preview' : 'question'}
+            onAdvanceFromPreview={advancePastPreview}
+          />
+        </motion.div>
 
         {/* Four-button action row (Prev / Mark / Submit / Next) */}
         <div className="max-w-3xl mx-auto mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
