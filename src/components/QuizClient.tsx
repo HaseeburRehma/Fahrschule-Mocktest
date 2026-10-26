@@ -1,21 +1,18 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { useShallow } from 'zustand/react/shallow';
-import { BookmarkSimple, CaretLeft, Heart, SquaresFour, X } from '@phosphor-icons/react';
 import { Link, useRouter } from '@/i18n/routing';
+import { useShallow } from 'zustand/react/shallow';
+import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight, Flag as FlagIcon, BookmarkCheck, Bookmark, LogOut } from 'lucide-react';
 import { useQuiz } from '@/store/quiz';
+import { ProgressBar } from './ProgressBar';
 import { QuestionCard } from './QuestionCard';
-import { QuizIntro } from './quiz/QuizIntro';
-import { ConfirmSheet, FeedbackSheet } from './quiz/QuizSheets';
-import { Mascot } from './ui/Mascot';
 import { getQuestionMap, getQuestionsForClass } from '@/data/questions';
-import { grundstoffTopics, zusatzstoffTopicsB } from '@/data/topics';
-import { buildExam, buildFilteredExam, EXAM_RULES, type FilterId } from '@/lib/exam';
-import { pickText, type LicenseClass, type Question } from '@/data/types';
+import { buildExam, buildFilteredExam, type FilterId } from '@/lib/exam';
+import type { LicenseClass } from '@/data/types';
 
 interface Props {
   licenseClass: LicenseClass;
@@ -26,28 +23,19 @@ const VALID_FILTERS: FilterId[] = [
   'selection', 'numbers', 'new', 'random', 'search', 'topics'
 ];
 
-/** Lives in practice mode (Figma hearts). Running out ends the round. */
-export const PRACTICE_LIVES = 5;
-
-function isExactlyCorrect(q: Question, selected: string[]): boolean {
-  if (selected.length !== q.correctIds.length) return false;
-  const picked = new Set(selected);
-  return q.correctIds.every((id) => picked.has(id));
-}
-
 export function QuizClient({ licenseClass }: Props) {
   const t = useTranslations();
-  const locale = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
   const filterParam = searchParams?.get('filter');
   const topicParam = searchParams?.get('topic');
   const filter: FilterId | null =
-    filterParam && (VALID_FILTERS as string[]).includes(filterParam) ? (filterParam as FilterId) : null;
+    filterParam && (VALID_FILTERS as string[]).includes(filterParam)
+      ? (filterParam as FilterId)
+      : null;
   const topicCode = topicParam && /^[\w.]+$/.test(topicParam) ? topicParam : null;
-  const isExam = !filter && !topicCode;
 
-  // Narrow selector: only re-render when the snapshot or actions change.
+  // Narrow selector: only re-render when the snapshot or these actions change.
   const { current, start, setAnswer, next, prev, goTo, toggleMark, finish, reset } = useQuiz(
     useShallow((s) => ({
       current: s.current,
@@ -65,17 +53,10 @@ export function QuizClient({ licenseClass }: Props) {
   const pool = useMemo(() => getQuestionsForClass(licenseClass), [licenseClass]);
   const byId = useMemo(() => getQuestionMap(licenseClass), [licenseClass]);
 
-  const [showIntro, setShowIntro] = useState(true);
-  const [confirmExit, setConfirmExit] = useState(false);
-  const [showOverview, setShowOverview] = useState(false);
-  // Practice mode: questions the user has already "Prüfen"-ed.
-  const [checked, setChecked] = useState<Record<string, true>>({});
-  // Video questions open in preview mode until the user advances.
-  const [previewAdvancedFor, setPreviewAdvancedFor] = useState<Record<string, true>>({});
-
   useEffect(() => {
-    // Always start a fresh paper when entering the quiz route (or changing
-    // class / filter / topic). "marked" and "wrong" persist across runs.
+    // Always start a fresh paper every time the user enters the quiz route
+    // (or changes class / filter / topic). Persisted state is reused only
+    // for cross-session features like the "marked" list and the "wrong" set.
     const state = useQuiz.getState();
     const markedIds = Object.keys(state.current?.marked ?? {});
     const wrongIds = Object.keys(state.wrong ?? {});
@@ -84,13 +65,22 @@ export function QuizClient({ licenseClass }: Props) {
         ? buildFilteredExam(licenseClass, pool, filter, { markedIds, wrongIds, topicCode })
         : buildExam(licenseClass, pool);
     start(licenseClass, paper.questionIds, filter ?? (topicCode ? `topic:${topicCode}` : null));
-    setShowIntro(true);
-    setChecked({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [licenseClass, filter, topicCode]);
 
-  if (!current || current.licenseClass !== licenseClass) return <Skeleton />;
-  if (current.order.length === 0) return <EmptyState filter={filter} licenseClass={licenseClass} />;
+  // For each video question, remember whether the user has advanced past
+  // the "preview" phase. Resetting on cursor change ensures every video
+  // question opens in preview mode unless the user explicitly advanced.
+  const [previewAdvancedFor, setPreviewAdvancedFor] = useState<Record<string, true>>({});
+
+  if (!current || current.licenseClass !== licenseClass) {
+    return <Skeleton />;
+  }
+
+  // Empty filter (e.g. user clicked "Marked" or "Wrong" with nothing tracked yet).
+  if (current.order.length === 0) {
+    return <EmptyState filter={filter} licenseClass={licenseClass} />;
+  }
 
   const total = current.order.length;
   const idx = current.cursor;
@@ -102,155 +92,72 @@ export function QuizClient({ licenseClass }: Props) {
   const isLast = idx === total - 1;
   const markedMap = current.marked ?? {};
   const isMarked = Boolean(markedMap[questionId]);
+
   const isVideo = Boolean(question.videoPath);
   const inPreview = isVideo && !previewAdvancedFor[questionId];
-  const revealed = !isExam && Boolean(checked[questionId]);
 
-  const livesLost = Object.keys(checked).filter((id) => {
-    const q = byId.get(id);
-    return q ? !isExactlyCorrect(q, current.answers[id]?.selectedIds ?? []) : false;
-  }).length;
-  const lives = Math.max(0, PRACTICE_LIVES - livesLost);
-  const answeredCount = Object.values(current.answers).filter((a) => a.selectedIds.length > 0).length;
-  const progressPct = Math.round(((isExam ? answeredCount : Object.keys(checked).length) / total) * 100);
-
-  const exitQuiz = () => {
-    reset();
-    router.push('/');
+  const toggle = (optId: string) => {
+    const isMulti = question.correctIds.length > 1;
+    let nextSel: string[];
+    if (isMulti) {
+      nextSel = selected.includes(optId)
+        ? selected.filter((id) => id !== optId)
+        : [...selected, optId];
+    } else {
+      nextSel = selected.includes(optId) ? [] : [optId];
+    }
+    setAnswer(questionId, nextSel);
   };
 
-  const finishQuiz = () => {
+  const advancePastPreview = () => {
+    setPreviewAdvancedFor((prev) => ({ ...prev, [questionId]: true }));
+  };
+
+  const onNext = () => next();
+  const onPrev = () => prev();
+  const onFinish = () => {
     finish();
     router.push(`/results/${licenseClass}`);
   };
 
-  if (showIntro) {
-    const paperPoints = current.order.reduce((sum, id) => sum + (byId.get(id)?.points ?? 0), 0);
-    const topic = topicCode
-      ? [...grundstoffTopics, ...zusatzstoffTopicsB].find((tp) => tp.code === topicCode)
-      : undefined;
-    const heading = isExam
-      ? t('quiz.intro.examHeading')
-      : topic
-        ? pickText(topic.name, locale)
-        : t(`home.filter.${filter}`);
-    const kicker = isExam
-      ? t(`classes.${licenseClass}.name`)
-      : topic
-        ? t('quiz.intro.topicKicker', { code: topic.code })
-        : t('quiz.intro.practiceKicker');
-    return (
-      <QuizIntro
-        title={isExam ? t('quiz.intro.examTitle') : t('quiz.intro.practiceTitle')}
-        speech={t(isExam ? 'quiz.intro.speechExam' : 'quiz.intro.speechPractice', { count: total })}
-        kicker={kicker}
-        heading={heading}
-        stats={
-          isExam
-            ? [
-                { value: String(total), label: t('quiz.intro.stats.questions'), tone: 'green' },
-                { value: String(EXAM_RULES.maxErrorPoints), label: t('quiz.intro.stats.maxErrors'), tone: 'pink' },
-                { value: String(paperPoints), label: t('quiz.intro.stats.points'), tone: 'gold' }
-              ]
-            : [
-                { value: String(total), label: t('quiz.intro.stats.questions'), tone: 'green' },
-                { value: String(PRACTICE_LIVES), label: t('quiz.intro.stats.lives'), tone: 'pink' },
-                { value: `+${paperPoints}`, label: t('quiz.intro.stats.points'), tone: 'gold' }
-              ]
-        }
-        startLabel={isExam ? t('quiz.intro.startExam') : t('quiz.intro.start')}
-        onStart={() => setShowIntro(false)}
-        onClose={exitQuiz}
-      />
-    );
-  }
-
-  const toggle = (optId: string) => {
-    if (revealed) return;
-    const isMulti = question.correctIds.length > 1;
-    const nextSel = isMulti
-      ? selected.includes(optId)
-        ? selected.filter((id) => id !== optId)
-        : [...selected, optId]
-      : selected.includes(optId)
-        ? []
-        : [optId];
-    setAnswer(questionId, nextSel);
-  };
-
-  const advance = () => {
-    if (isLast) finishQuiz();
-    else next();
-  };
-
-  const onPrimary = () => {
-    if (inPreview) {
-      setPreviewAdvancedFor((p) => ({ ...p, [questionId]: true }));
-      return;
+  const onExit = () => {
+    if (typeof window !== 'undefined' && window.confirm(t('quiz.exitConfirm'))) {
+      reset();
+      router.push('/');
     }
-    if (isExam) {
-      advance();
-      return;
-    }
-    if (!revealed) setChecked((c) => ({ ...c, [questionId]: true }));
   };
-
-  const onFeedbackContinue = () => {
-    if (lives <= 0) finishQuiz();
-    else advance();
-  };
-
-  const primaryLabel = inPreview
-    ? t('quiz.goToQuestion')
-    : isExam
-      ? isLast
-        ? t('quiz.finish')
-        : t('common.continue')
-      : t('quiz.check');
-  const primaryDisabled = !inPreview && !isExam && selected.length === 0;
-  const correctAnswer = question.options
-    .filter((o) => question.correctIds.includes(o.id))
-    .map((o) => pickText(o.text, locale))
-    .join(' · ');
 
   return (
-    <main className="relative flex min-h-[100dvh] flex-col bg-ink-0">
-      {/* Top bar — Figma: close · progress · hearts */}
-      <div className="sticky top-0 z-30 bg-ink-0/90 pt-[env(safe-area-inset-top)] backdrop-blur-md">
-        <div className="mx-auto flex h-[60px] max-w-2xl items-center gap-3.5 px-5">
-          <button onClick={() => setConfirmExit(true)} aria-label={t('quiz.exit')} className="icon-btn focus-brand">
-            <X size={22} />
-          </button>
-          <div
-            className="h-3.5 flex-1 overflow-hidden rounded-[7px] bg-ink-200"
-            role="progressbar"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={progressPct}
-            aria-label={t('quiz.label', { current: idx + 1, total })}
-          >
-            <motion.div
-              className="h-full rounded-[7px] bg-brand shadow-glow"
-              initial={false}
-              animate={{ width: `${Math.max(4, progressPct)}%` }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-            />
+    <main className="flex-1 flex flex-col">
+      {/* Progress / counter bar */}
+      <div className="sticky top-16 z-30 bg-ink-0/85 backdrop-blur-md border-b border-white/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-4 mb-3">
+            <span className="text-xs uppercase tracking-widest text-white/50">
+              {t('quiz.label', { current: idx + 1, total })}
+            </span>
+            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/50">
+              <span className="rounded-md border border-white/15 bg-white/[0.04] px-2 py-0.5 text-white/80">
+                {licenseClass}
+              </span>
+            </span>
           </div>
-          {isExam ? (
-            <span className="text-heading-m tabular-nums text-white" aria-hidden>
-              {idx + 1}/{total}
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-[5px]" aria-label={t('quiz.livesLeft', { count: lives })}>
-              <Heart size={24} weight="fill" className="text-danger" />
-              <span className="text-heading-m tabular-nums text-white">{lives}</span>
-            </span>
-          )}
+          <ProgressBar current={idx + 1} total={total} />
         </div>
       </div>
 
-      {/* Question */}
-      <div className="mx-auto w-full max-w-2xl flex-1 px-5 pb-40 pt-4">
+      {/* Question card */}
+      <div className="flex-1 px-4 sm:px-6 py-6 sm:py-10 md:py-14">
+        {/*
+          Previously wrapped in <AnimatePresence mode="wait"> with an exit
+          animation. That pattern was racing with Framer Motion under React
+          19's concurrent rendering and crashing with
+          "Failed to execute 'removeChild' on 'Node'" when the question
+          changed type (e.g. picture → video) at the same time the user
+          jumped via the navigator. The exit orchestration is dropped —
+          the question still gets a clean enter animation because the
+          `key` change remounts the div.
+        */}
         <motion.div
           key={`${questionId}:${inPreview ? 'p' : 'q'}`}
           initial={{ opacity: 0, y: 12 }}
@@ -261,196 +168,172 @@ export function QuizClient({ licenseClass }: Props) {
             question={question}
             selected={selected}
             onToggle={toggle}
-            revealed={revealed}
             videoPhase={inPreview ? 'preview' : 'question'}
-            onAdvanceFromPreview={() => setPreviewAdvancedFor((p) => ({ ...p, [questionId]: true }))}
+            onAdvanceFromPreview={advancePastPreview}
           />
         </motion.div>
-      </div>
 
-      {/* Bottom action bar */}
-      {!revealed && (
-        <div className="fixed inset-x-0 bottom-0 z-30 bg-gradient-to-t from-ink-0 via-ink-0/95 to-transparent pb-[calc(16px+env(safe-area-inset-bottom))] pt-6">
-          <div className="mx-auto flex max-w-2xl items-center gap-2.5 px-5">
-            {isExam && (
-              <>
-                <button
-                  onClick={prev}
-                  disabled={idx === 0}
-                  aria-label={t('quiz.previous')}
-                  className="icon-btn focus-brand h-[52px] w-[52px] rounded-full disabled:opacity-30"
-                >
-                  <CaretLeft size={22} className="rtl:rotate-180" />
-                </button>
-                <button
-                  onClick={() => toggleMark(questionId)}
-                  aria-pressed={isMarked}
-                  aria-label={isMarked ? t('quiz.marked') : t('quiz.mark')}
-                  className={`icon-btn focus-brand h-[52px] w-[52px] rounded-full ${isMarked ? 'bg-gold text-ink-0 hover:bg-gold' : ''}`}
-                >
-                  <BookmarkSimple size={22} weight={isMarked ? 'fill' : 'regular'} />
-                </button>
-                <button
-                  onClick={() => setShowOverview(true)}
-                  aria-label={t('quiz.navigator')}
-                  className="icon-btn focus-brand h-[52px] w-[52px] rounded-full"
-                >
-                  <SquaresFour size={22} />
-                </button>
-              </>
-            )}
-            <button onClick={onPrimary} disabled={primaryDisabled} className="btn-primary focus-brand flex-1">
-              {primaryLabel}
+        {/* Four-button action row (Prev / Mark / Submit / Next) */}
+        <div className="max-w-3xl mx-auto mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+          <button
+            onClick={onPrev}
+            disabled={idx === 0}
+            className="focus-brand inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-white/80 min-h-[48px] hover:border-white/40 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            {t('quiz.previous')}
+          </button>
+
+          <button
+            onClick={() => toggleMark(questionId)}
+            aria-pressed={isMarked}
+            className={[
+              'focus-brand inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold min-h-[48px] transition',
+              isMarked
+                ? 'bg-amber-400 text-black hover:bg-amber-300'
+                : 'border border-amber-400/40 bg-amber-400/10 text-amber-200 hover:bg-amber-400/20'
+            ].join(' ')}
+          >
+            {isMarked ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+            {isMarked ? t('quiz.marked') : t('quiz.mark')}
+          </button>
+
+          <button
+            onClick={onExit}
+            className="focus-brand inline-flex items-center justify-center gap-2 rounded-xl bg-danger/80 px-4 py-3 text-sm font-semibold text-white min-h-[48px] hover:bg-danger transition"
+          >
+            <LogOut className="w-4 h-4" />
+            {t('quiz.submit')}
+          </button>
+
+          {isLast ? (
+            <button
+              onClick={onFinish}
+              className="focus-brand inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-bold text-black min-h-[48px] hover:shadow-glow-lg transition"
+            >
+              <FlagIcon className="w-4 h-4" />
+              {t('quiz.finish')}
             </button>
-          </div>
+          ) : (
+            <button
+              onClick={onNext}
+              className="focus-brand inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-bold text-black min-h-[48px] hover:shadow-glow-lg transition"
+            >
+              {t('quiz.next')}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
         </div>
-      )}
 
-      {revealed && (
-        <FeedbackSheet
-          correct={isExactlyCorrect(question, selected)}
-          correctAnswer={correctAnswer}
-          explanation={pickText(question.explanation, locale)}
-          continueLabel={lives <= 0 || isLast ? t('quiz.feedback.toResults') : t('common.continue')}
-          onContinue={onFeedbackContinue}
-        />
-      )}
-
-      {showOverview && (
-        <QuestionOverview
-          order={current.order}
+        {/* Question-number navigator */}
+        <QuestionNavigator
+          total={total}
           cursor={idx}
-          answered={current.answers}
-          marked={markedMap}
-          onGoTo={(i) => {
-            goTo(i);
-            setShowOverview(false);
-          }}
-          onClose={() => setShowOverview(false)}
-          onFinish={finishQuiz}
+          answeredIds={Object.keys(current.answers)}
+          markedIds={Object.keys(markedMap)}
+          order={current.order}
+          onGoTo={goTo}
         />
-      )}
-
-      {confirmExit && (
-        <ConfirmSheet
-          title={t('quiz.exitTitle')}
-          body={t('quiz.exitConfirm')}
-          confirmLabel={t('quiz.exit')}
-          cancelLabel={t('quiz.keepGoing')}
-          onConfirm={exitQuiz}
-          onCancel={() => setConfirmExit(false)}
-        />
-      )}
+      </div>
     </main>
   );
 }
 
-function QuestionOverview({
-  order,
+function QuestionNavigator({
+  total,
   cursor,
-  answered,
-  marked,
-  onGoTo,
-  onClose,
-  onFinish
+  answeredIds,
+  markedIds,
+  order,
+  onGoTo
 }: {
-  order: string[];
+  total: number;
   cursor: number;
-  answered: Record<string, { selectedIds: string[] }>;
-  marked: Record<string, true>;
+  answeredIds: string[];
+  markedIds: string[];
+  order: string[];
   onGoTo: (i: number) => void;
-  onClose: () => void;
-  onFinish: () => void;
 }) {
   const t = useTranslations();
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
-
+  const answeredSet = new Set(answeredIds);
+  const markedSet = new Set(markedIds);
   return (
-    <>
-      <div className="fixed inset-0 z-40 bg-black/65" aria-hidden onClick={onClose} />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={t('quiz.navigator')}
-        className="fixed inset-x-0 bottom-0 z-50 max-h-[80dvh] animate-sheet-up overflow-y-auto rounded-t-sheet border-x border-t border-ink-300 bg-ink-100 px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5"
-      >
-        <div className="mx-auto max-w-2xl">
-          <div className="mb-4 flex items-center gap-3">
-            <p className="flex-1 text-heading-m text-white">{t('quiz.navigator')}</p>
-            <button onClick={onClose} aria-label={t('common.close')} className="icon-btn focus-brand" autoFocus>
-              <X size={20} />
+    <div className="max-w-3xl mx-auto mt-6">
+      <p className="text-xs uppercase tracking-widest text-white/40 mb-2">{t('quiz.navigator')}</p>
+      <div className="flex flex-wrap gap-1.5">
+        {Array.from({ length: total }, (_, i) => i).map((i) => {
+          const id = order[i];
+          const isCurrent = i === cursor;
+          const isAnswered = answeredSet.has(id);
+          const isMarked = markedSet.has(id);
+          return (
+            <button
+              key={i}
+              onClick={() => onGoTo(i)}
+              aria-current={isCurrent ? 'true' : undefined}
+              className={[
+                'relative min-w-[34px] h-9 px-2 rounded-md text-xs font-semibold transition',
+                isCurrent
+                  ? 'bg-brand text-black ring-2 ring-brand/60'
+                  : isAnswered
+                  ? 'bg-brand/15 text-brand border border-brand/40 hover:bg-brand/25'
+                  : 'bg-white/[0.04] text-white/70 border border-white/10 hover:border-white/30'
+              ].join(' ')}
+            >
+              {i + 1}
+              {isMarked && (
+                <span
+                  aria-hidden
+                  className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-amber-400 ring-2 ring-ink-0"
+                />
+              )}
             </button>
-          </div>
-          <ol className="grid grid-cols-6 gap-2 sm:grid-cols-10">
-            {order.map((id, i) => {
-              const isCurrent = i === cursor;
-              const isAnswered = (answered[id]?.selectedIds.length ?? 0) > 0;
-              return (
-                <li key={id}>
-                  <button
-                    onClick={() => onGoTo(i)}
-                    aria-current={isCurrent ? 'step' : undefined}
-                    className={[
-                      'focus-brand relative h-11 w-full rounded-[12px] text-label-m transition',
-                      isCurrent
-                        ? 'bg-brand text-ink-0 shadow-glow'
-                        : isAnswered
-                          ? 'border border-brand/50 bg-brand-800 text-brand'
-                          : 'border border-ink-300 bg-ink-200 text-muted hover:text-white'
-                    ].join(' ')}
-                  >
-                    {i + 1}
-                    {marked[id] && (
-                      <span aria-hidden className="absolute -end-1 -top-1 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-ink-100" />
-                    )}
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-          <button onClick={onFinish} className="btn-outline focus-brand mt-5 w-full">
-            {t('quiz.finish')}
-          </button>
-        </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 }
 
 function Skeleton() {
   const t = useTranslations();
   return (
-    <main className="mx-auto flex min-h-[100dvh] w-full max-w-2xl flex-col gap-4 px-5 py-6" aria-busy="true">
-      <div className="skeleton h-10 w-full" />
-      <div className="skeleton h-8 w-3/4" />
-      <div className="skeleton h-40 w-full" />
-      <div className="skeleton h-16 w-full" />
-      <div className="skeleton h-16 w-full" />
-      <p className="text-center text-body-s text-muted">{t('quiz.loading')}</p>
+    <main className="flex-1 flex flex-col items-center justify-center gap-4 px-6 py-20">
+      <div className="skeleton h-8 w-48" />
+      <div className="skeleton h-[420px] w-full max-w-3xl" />
+      <p className="text-white/50 text-sm">{t('quiz.loading')}</p>
     </main>
   );
 }
 
-function EmptyState({ filter, licenseClass }: { filter: FilterId | null; licenseClass: LicenseClass }) {
+function EmptyState({
+  filter,
+  licenseClass
+}: {
+  filter: FilterId | null;
+  licenseClass: LicenseClass;
+}) {
   const t = useTranslations();
   const filterLabel = filter ? t(`home.filter.${filter}`) : '';
   return (
-    <main className="mx-auto flex min-h-[100dvh] max-w-md flex-col items-center justify-center gap-4 px-6 text-center">
-      <Mascot pose="think" sizes="160px" className="h-auto w-36" />
-      <h1 className="text-heading-l text-white">
+    <main className="flex-1 flex flex-col items-center justify-center px-6 py-20 text-center gap-5">
+      <div className="text-5xl mb-2" aria-hidden>📭</div>
+      <h2 className="display text-2xl sm:text-3xl uppercase">
         {filterLabel ? t('quiz.empty.title', { filter: filterLabel }) : t('quiz.empty.titleGeneric')}
-      </h1>
-      <p className="text-body-l text-muted">{t('quiz.empty.body')}</p>
-      <div className="mt-2 flex w-full flex-col gap-2.5">
+      </h2>
+      <p className="text-white/60 max-w-md">{t('quiz.empty.body')}</p>
+      <div className="flex flex-wrap gap-3 justify-center pt-2">
         {/* Locale-aware links via the i18n router (no window.location parsing) */}
-        <Link href={`/quiz/${licenseClass}?filter=random`} className="btn-primary focus-brand">
+        <Link
+          href={`/quiz/${licenseClass}?filter=random`}
+          className="focus-brand inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-black hover:shadow-glow-lg transition"
+        >
           {t('quiz.empty.startRandom')}
         </Link>
-        <Link href="/" className="btn-ghost focus-brand">
+        <Link
+          href="/"
+          className="focus-brand inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white transition"
+        >
           {t('quiz.empty.backHome')}
         </Link>
       </div>

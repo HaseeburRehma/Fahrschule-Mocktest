@@ -6,11 +6,7 @@
   "nav": {
     "home": "Start",
     "exit": "Wyjdź",
-    "language": "Język",
-    "main": "Nawigacja główna",
-    "topics": "Teoria",
-    "search": "Szukaj",
-    "progress": "Postęp"
+    "language": "Język"
   },
   "home": {
     "tag": "Z mocą po prawko",
@@ -52,24 +48,7 @@
       "numbers": "Pytanie liczbowe",
       "new": "Nowe pytania",
       "random": "Losowe"
-    },
-    "journey1": "Twoja droga",
-    "journey2": "do prawa jazdy",
-    "nextStep": "Następny krok",
-    "nextFirstTitle": "Pierwszy egzamin próbny",
-    "nextFirstBody": "30 pytań – dokładnie jak w TÜV i DEKRA",
-    "nextAgainTitle": "Kolejny egzamin próbny",
-    "lastPassed": "Ostatni test zdany – {points} pkt. karnych",
-    "lastFailed": "Ostatni test: {points} pkt. karnych – nie poddawaj się!",
-    "tiles": {
-      "passed": "Zdane",
-      "mastered": "Opanowane",
-      "wrong": "Błędne"
-    },
-    "examTitle": "Symulacja egzaminu",
-    "examAll": "Wszystkie tematy",
-    "examMeta": "{count} pytań · maks. {points} pkt. karnych",
-    "streak": "{count, plural, one {# dzień} few {# dni} many {# dni} other {# dnia}} z rzędu"
+    }
   },
   "classes": {
     "A": {
@@ -96,16 +75,14 @@
     "multiHint": "Poprawnych może być więcej niż jedna odpowiedź.",
     "previous": "Wstecz",
     "next": "Następne pytanie",
-    "check": "Sprawdź",
-    "finish": "Oddaj",
-    "exit": "Opuść quiz",
+    "check": "Sprawdź odpowiedź",
+    "finish": "Zakończ egzamin",
+    "exit": "Wyjdź z egzaminu",
     "exitConfirm": "Na pewno wyjść? Twój postęp zostanie utracony.",
     "feedback": {
       "correct": "Dobrze!",
       "partial": "Częściowo poprawnie",
-      "wrong": "Niestety źle",
-      "correctIs": "Poprawna odpowiedź: {answer}",
-      "toResults": "Do wyniku"
+      "wrong": "Źle"
     },
     "explanation": "Wyjaśnienie",
     "loading": "Ładowanie pytań…",
@@ -118,7 +95,7 @@
     "mark": "Oznacz",
     "marked": "Oznaczone",
     "submit": "Oddaj",
-    "navigator": "Przegląd",
+    "navigator": "Pytania",
     "empty": {
       "title": "Brak pytań w „{filter}“",
       "titleGeneric": "Brak pytań",
@@ -132,30 +109,6 @@
       "details": "Szczegóły techniczne",
       "reset": "Resetuj i zacznij od nowa",
       "home": "Strona główna"
-    },
-    "exitTitle": "Na pewno przerwać?",
-    "keepGoing": "Ćwicz dalej",
-    "livesLeft": "Pozostałe życia: {count}",
-    "signAlt": "Znak drogowy do pytania: {question}",
-    "signAltNamed": "Znak drogowy: {name}",
-    "sceneAlt": "Sytuacja drogowa do pytania: {question}",
-    "captionsLabel": "Polski",
-    "intro": {
-      "examTitle": "Egzamin próbny",
-      "practiceTitle": "Quiz z teorii",
-      "examHeading": "Symulacja egzaminu",
-      "topicKicker": "Temat {code}",
-      "practiceKicker": "Celowane ćwiczenie",
-      "speechExam": "Dasz radę wszystkim {count} pytaniom z maks. 10 pkt. karnymi?",
-      "speechPractice": "Odpowiesz poprawnie na wszystkie {count} pytań z rzędu?",
-      "stats": {
-        "questions": "Pytania",
-        "maxErrors": "Maks. błędów",
-        "lives": "Życia",
-        "points": "Punkty"
-      },
-      "start": "Rozpocznij quiz",
-      "startExam": "Rozpocznij egzamin"
     },
     "signs": {
       "50": "Ograniczenie prędkości 50 km/h",
@@ -174,19 +127,19 @@
       "two-way-traffic": "Ruch dwukierunkowy",
       "uneven-road": "Nierówna droga",
       "y-junction": "Rozwidlenie drogi"
-    }
+    },
+    "signAlt": "Znak drogowy do pytania: {question}",
+    "signAltNamed": "Znak drogowy: {name}",
+    "sceneAlt": "Sytuacja drogowa do pytania: {question}",
+    "captionsLabel": "Polski"
   },
   "topics": {
-    "title": "Teoria",
-    "subtitle": "Wszystkie tematy egzaminu teoretycznego – wybierz temat, aby ćwiczyć.",
+    "title": "Ucz się po tematach",
+    "subtitle": "Wybierz temat. Każdy temat prowadzi do pytań oznaczonych tym kodem.",
     "questionsHere": "{count} w puli",
     "practiceTopic": "Ćwicz temat",
     "grundstoff": "Podstawowy",
-    "zusatzstoff": "Dla kategorii",
-    "doneOf": "Opanowane tematy: {done} z {total}",
-    "masteredOf": "Poprawne odpowiedzi: {done} z {total} pytań",
-    "rowMeta": "{mastered} / {total} opanowane",
-    "noQuestions": "Brak pytań"
+    "zusatzstoff": "Dla kategorii"
   },
   "search": {
     "title": "Szukaj pytań",
@@ -222,25 +175,14 @@
     "chooseAnother": "Wybierz inną klasę",
     "share": "Udostępnij wynik",
     "shareCopied": "Skopiowano link",
-    "backHome": "Wróć na stronę główną",
-    "noResult": "Nie znaleziono ukończonego testu.",
-    "passedTitle": "Zdane!",
-    "failedTitle": "Ups – niezdane",
-    "mastered": "Quiz opanowany!",
-    "practice": "Ćwiczenie",
-    "summary": "{correct} z {total} poprawnie",
-    "errorPointsShort": "Pkt. karne",
-    "points": "Punkty",
-    "accuracy": "Trafność",
-    "continue": "Kontynuuj swoją drogę",
-    "shareText": "Zdobyłem/am {accuracy}% w próbnym teście na prawo jazdy!"
+    "backHome": "Wróć na stronę główną"
   },
   "footer": {
     "imprint": "Impressum",
     "privacy": "Prywatność",
     "contact": "Kontakt",
     "tagline": "Z mocą po prawko.",
-    "copyright": "© {year} Fahrschule Abgefahrn"
+    "copyright": "© {year} Fahrschule Mocktest"
   },
   "categories": {
     "signs": "Znaki drogowe",
@@ -269,47 +211,6 @@
     "imageAlt": "Kursantka, która zdała egzamin na prawo jazdy w Düsseldorfie"
   },
   "testimonials": {
-    "title": "Nasi absolwenci",
     "alt": "Kursant, który zdał z Fahrschule Abgefahrn"
-  },
-  "progress": {
-    "overall": "Postęp ogólny",
-    "streakDays": "{count, plural, one {# dzień} few {# dni} many {# dni} other {# dnia}}",
-    "stagesDone": "Ukończone etapy: {done} z {total}",
-    "roadmap": "Twój plan",
-    "stats": {
-      "attempts": "Egzaminy",
-      "passRate": "Zdawalność",
-      "avgErrors": "Śr. błędów"
-    },
-    "m": {
-      "first": "Pierwszy test",
-      "basics": "Podstawy",
-      "firstPass": "Pierwszy zdany egzamin",
-      "threeInRow": "3× zdane z rzędu",
-      "catalogue": "Katalog pytań opanowany",
-      "ready": "Gotowy na egzamin",
-      "done": "Ukończone",
-      "open": "Rozpocznij pierwszy test",
-      "basicsDetail": "Opanowano {pct}% pytań",
-      "passCount": "Zdane {count}×",
-      "streakDetail": "{count} z 3 z rzędu",
-      "catalogueDetail": "{done} z {total} pytań",
-      "readyDetail": "Twój wielki cel"
-    },
-    "repeatWrong": "Powtórz błędne odpowiedzi",
-    "repeatMarked": "Ćwicz oznaczone pytania",
-    "questionsCount": "{count, plural, one {# pytanie} few {# pytania} many {# pytań} other {# pytania}}",
-    "history": "Twoje podejścia",
-    "empty": "Brak podejść – rozpocznij pierwszy egzamin próbny.",
-    "start": "Rozpocznij egzamin próbny",
-    "exam": "Egzamin próbny",
-    "practice": "Ćwiczenie",
-    "errorPoints": "{count} pkt. karnych"
-  },
-  "notFound": {
-    "title": "Nie znaleziono strony",
-    "body": "Ta strona nie istnieje lub została przeniesiona.",
-    "home": "Na stronę główną"
   }
 }

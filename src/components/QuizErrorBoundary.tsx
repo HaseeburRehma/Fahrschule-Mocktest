@@ -3,7 +3,6 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { Mascot } from './ui/Mascot';
 import { useQuiz } from '@/store/quiz';
 
 interface State {
@@ -63,25 +62,33 @@ function Fallback({ message }: { message: string }) {
   };
 
   return (
-    <main className="mx-auto flex min-h-[100dvh] max-w-md flex-col items-center justify-center gap-4 px-6 text-center">
-      <Mascot pose="think" sizes="160px" className="h-auto w-36" />
-      <h1 className="text-heading-l text-white">{t('quiz.errorBoundary.title')}</h1>
-      <p className="text-body-l text-muted">{t('quiz.errorBoundary.body')}</p>
+    <main className="flex-1 flex flex-col items-center justify-center px-6 py-20 text-center gap-5">
+      <div className="text-5xl mb-2" aria-hidden>⚠️</div>
+      <h2 className="display text-2xl sm:text-3xl uppercase">
+        {t('quiz.errorBoundary.title')}
+      </h2>
+      <p className="text-white/60 max-w-md">{t('quiz.errorBoundary.body')}</p>
       {message && (
-        <details className="w-full text-start">
-          <summary className="cursor-pointer text-caption uppercase text-muted hover:text-white">
+        <details className="max-w-md w-full text-left">
+          <summary className="text-xs uppercase tracking-widest text-white/45 cursor-pointer hover:text-white/70">
             {t('quiz.errorBoundary.details')}
           </summary>
-          <pre className="mt-2 overflow-auto whitespace-pre-wrap rounded-[12px] border border-ink-300 bg-ink-100 p-3 text-[11px] text-muted">
+          <pre className="mt-2 rounded-lg bg-white/[0.04] border border-white/10 p-3 text-[11px] text-white/75 overflow-auto whitespace-pre-wrap">
             {message}
           </pre>
         </details>
       )}
-      <div className="mt-2 flex w-full flex-col gap-2.5">
-        <button onClick={onReset} className="btn-primary focus-brand">
+      <div className="flex flex-wrap gap-3 justify-center pt-2">
+        <button
+          onClick={onReset}
+          className="focus-brand inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-black hover:shadow-glow-lg transition"
+        >
           {t('quiz.errorBoundary.reset')}
         </button>
-        <Link href="/" className="btn-ghost focus-brand">
+        <Link
+          href="/"
+          className="focus-brand inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/80 hover:border-white/40 hover:text-white transition"
+        >
           {t('quiz.errorBoundary.home')}
         </Link>
       </div>

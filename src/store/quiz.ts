@@ -25,23 +25,6 @@ export interface QuizSnapshot {
   marked: Record<string, true>;
 }
 
-/** Summary of a finished run, kept for the progress screens. */
-export interface AttemptSummary {
-  /** `${licenseClass}:${startedAt}` — unique per run. */
-  id: string;
-  licenseClass: LicenseClass;
-  /** null = official 30-question exam simulation; otherwise practice filter/topic. */
-  filter: string | null;
-  finishedAt: number;
-  durationMs: number;
-  total: number;
-  correct: number;
-  errorPoints: number;
-  passed: boolean;
-}
-
-export const MAX_HISTORY = 30;
-
 interface QuizState {
   current: QuizSnapshot | null;
   /**
@@ -50,10 +33,6 @@ interface QuizState {
    * and read by the "Wrong questions" home filter.
    */
   wrong: Record<string, true>;
-  /** Persisted: question IDs the user has answered correctly at least once (and not missed since). */
-  mastered: Record<string, true>;
-  /** Persisted: most recent finished attempts, newest first. */
-  history: AttemptSummary[];
 
   start: (licenseClass: LicenseClass, order: string[], filter?: string | null) => void;
   setAnswer: (questionId: string, selectedIds: string[]) => void;
@@ -65,8 +44,7 @@ interface QuizState {
   recordWrong: (ids: string[]) => void;
   /** Remove a single question from the wrong set (used after they answer it correctly later). */
   clearWrong: (id: string) => void;
-  /** Record a finished attempt: updates wrong/mastered sets and the history (idempotent per attempt id). */
-  recordAttempt: (summary: AttemptSummary, wrongIds: string[], masteredIds: string[]) => void;
+
   finish: () => void;
   reset: () => void;
 }
@@ -76,8 +54,6 @@ export const useQuiz = create<QuizState>()(
     (set, get) => ({
       current: null,
       wrong: {},
-      mastered: {},
-      history: [],
 
       start: (licenseClass, order, filter = null) => {
         const prev = get().current;
@@ -162,26 +138,6 @@ export const useQuiz = create<QuizState>()(
         set({ wrong: nextWrong });
       },
 
-      recordAttempt: (summary, wrongIds, masteredIds) => {
-        const state = get();
-        if ((state.history ?? []).some((h) => h.id === summary.id)) return;
-        const nextWrong = { ...(state.wrong ?? {}) };
-        const nextMastered = { ...(state.mastered ?? {}) };
-        for (const id of wrongIds) {
-          nextWrong[id] = true;
-          delete nextMastered[id];
-        }
-        for (const id of masteredIds) {
-          nextMastered[id] = true;
-          delete nextWrong[id];
-        }
-        set({
-          wrong: nextWrong,
-          mastered: nextMastered,
-          history: [summary, ...(state.history ?? [])].slice(0, MAX_HISTORY)
-        });
-      },
-
       finish: () => {
         const c = get().current;
         if (!c) return;
@@ -217,19 +173,6 @@ function idSet(v: unknown): Record<string, true> {
 
 const CLASSES: readonly LicenseClass[] = ['A', 'B', 'AB', 'Mofa'];
 
-function isAttempt(v: unknown): v is AttemptSummary {
-  return (
-    isObj(v) &&
-    typeof v.id === 'string' &&
-    CLASSES.includes(v.licenseClass as LicenseClass) &&
-    (v.filter === null || typeof v.filter === 'string') &&
-    [v.finishedAt, v.durationMs, v.total, v.correct, v.errorPoints].every(
-      (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0
-    ) &&
-    typeof v.passed === 'boolean'
-  );
-}
-
 function sanitizeSnapshot(v: unknown): QuizSnapshot | null {
   if (!isObj(v)) return null;
   if (!CLASSES.includes(v.licenseClass as LicenseClass)) return null;
@@ -257,12 +200,10 @@ function sanitizeSnapshot(v: unknown): QuizSnapshot | null {
 /** Exported for tests. */
 export function sanitizePersisted(
   persisted: unknown
-): Pick<QuizState, 'current' | 'wrong' | 'mastered' | 'history'> {
+): Pick<QuizState, 'current' | 'wrong'> {
   const p = isObj(persisted) ? persisted : {};
   return {
     current: sanitizeSnapshot(p.current),
-    wrong: idSet(p.wrong),
-    mastered: idSet(p.mastered),
-    history: Array.isArray(p.history) ? p.history.filter(isAttempt).slice(0, MAX_HISTORY) : []
+    wrong: idSet(p.wrong)
   };
 }

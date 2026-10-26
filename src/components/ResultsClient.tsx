@@ -1,103 +1,110 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useLocale, useTranslations } from 'next-intl';
-import { useShallow } from 'zustand/react/shallow';
-import { ArrowCounterClockwise, CheckCircle, House, ShareNetwork, XCircle } from '@phosphor-icons/react';
+import { useTranslations, useLocale } from 'next-intl';
 import { Link, useRouter } from '@/i18n/routing';
+import {
+  Award,
+  AlertTriangle,
+  Repeat,
+  Share2,
+  Home as HomeIcon,
+  CheckCircle2,
+  XCircle,
+  Clock
+} from 'lucide-react';
 import { useQuiz } from '@/store/quiz';
+import { useShallow } from 'zustand/react/shallow';
 import { evaluate } from '@/lib/scoring';
-import { formatDuration } from '@/lib/progress';
-import { getQuestionsForClass } from '@/data/questions';
+import { getQuestionMap, getQuestionsForClass } from '@/data/questions';
 import type { LicenseClass } from '@/data/types';
 import { pickText } from '@/data/types';
 import { AnimatedNumber } from './AnimatedNumber';
 import { Confetti } from './Confetti';
-import { Mascot } from './ui/Mascot';
 
 interface Props {
   licenseClass: LicenseClass;
 }
 
-/** Practice rounds count as "mastered" from this accuracy upwards. */
-const PRACTICE_PASS_RATIO = 0.8;
-
 export function ResultsClient({ licenseClass }: Props) {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
-  const { current, reset, recordAttempt } = useQuiz(
-    useShallow((s) => ({ current: s.current, reset: s.reset, recordAttempt: s.recordAttempt }))
+  const { current, reset, recordWrong, clearWrong } = useQuiz(
+    useShallow((s) => ({
+      current: s.current,
+      reset: s.reset,
+      recordWrong: s.recordWrong,
+      clearWrong: s.clearWrong
+    }))
   );
   const [shareOk, setShareOk] = useState(false);
+  const recordedRef = useRef<string | null>(null);
 
   const pool = useMemo(() => getQuestionsForClass(licenseClass), [licenseClass]);
-  const result = useMemo(
-    () => (current && current.finishedAt && current.licenseClass === licenseClass ? evaluate(current, pool) : null),
-    [current, pool, licenseClass]
-  );
+  const byId = useMemo(() => getQuestionMap(licenseClass), [licenseClass]);
 
-  // Persist this attempt once (recordAttempt is idempotent per attempt id):
-  // wrong/skipped → "wrong" set, exact answers → "mastered", plus history.
+  // Persist this attempt's wrong/skipped IDs into the global "wrong" set so
+  // the home-page "Wrong questions" filter has real content. Correctly
+  // answered questions are removed from the set (they've been mastered).
+  // We key the side-effect by `startedAt` so a single attempt is only
+  // recorded once even if the component re-renders.
   useEffect(() => {
-    if (!current || !result) return;
+    if (!current || !current.finishedAt) return;
+    const attemptKey = `${current.licenseClass}:${current.startedAt}`;
+    if (recordedRef.current === attemptKey) return;
+    recordedRef.current = attemptKey;
     const wrongIds: string[] = [];
     const masteredIds: string[] = [];
-    for (const p of result.perQuestion) {
-      // Only questions the user actually saw count as wrong in practice
-      // rounds that ended early (out of lives).
-      if (p.verdict === 'correct') masteredIds.push(p.question.id);
-      else if (current.filter === null || p.selectedIds.length > 0) wrongIds.push(p.question.id);
+    for (const id of current.order) {
+      const q = byId.get(id);
+      if (!q) continue;
+      const sel = current.answers[id]?.selectedIds ?? [];
+      const correctSet = new Set(q.correctIds);
+      const selectedSet = new Set(sel);
+      const exact =
+        sel.length > 0 &&
+        correctSet.size === selectedSet.size &&
+        [...correctSet].every((x) => selectedSet.has(x));
+      if (exact) masteredIds.push(id);
+      else wrongIds.push(id);
     }
-    recordAttempt(
-      {
-        id: `${current.licenseClass}:${current.startedAt}`,
-        licenseClass: current.licenseClass,
-        filter: current.filter,
-        finishedAt: current.finishedAt ?? Date.now(),
-        durationMs: result.durationMs,
-        total: result.perQuestion.length,
-        correct: result.correctCount,
-        errorPoints: result.errorPoints,
-        passed: current.filter === null ? result.passed : result.correctCount / Math.max(1, result.perQuestion.length) >= PRACTICE_PASS_RATIO
-      },
-      wrongIds,
-      masteredIds
-    );
-  }, [current, result, recordAttempt]);
+    if (wrongIds.length) recordWrong(wrongIds);
+    for (const id of masteredIds) clearWrong(id);
+  }, [current, byId, recordWrong, clearWrong]);
 
-  if (!current || !result) {
+  if (!current || current.licenseClass !== licenseClass || !current.finishedAt) {
     return (
-      <main className="mx-auto flex max-w-md flex-1 flex-col items-center justify-center gap-4 px-6 py-20 text-center">
-        <Mascot pose="think" sizes="160px" className="h-auto w-36" />
-        <p className="text-body-l text-muted">{t('results.noResult')}</p>
-        <Link href="/" className="btn-primary focus-brand">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-20 text-center gap-4">
+        <p className="text-white/70">No completed exam found.</p>
+        <Link
+          href="/"
+          className="rounded-full bg-brand px-6 py-3 text-black font-semibold hover:shadow-glow"
+        >
           {t('results.backHome')}
         </Link>
       </main>
     );
   }
 
-  const isExam = current.filter === null;
-  const total = result.perQuestion.length;
-  const accuracy = total ? Math.round((result.correctCount / total) * 100) : 0;
-  const passed = isExam ? result.passed : accuracy >= PRACTICE_PASS_RATIO * 100;
+  const result = evaluate(current, pool);
+  const minutes = Math.floor(result.durationMs / 60000);
+  const seconds = Math.floor((result.durationMs % 60000) / 1000);
 
   const onRetry = () => {
-    const filter = current.filter;
     reset();
-    if (!filter) router.push(`/quiz/${licenseClass}`);
-    else if (filter.startsWith('topic:')) router.push(`/quiz/${licenseClass}?topic=${encodeURIComponent(filter.slice(6))}`);
-    else router.push(`/quiz/${licenseClass}?filter=${encodeURIComponent(filter)}`);
+    router.push(`/quiz/${licenseClass}`);
   };
-
   const onShare = async () => {
-    const url = typeof window !== 'undefined' ? `${window.location.origin}/${locale}` : '';
+    const url = typeof window !== 'undefined' ? window.location.href : '';
     try {
       if (navigator.share) {
-        await navigator.share({ title: t('meta.title'), text: t('results.shareText', { accuracy }), url });
+        await navigator.share({
+          title: t('meta.title'),
+          text: `${result.earned} / ${result.total}`,
+          url
+        });
       } else {
         await navigator.clipboard.writeText(url);
         setShareOk(true);
@@ -108,192 +115,234 @@ export function ResultsClient({ licenseClass }: Props) {
     }
   };
 
-  const stats = [
-    isExam
-      ? { value: result.errorPoints, label: t('results.errorPointsShort'), tone: passed ? 'text-brand-600' : 'text-[#C21E5C]' }
-      : { value: result.earned, prefix: '+', label: t('results.points'), tone: 'text-gold-deep' },
-    { value: accuracy, suffix: '%', label: t('results.accuracy'), tone: 'text-brand-600' },
-    { text: formatDuration(result.durationMs), label: t('results.timeTaken'), tone: 'text-[#1E5AD6]' }
-  ];
-
-  const mistakes = result.perQuestion.filter((p) => p.verdict !== 'correct' && (isExam || p.selectedIds.length > 0));
-
   return (
-    <main className="flex-1 pb-10">
-      <Confetti active={passed} />
+    <main className="flex-1 pb-20">
+      <Confetti active={result.passed} />
 
-      {/* Celebration / Hoppla hero (Figma "09/Quiz Gemeistert") */}
-      <section
-        className={[
-          'relative isolate overflow-hidden',
-          passed ? 'bg-paper-celebrate text-brand-900' : 'bg-ink-0 text-white'
-        ].join(' ')}
-      >
-        {passed ? (
-          <Image
-            src="/images/mascot/celebrate.jpg"
-            alt=""
-            aria-hidden
-            fill
-            priority
-            sizes="100vw"
-            className="-z-10 object-cover object-[50%_60%] md:object-contain md:object-bottom"
-          />
-        ) : (
-          <div className="fx-hero-glow -z-10 opacity-60" aria-hidden />
+      {/* Hero score */}
+      <section className="relative max-w-4xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-8 sm:pb-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 mb-6 text-xs uppercase tracking-widest text-white/60"
+        >
+          {t('classes.' + licenseClass + '.name')}
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="display text-[clamp(2.25rem,7vw,4.5rem)] uppercase mb-2"
+        >
+          {t('results.title')}
+        </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mt-8 mb-3 flex items-baseline justify-center gap-3"
+        >
+          <span
+            className={`display text-[clamp(3.5rem,15vw,8rem)] drop-shadow-[0_0_24px_rgba(1,254,33,0.45)] ${
+              result.passed ? 'text-brand' : 'text-danger'
+            }`}
+          >
+            <AnimatedNumber value={result.errorPoints} />
+          </span>
+          <span className="text-white/50 text-xl sm:text-2xl md:text-3xl">
+            / {result.maxErrorPoints}
+          </span>
+        </motion.div>
+
+        <p className="text-xs uppercase tracking-widest text-white/45 mb-2">
+          {t('results.errorPointsLabel')}
+        </p>
+        <p className="text-sm text-white/50 mb-6">
+          {t('results.errorPointsThreshold', { points: result.maxErrorPoints })}
+        </p>
+
+        {/* Verdict badge */}
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.45, type: 'spring', stiffness: 200 }}
+          className={`inline-flex items-center gap-2 rounded-full px-6 py-3 border font-bold uppercase tracking-widest text-sm ${
+            result.passed
+              ? 'border-brand bg-brand/10 text-brand shadow-glow animate-pulse-glow'
+              : 'border-danger/60 bg-danger/10 text-danger'
+          }`}
+        >
+          {result.passed ? <Award className="w-5 h-5" /> : <AlertTriangle className="w-5 h-5" />}
+          {result.passed ? t('results.passed') : t('results.failed')}
+        </motion.div>
+
+        <p className="mt-5 text-white/70 max-w-md mx-auto">
+          {result.passed ? t('results.passedSubtitle') : t('results.failedSubtitle')}
+        </p>
+
+        {result.failureReason === 'twoFivePointersFailed' && (
+          <p className="mt-3 text-xs text-danger/90 max-w-md mx-auto">
+            {t('results.twoFivePointersFailed')}
+          </p>
         )}
-
-        <div className="mx-auto flex min-h-[560px] max-w-md flex-col px-4 pb-6 pt-10 md:min-h-[640px]">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="text-center font-tomorrow"
-          >
-            <p className={`text-caption uppercase tracking-[1px] ${passed ? 'text-[#2F5A26]' : 'text-muted'}`}>
-              {isExam ? t(`classes.${licenseClass}.name`) : t('results.practice')}
-            </p>
-            <h1 className={`mt-1 font-tomorrow text-[30px] font-bold leading-tight ${passed ? 'text-brand-900' : 'text-danger'}`}>
-              {passed ? (isExam ? t('results.passedTitle') : t('results.mastered')) : t('results.failedTitle')}
-            </h1>
-            <p className={`mt-1 text-[15px] font-medium ${passed ? 'text-[#2F5A26]' : 'text-muted'}`}>
-              {t('results.summary', { correct: result.correctCount, total })}
-            </p>
-            {isExam && result.failureReason === 'twoFivePointersFailed' && (
-              <p className="mt-2 text-body-s text-danger">{t('results.twoFivePointersFailed')}</p>
-            )}
-          </motion.div>
-
-          {!passed && <Mascot pose="think" priority sizes="260px" className="mx-auto mt-6 h-auto w-56" />}
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.45 }}
-            className="mt-auto flex flex-col items-center gap-4 rounded-sheet bg-paper px-5 py-[22px] shadow-card"
-          >
-            <dl className="flex w-full gap-2.5 text-center font-tomorrow">
-              {stats.map((s) => (
-                <div key={s.label} className="flex flex-1 flex-col-reverse items-center gap-1 rounded-[16px] bg-paper-tile-green px-2 py-4">
-                  <dt className="text-[12px] font-medium text-paper-sub-green">{s.label}</dt>
-                  <dd className={`text-[22px] font-bold tabular-nums ${s.tone}`}>
-                    {'text' in s ? (
-                      s.text
-                    ) : (
-                      <>
-                        {s.prefix}
-                        <AnimatedNumber value={s.value} />
-                        {s.suffix}
-                      </>
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <Link
-              href="/progress"
-              className="focus-brand flex min-h-[54px] w-full items-center justify-center rounded-full bg-brand font-tomorrow text-[16px] font-bold text-brand-900 transition hover:shadow-glow"
-            >
-              {t('results.continue')}
-            </Link>
-            <div className="flex w-full gap-2">
-              <button
-                onClick={onRetry}
-                className="focus-brand flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-full bg-paper-tile font-tomorrow text-[14px] font-semibold text-paper-ink transition hover:bg-paper-tile-green"
-              >
-                <ArrowCounterClockwise size={18} weight="bold" />
-                {t('results.tryAgain')}
-              </button>
-              <button
-                onClick={onShare}
-                className="focus-brand flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-full bg-paper-tile font-tomorrow text-[14px] font-semibold text-paper-ink transition hover:bg-paper-tile-green"
-              >
-                <ShareNetwork size={18} weight="bold" />
-                {shareOk ? t('results.shareCopied') : t('results.share')}
-              </button>
-            </div>
-          </motion.div>
-        </div>
       </section>
 
-      {/* Breakdown by category */}
-      <section className="mx-auto mt-8 max-w-3xl px-4 sm:px-6">
-        <h2 className="mb-3 text-heading-m text-white">{t('results.byCategory')}</h2>
-        <ul className="grid gap-2.5 sm:grid-cols-2">
+      {/* KPI grid */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <Kpi
+          label={t('results.totalQuestions')}
+          value={result.perQuestion.length}
+        />
+        <Kpi
+          label={t('results.correct')}
+          value={result.correctCount}
+          tone="brand"
+          icon={<CheckCircle2 className="w-4 h-4" />}
+        />
+        <Kpi
+          label={t('results.wrong')}
+          value={result.wrongCount + result.skippedCount}
+          tone="danger"
+          icon={<XCircle className="w-4 h-4" />}
+        />
+        <Kpi
+          label={t('results.timeTaken')}
+          value={`${minutes}:${seconds.toString().padStart(2, '0')}`}
+          icon={<Clock className="w-4 h-4" />}
+        />
+      </section>
+
+      {/* By category */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-10">
+        <h2 className="display text-2xl uppercase mb-4">{t('results.byCategory')}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {Object.entries(result.byCategory).map(([cat, val]) => {
             const pct = Math.round((val.correct / val.total) * 100);
             return (
-              <li key={cat} className="card flex items-center gap-4 p-4">
-                <div className="min-w-0 flex-1">
-                  <p className="mb-2 text-title-m text-white">{t(`categories.${cat}`)}</p>
-                  <div className="h-2 overflow-hidden rounded-full bg-ink-200">
+              <div
+                key={cat}
+                className="rounded-2xl border border-white/10 bg-ink-100 p-4 flex items-center gap-4"
+              >
+                <div className="flex-1">
+                  <p className="text-sm text-white/80 mb-1">{t(`categories.${cat}`)}</p>
+                  <div className="h-1.5 w-full bg-white/[0.07] rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${pct}%` }}
                       transition={{ duration: 0.8, ease: 'easeOut' }}
-                      className="h-full rounded-full bg-brand shadow-glow"
+                      className="h-full bg-brand"
                     />
                   </div>
                 </div>
-                <span className="text-label-m tabular-nums text-muted">
+                <span className="text-sm tabular-nums text-white/70">
                   {val.correct}/{val.total}
                 </span>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </section>
 
-      {/* Review of mistakes */}
-      <section className="mx-auto mt-8 max-w-3xl px-4 sm:px-6">
-        <h2 className="mb-3 text-heading-m text-white">{t('results.review')}</h2>
-        {mistakes.length === 0 ? (
-          <p className="card flex items-center gap-3 p-4 text-body-s text-brand">
-            <CheckCircle size={22} weight="fill" />
-            {t('results.reviewEmpty')}
-          </p>
+      {/* Review */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-12">
+        <h2 className="display text-2xl uppercase mb-4">{t('results.review')}</h2>
+        {result.perQuestion.filter((p) => p.verdict !== 'correct').length === 0 ? (
+          <p className="text-brand text-sm">{t('results.reviewEmpty')}</p>
         ) : (
-          <ul className="flex flex-col gap-2.5">
-            {mistakes.map(({ question, selectedIds, verdict }) => {
-              const correctText = question.options
-                .filter((o) => question.correctIds.includes(o.id))
-                .map((o) => pickText(o.text, locale))
-                .join(' · ');
-              const yours = question.options
-                .filter((o) => selectedIds.includes(o.id))
-                .map((o) => pickText(o.text, locale))
-                .join(' · ');
-              return (
-                <li key={question.id} className="card p-5">
-                  <p className="mb-1 text-caption uppercase text-muted">{t(`categories.${question.category}`)}</p>
-                  <p className="mb-3 text-title-m text-white">{pickText(question.question, locale)}</p>
-                  <p className="mb-1.5 flex gap-2 rounded-[12px] bg-danger-surface px-3 py-2 text-body-s text-danger">
-                    <XCircle size={20} className="mt-px shrink-0" />
-                    <span>
-                      <span className="font-semibold">{t('results.yourAnswer')}:</span>{' '}
+          <ul className="space-y-3">
+            {result.perQuestion
+              .filter((p) => p.verdict !== 'correct')
+              .map(({ question, selectedIds, verdict }) => {
+                const correctText = question.options
+                  .filter((o) => question.correctIds.includes(o.id))
+                  .map((o) => pickText(o.text, locale))
+                  .join(' • ');
+                const yours = question.options
+                  .filter((o) => selectedIds.includes(o.id))
+                  .map((o) => pickText(o.text, locale))
+                  .join(' • ');
+                return (
+                  <li
+                    key={question.id}
+                    className="rounded-2xl border border-white/10 bg-ink-100 p-5"
+                  >
+                    <p className="text-xs uppercase tracking-widest text-white/50 mb-1">
+                      {t(`categories.${question.category}`)}
+                    </p>
+                    <p className="font-semibold mb-3">{pickText(question.question, locale)}</p>
+                    <p className="text-sm text-white/60 mb-1">
+                      <span className="text-danger">{t('results.yourAnswer')}:</span>{' '}
                       {yours || (verdict === 'skipped' ? '—' : '')}
-                    </span>
-                  </p>
-                  <p className="mb-3 flex gap-2 rounded-[12px] bg-brand-800 px-3 py-2 text-body-s text-brand">
-                    <CheckCircle size={20} weight="fill" className="mt-px shrink-0" />
-                    <span>
-                      <span className="font-semibold">{t('results.correctAnswer')}:</span> {correctText}
-                    </span>
-                  </p>
-                  <p className="text-body-s text-muted">{pickText(question.explanation, locale)}</p>
-                </li>
-              );
-            })}
+                    </p>
+                    <p className="text-sm mb-3">
+                      <span className="text-brand">{t('results.correctAnswer')}:</span>{' '}
+                      {correctText}
+                    </p>
+                    <p className="text-xs text-white/60 leading-relaxed">
+                      {pickText(question.explanation, locale)}
+                    </p>
+                  </li>
+                );
+              })}
           </ul>
         )}
       </section>
 
-      <div className="mx-auto mt-8 flex max-w-3xl px-4 sm:px-6">
-        <Link href="/" className="btn-ghost focus-brand">
-          <House size={18} />
-          {t('results.backHome')}
+      {/* Actions */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-12 flex flex-wrap gap-3">
+        <button
+          onClick={onRetry}
+          className="focus-brand inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-black hover:shadow-glow transition"
+        >
+          <Repeat className="w-4 h-4" />
+          {t('results.tryAgain')}
+        </button>
+        <Link
+          href="/"
+          className="focus-brand inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white/80 hover:border-white/40 transition"
+        >
+          <HomeIcon className="w-4 h-4" />
+          {t('results.chooseAnother')}
         </Link>
-      </div>
+        <button
+          onClick={onShare}
+          className="focus-brand inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white/80 hover:border-white/40 transition"
+        >
+          <Share2 className="w-4 h-4" />
+          {shareOk ? t('results.shareCopied') : t('results.share')}
+        </button>
+      </section>
     </main>
+  );
+}
+
+function Kpi({
+  label,
+  value,
+  tone,
+  icon
+}: {
+  label: string;
+  value: string | number;
+  tone?: 'brand' | 'danger';
+  icon?: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-ink-100 p-4">
+      <p className="text-[11px] uppercase tracking-widest text-white/50 mb-1 inline-flex items-center gap-2">
+        {icon}
+        {label}
+      </p>
+      <p
+        className={`display text-3xl ${
+          tone === 'brand' ? 'text-brand' : tone === 'danger' ? 'text-danger' : 'text-white'
+        }`}
+      >
+        {value}
+      </p>
+    </div>
   );
 }

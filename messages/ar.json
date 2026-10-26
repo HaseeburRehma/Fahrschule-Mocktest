@@ -6,11 +6,7 @@
   "nav": {
     "home": "الرئيسية",
     "exit": "خروج",
-    "language": "اللغة",
-    "main": "التنقل الرئيسي",
-    "topics": "النظرية",
-    "search": "بحث",
-    "progress": "التقدّم"
+    "language": "اللغة"
   },
   "home": {
     "tag": "بالقوة إلى الرخصة",
@@ -52,24 +48,7 @@
       "numbers": "سؤال رقمي",
       "new": "أسئلة جديدة",
       "random": "عشوائي"
-    },
-    "journey1": "طريقك",
-    "journey2": "إلى رخصة القيادة",
-    "nextStep": "الخطوة التالية",
-    "nextFirstTitle": "أول اختبار تجريبي",
-    "nextFirstBody": "30 سؤالًا – تمامًا كما في TÜV وDEKRA",
-    "nextAgainTitle": "الاختبار التجريبي التالي",
-    "lastPassed": "نجحت في آخر اختبار – {points} نقاط خطأ",
-    "lastFailed": "آخر اختبار: {points} نقاط خطأ – استمر!",
-    "tiles": {
-      "passed": "ناجح",
-      "mastered": "متقن",
-      "wrong": "خاطئة"
-    },
-    "examTitle": "محاكاة الاختبار",
-    "examAll": "كل المواضيع",
-    "examMeta": "{count} سؤالًا · حد أقصى {points} نقاط خطأ",
-    "streak": "تدرّبت {count} أيام متتالية"
+    }
   },
   "classes": {
     "A": {
@@ -96,16 +75,14 @@
     "multiHint": "قد تكون أكثر من إجابة صحيحة.",
     "previous": "السابق",
     "next": "السؤال التالي",
-    "check": "تحقّق",
-    "finish": "تسليم",
-    "exit": "مغادرة الاختبار",
+    "check": "تحقق من الإجابة",
+    "finish": "إنهاء الاختبار",
+    "exit": "الخروج من الاختبار",
     "exitConfirm": "هل تريد فعلاً الخروج؟ سيتم فقدان تقدمك.",
     "feedback": {
       "correct": "صحيح!",
       "partial": "صحيح جزئيًا",
-      "wrong": "للأسف خطأ",
-      "correctIs": "الإجابة الصحيحة: {answer}",
-      "toResults": "إلى النتيجة"
+      "wrong": "إجابة خاطئة"
     },
     "explanation": "الشرح",
     "loading": "جاري تحميل الأسئلة…",
@@ -118,7 +95,7 @@
     "mark": "تمييز",
     "marked": "تم التمييز",
     "submit": "تسليم",
-    "navigator": "نظرة عامة",
+    "navigator": "الأسئلة",
     "empty": {
       "title": "لا توجد أسئلة تحت «{filter}»",
       "titleGeneric": "لا توجد أسئلة بعد",
@@ -132,30 +109,6 @@
       "details": "تفاصيل تقنية",
       "reset": "إعادة الضبط والبدء من جديد",
       "home": "الرئيسية"
-    },
-    "exitTitle": "هل تريد التوقف فعلًا؟",
-    "keepGoing": "متابعة التدريب",
-    "livesLeft": "تبقّى {count} من المحاولات",
-    "signAlt": "إشارة مرور للسؤال: {question}",
-    "signAltNamed": "إشارة مرور: {name}",
-    "sceneAlt": "موقف مروري للسؤال: {question}",
-    "captionsLabel": "العربية",
-    "intro": {
-      "examTitle": "اختبار تجريبي",
-      "practiceTitle": "اختبار النظرية",
-      "examHeading": "محاكاة الاختبار",
-      "topicKicker": "الموضوع {code}",
-      "practiceKicker": "تدريب موجّه",
-      "speechExam": "هل تستطيع حل {count} سؤالًا بحد أقصى 10 نقاط خطأ؟",
-      "speechPractice": "هل تستطيع حل {count} أسئلة متتالية؟",
-      "stats": {
-        "questions": "أسئلة",
-        "maxErrors": "أقصى خطأ",
-        "lives": "محاولات",
-        "points": "نقاط"
-      },
-      "start": "ابدأ الاختبار",
-      "startExam": "ابدأ الامتحان"
     },
     "signs": {
       "50": "الحد الأقصى للسرعة 50 كم/س",
@@ -174,19 +127,19 @@
       "two-way-traffic": "حركة مرور في الاتجاهين",
       "uneven-road": "طريق غير مستوٍ",
       "y-junction": "تفرّع الطريق"
-    }
+    },
+    "signAlt": "إشارة مرور للسؤال: {question}",
+    "signAltNamed": "إشارة مرور: {name}",
+    "sceneAlt": "موقف مروري للسؤال: {question}",
+    "captionsLabel": "العربية"
   },
   "topics": {
-    "title": "النظرية",
-    "subtitle": "كل مواضيع الاختبار النظري – اختر موضوعًا للتدريب.",
+    "title": "تعلّم حسب الموضوع",
+    "subtitle": "اختر موضوعًا. كل موضوع يرتبط بالأسئلة المرتبطة برمزه.",
     "questionsHere": "{count} في القائمة",
     "practiceTopic": "تدرّب على الموضوع",
     "grundstoff": "أساسي",
-    "zusatzstoff": "حسب الفئة",
-    "doneOf": "أتقنت {done} من {total} مواضيع",
-    "masteredOf": "{done} من {total} أسئلة أُجيبت بشكل صحيح",
-    "rowMeta": "{mastered} / {total} متقنة",
-    "noQuestions": "لا توجد أسئلة بعد"
+    "zusatzstoff": "حسب الفئة"
   },
   "search": {
     "title": "بحث في الأسئلة",
@@ -222,25 +175,14 @@
     "chooseAnother": "اختر فئة أخرى",
     "share": "شارك النتيجة",
     "shareCopied": "تم نسخ الرابط",
-    "backHome": "العودة للرئيسية",
-    "noResult": "لم يتم العثور على اختبار مكتمل.",
-    "passedTitle": "نجحت!",
-    "failedTitle": "للأسف – لم تنجح",
-    "mastered": "أتقنت الاختبار!",
-    "practice": "تدريب",
-    "summary": "{correct} من {total} صحيحة",
-    "errorPointsShort": "نقاط الخطأ",
-    "points": "نقاط",
-    "accuracy": "الدقة",
-    "continue": "تابع طريقك",
-    "shareText": "حققت {accuracy}٪ في الاختبار التجريبي لرخصة القيادة!"
+    "backHome": "العودة للرئيسية"
   },
   "footer": {
     "imprint": "بصمة قانونية",
     "privacy": "الخصوصية",
     "contact": "اتصل بنا",
     "tagline": "بالقوة إلى الرخصة.",
-    "copyright": "© {year} Fahrschule Abgefahrn"
+    "copyright": "© {year} Fahrschule Mocktest"
   },
   "categories": {
     "signs": "إشارات المرور",
@@ -269,47 +211,6 @@
     "imageAlt": "متدربة نجحت في اختبار رخصة القيادة في دوسلدورف"
   },
   "testimonials": {
-    "title": "خريجونا",
     "alt": "متدرب نجح مع Fahrschule Abgefahrn"
-  },
-  "progress": {
-    "overall": "التقدّم الإجمالي",
-    "streakDays": "{count} أيام",
-    "stagesDone": "أكملت {done} من {total} مراحل",
-    "roadmap": "خطتك",
-    "stats": {
-      "attempts": "اختبارات",
-      "passRate": "نجاح",
-      "avgErrors": "متوسط الأخطاء"
-    },
-    "m": {
-      "first": "أول اختبار",
-      "basics": "الأساسيات",
-      "firstPass": "أول نجاح",
-      "threeInRow": "نجاح 3 مرات متتالية",
-      "catalogue": "إتقان بنك الأسئلة",
-      "ready": "جاهز للاختبار",
-      "done": "مكتمل",
-      "open": "ابدأ اختبارك الأول",
-      "basicsDetail": "أتقنت {pct}٪ من الأسئلة",
-      "passCount": "نجحت {count} مرات",
-      "streakDetail": "{count} من 3 متتالية",
-      "catalogueDetail": "{done} من {total} أسئلة",
-      "readyDetail": "هدفك الكبير"
-    },
-    "repeatWrong": "إعادة الأسئلة الخاطئة",
-    "repeatMarked": "تدرّب على الأسئلة المعلّمة",
-    "questionsCount": "{count} أسئلة",
-    "history": "محاولاتك",
-    "empty": "لا توجد محاولات بعد – ابدأ أول اختبار تجريبي.",
-    "start": "ابدأ الاختبار التجريبي",
-    "exam": "اختبار تجريبي",
-    "practice": "تدريب",
-    "errorPoints": "{count} نقاط خطأ"
-  },
-  "notFound": {
-    "title": "الصفحة غير موجودة",
-    "body": "هذه الصفحة غير موجودة أو تم نقلها.",
-    "home": "إلى الصفحة الرئيسية"
   }
 }

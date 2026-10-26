@@ -17,7 +17,7 @@ interface Piece {
   drift: number;
 }
 
-const COLORS = ['#00FF24', '#ffffff', '#FFC83D', '#7FFF92'];
+const COLORS = ['#01FE21', '#ffffff', '#01FE21', '#7FFF92'];
 
 /**
  * Lightweight CSS-only confetti — fires once on mount.

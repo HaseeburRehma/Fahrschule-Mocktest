@@ -3,32 +3,25 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales, rtlLocales, type Locale } from '@/i18n/routing';
-import { Montserrat, Tomorrow } from 'next/font/google';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { BottomNav } from '@/components/BottomNav';
+import { SmoothScroll } from '@/components/SmoothScroll';
+import { CursorFollower } from '@/components/CursorFollower';
+import { Bebas_Neue, Montserrat, Oswald } from 'next/font/google';
 import { SITE_URL } from '@/lib/site';
 
-// Self-hosted at build time by next/font — no render-blocking request to
-// Google and no third-party font origin needed in the CSP.
+// Self-hosted at build time — no render-blocking request to Google Fonts.
+const bebas = Bebas_Neue({ subsets: ['latin', 'latin-ext'], weight: '400', display: 'swap', variable: '--font-bebas' });
+const oswald = Oswald({ subsets: ['latin', 'latin-ext', 'cyrillic'], weight: ['500', '600', '700'], display: 'swap', variable: '--font-oswald' });
 const montserrat = Montserrat({
   subsets: ['latin', 'latin-ext', 'cyrillic'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-montserrat'
 });
 
-const tomorrow = Tomorrow({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['500', '600', '700'],
-  display: 'swap',
-  variable: '--font-tomorrow'
-});
-
 export const viewport: Viewport = {
-  themeColor: '#060706',
-  colorScheme: 'dark'
+  themeColor: '#01FE21'
 };
 
 export function generateStaticParams() {
@@ -103,15 +96,17 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${montserrat.variable} ${tomorrow.variable}`}
+      className={`${bebas.variable} ${oswald.variable} ${montserrat.variable}`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-screen flex-col bg-ink-0 font-body text-white antialiased">
+      <body className="min-h-screen bg-ink-0 text-white antialiased flex flex-col">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          <div className="flex flex-1 flex-col">{children}</div>
-          <Footer />
-          <BottomNav />
+          <SmoothScroll>
+            <Header />
+            <div className="flex-1 flex flex-col">{children}</div>
+            <Footer />
+          </SmoothScroll>
+          <CursorFollower />
         </NextIntlClientProvider>
       </body>
     </html>

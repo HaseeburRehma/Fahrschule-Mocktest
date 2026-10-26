@@ -33,19 +33,19 @@ export default async function OpengraphImage({
           flexDirection: 'column',
           justifyContent: 'center',
           padding: '80px',
-          backgroundColor: '#060706',
-          backgroundImage: 'radial-gradient(circle at 78% 30%, rgba(0,255,36,0.28), rgba(6,7,6,0) 60%)',
+          backgroundColor: '#000000',
+          backgroundImage: 'radial-gradient(circle at 78% 30%, rgba(1,254,33,0.28), rgba(6,7,6,0) 60%)',
           color: '#fff',
           fontFamily: 'sans-serif'
         }}
       >
-        <div style={{ display: 'flex', fontSize: 30, fontWeight: 700, color: '#00FF24', letterSpacing: 2 }}>
+        <div style={{ display: 'flex', fontSize: 30, fontWeight: 700, color: '#01FE21', letterSpacing: 2 }}>
           #FAHRSCHULE ABGEFAHRN
         </div>
         <div style={{ display: 'flex', fontSize: 76, fontWeight: 800, lineHeight: 1.05, marginTop: 28, maxWidth: 900 }}>
           {t('cinemaHeadline')}
         </div>
-        <div style={{ display: 'flex', fontSize: 30, color: '#AEB4AE', marginTop: 28, maxWidth: 880 }}>
+        <div style={{ display: 'flex', fontSize: 30, color: 'rgba(255,255,255,0.65)', marginTop: 28, maxWidth: 880 }}>
           {t('tag')}
         </div>
         <div
@@ -53,7 +53,7 @@ export default async function OpengraphImage({
             display: 'flex',
             marginTop: 48,
             alignSelf: 'flex-start',
-            background: '#00FF24',
+            background: '#01FE21',
             color: '#040404',
             fontSize: 30,
             fontWeight: 700,

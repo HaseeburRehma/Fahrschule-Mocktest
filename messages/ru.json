@@ -6,11 +6,7 @@
   "nav": {
     "home": "Главная",
     "exit": "Выйти",
-    "language": "Язык",
-    "main": "Основная навигация",
-    "topics": "Теория",
-    "search": "Поиск",
-    "progress": "Прогресс"
+    "language": "Язык"
   },
   "home": {
     "tag": "С силой к правам",
@@ -52,24 +48,7 @@
       "numbers": "Вопрос с числами",
       "new": "Новые вопросы",
       "random": "Случайно"
-    },
-    "journey1": "Твой путь",
-    "journey2": "к правам",
-    "nextStep": "Следующий шаг",
-    "nextFirstTitle": "Первый пробный экзамен",
-    "nextFirstBody": "30 вопросов – как у TÜV и DEKRA",
-    "nextAgainTitle": "Следующий пробный экзамен",
-    "lastPassed": "Последний тест сдан – {points} штрафных баллов",
-    "lastFailed": "Последний тест: {points} штрафных баллов – не сдавайся!",
-    "tiles": {
-      "passed": "Сдано",
-      "mastered": "Освоено",
-      "wrong": "Ошибки"
-    },
-    "examTitle": "Симуляция экзамена",
-    "examAll": "Все темы",
-    "examMeta": "{count} вопросов · макс. {points} штрафных баллов",
-    "streak": "{count, plural, one {# день} few {# дня} many {# дней} other {# дня}} подряд"
+    }
   },
   "classes": {
     "A": {
@@ -96,16 +75,14 @@
     "multiHint": "Может быть несколько верных ответов.",
     "previous": "Назад",
     "next": "Следующий вопрос",
-    "check": "Проверить",
-    "finish": "Сдать",
-    "exit": "Выйти из теста",
+    "check": "Проверить ответ",
+    "finish": "Завершить экзамен",
+    "exit": "Выйти из экзамена",
     "exitConfirm": "Действительно выйти? Прогресс будет потерян.",
     "feedback": {
       "correct": "Верно!",
       "partial": "Частично верно",
-      "wrong": "К сожалению, неверно",
-      "correctIs": "Правильно: {answer}",
-      "toResults": "К результату"
+      "wrong": "Неверно"
     },
     "explanation": "Пояснение",
     "loading": "Загрузка вопросов…",
@@ -118,7 +95,7 @@
     "mark": "Отметить",
     "marked": "Отмечено",
     "submit": "Сдать",
-    "navigator": "Обзор",
+    "navigator": "Вопросы",
     "empty": {
       "title": "В разделе «{filter}» ещё нет вопросов",
       "titleGeneric": "Пока нет вопросов",
@@ -132,30 +109,6 @@
       "details": "Технические детали",
       "reset": "Сбросить и начать заново",
       "home": "На главную"
-    },
-    "exitTitle": "Точно остановиться?",
-    "keepGoing": "Продолжить",
-    "livesLeft": "Осталось жизней: {count}",
-    "signAlt": "Дорожный знак к вопросу: {question}",
-    "signAltNamed": "Дорожный знак: {name}",
-    "sceneAlt": "Дорожная ситуация к вопросу: {question}",
-    "captionsLabel": "Русский",
-    "intro": {
-      "examTitle": "Пробный экзамен",
-      "practiceTitle": "Тест по теории",
-      "examHeading": "Симуляция экзамена",
-      "topicKicker": "Тема {code}",
-      "practiceKicker": "Целевая тренировка",
-      "speechExam": "Справишься со всеми {count} вопросами, набрав не более 10 штрафных баллов?",
-      "speechPractice": "Ответишь на все {count} вопросов подряд?",
-      "stats": {
-        "questions": "Вопросы",
-        "maxErrors": "Макс. ошибок",
-        "lives": "Жизни",
-        "points": "Баллы"
-      },
-      "start": "Начать тест",
-      "startExam": "Начать экзамен"
     },
     "signs": {
       "50": "Ограничение скорости 50 км/ч",
@@ -174,19 +127,19 @@
       "two-way-traffic": "Двустороннее движение",
       "uneven-road": "Неровная дорога",
       "y-junction": "Развилка"
-    }
+    },
+    "signAlt": "Дорожный знак к вопросу: {question}",
+    "signAltNamed": "Дорожный знак: {name}",
+    "sceneAlt": "Дорожная ситуация к вопросу: {question}",
+    "captionsLabel": "Русский"
   },
   "topics": {
-    "title": "Теория",
-    "subtitle": "Все темы теоретического экзамена – выбери тему для тренировки.",
+    "title": "Учить по темам",
+    "subtitle": "Выберите тему. Каждая тема — это набор вопросов с тем же кодом каталога.",
     "questionsHere": "{count} в наборе",
     "practiceTopic": "Тренировать тему",
     "grundstoff": "Основной материал",
-    "zusatzstoff": "По категории",
-    "doneOf": "Освоено тем: {done} из {total}",
-    "masteredOf": "Верно отвечено вопросов: {done} из {total}",
-    "rowMeta": "{mastered} / {total} освоено",
-    "noQuestions": "Пока нет вопросов"
+    "zusatzstoff": "По категории"
   },
   "search": {
     "title": "Поиск вопросов",
@@ -222,25 +175,14 @@
     "chooseAnother": "Выбрать другой класс",
     "share": "Поделиться",
     "shareCopied": "Ссылка скопирована",
-    "backHome": "На главную",
-    "noResult": "Завершённый тест не найден.",
-    "passedTitle": "Сдано!",
-    "failedTitle": "Упс – не сдано",
-    "mastered": "Тест пройден!",
-    "practice": "Тренировка",
-    "summary": "{correct} из {total} верно",
-    "errorPointsShort": "Штраф. баллы",
-    "points": "Баллы",
-    "accuracy": "Точность",
-    "continue": "Продолжить путь",
-    "shareText": "Я набрал(а) {accuracy}% в пробном тесте на права!"
+    "backHome": "На главную"
   },
   "footer": {
     "imprint": "Импрессум",
     "privacy": "Приватность",
     "contact": "Контакты",
     "tagline": "С силой к правам.",
-    "copyright": "© {year} Fahrschule Abgefahrn"
+    "copyright": "© {year} Fahrschule Mocktest"
   },
   "categories": {
     "signs": "Дорожные знаки",
@@ -269,47 +211,6 @@
     "imageAlt": "Ученица, сдавшая экзамен на права в Дюссельдорфе"
   },
   "testimonials": {
-    "title": "Наши выпускники",
     "alt": "Ученик, сдавший экзамен с Fahrschule Abgefahrn"
-  },
-  "progress": {
-    "overall": "Общий прогресс",
-    "streakDays": "{count, plural, one {# день} few {# дня} many {# дней} other {# дня}}",
-    "stagesDone": "Пройдено этапов: {done} из {total}",
-    "roadmap": "Твой план",
-    "stats": {
-      "attempts": "Экзамены",
-      "passRate": "Сдано",
-      "avgErrors": "Ср. ошибки"
-    },
-    "m": {
-      "first": "Первый тест",
-      "basics": "Основы",
-      "firstPass": "Первый экзамен сдан",
-      "threeInRow": "Сдано 3 раза подряд",
-      "catalogue": "Каталог вопросов освоен",
-      "ready": "Готов к экзамену",
-      "done": "Выполнено",
-      "open": "Начни свой первый тест",
-      "basicsDetail": "Освоено {pct}% вопросов",
-      "passCount": "Сдано раз: {count}",
-      "streakDetail": "{count} из 3 подряд",
-      "catalogueDetail": "{done} из {total} вопросов",
-      "readyDetail": "Твоя большая цель"
-    },
-    "repeatWrong": "Повторить ошибки",
-    "repeatMarked": "Отмеченные вопросы",
-    "questionsCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}",
-    "history": "Твои попытки",
-    "empty": "Попыток пока нет – начни первый пробный экзамен.",
-    "start": "Начать пробный экзамен",
-    "exam": "Пробный экзамен",
-    "practice": "Тренировка",
-    "errorPoints": "{count} штраф. б."
-  },
-  "notFound": {
-    "title": "Страница не найдена",
-    "body": "Эта страница не существует или была перемещена.",
-    "home": "На главную"
   }
 }

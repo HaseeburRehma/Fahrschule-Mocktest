@@ -6,11 +6,7 @@
   "nav": {
     "home": "Start",
     "exit": "Beenden",
-    "language": "Sprache",
-    "main": "Hauptnavigation",
-    "topics": "Theorie",
-    "search": "Suche",
-    "progress": "Fortschritt"
+    "language": "Sprache"
   },
   "home": {
     "tag": "Mit Power zum Lappen",
@@ -52,24 +48,7 @@
       "numbers": "Zahlenfrage",
       "new": "Neue Fragen",
       "random": "Zufällig"
-    },
-    "journey1": "Deine Strecke",
-    "journey2": "zum Führerschein",
-    "nextStep": "Nächster Schritt",
-    "nextFirstTitle": "Erste Probeprüfung",
-    "nextFirstBody": "30 Fragen – genau wie bei TÜV & DEKRA",
-    "nextAgainTitle": "Nächste Probeprüfung",
-    "lastPassed": "Letzter Test bestanden – {points} Fehlerpunkte",
-    "lastFailed": "Letzter Test: {points} Fehlerpunkte – dranbleiben!",
-    "tiles": {
-      "passed": "Bestanden",
-      "mastered": "Gemeistert",
-      "wrong": "Falsch"
-    },
-    "examTitle": "Prüfungssimulation",
-    "examAll": "Alle Themen",
-    "examMeta": "{count} Fragen · max. {points} Fehlerpunkte",
-    "streak": "{count, plural, one {# Tag} other {# Tage}} in Folge geübt"
+    }
   },
   "classes": {
     "A": {
@@ -96,16 +75,14 @@
     "multiHint": "Mehrere Antworten können richtig sein.",
     "previous": "Zurück",
     "next": "Nächste Frage",
-    "check": "Prüfen",
-    "finish": "Abgeben",
-    "exit": "Quiz verlassen",
+    "check": "Antwort prüfen",
+    "finish": "Prüfung abschließen",
+    "exit": "Prüfung verlassen",
     "exitConfirm": "Möchtest du die Prüfung wirklich verlassen? Dein Fortschritt geht verloren.",
     "feedback": {
       "correct": "Richtig!",
       "partial": "Teilweise richtig",
-      "wrong": "Leider falsch",
-      "correctIs": "Richtig ist: {answer}",
-      "toResults": "Zum Ergebnis"
+      "wrong": "Leider falsch"
     },
     "explanation": "Erklärung",
     "loading": "Fragen werden geladen…",
@@ -118,7 +95,7 @@
     "mark": "Markieren",
     "marked": "Markiert",
     "submit": "Abgeben",
-    "navigator": "Übersicht",
+    "navigator": "Fragen",
     "empty": {
       "title": "Noch keine Fragen unter „{filter}“",
       "titleGeneric": "Noch keine Fragen",
@@ -132,30 +109,6 @@
       "details": "Technische Details",
       "reset": "Zurücksetzen & neu starten",
       "home": "Zur Startseite"
-    },
-    "exitTitle": "Wirklich aufhören?",
-    "keepGoing": "Weiter üben",
-    "livesLeft": "{count, plural, one {# Leben} other {# Leben}} übrig",
-    "signAlt": "Verkehrszeichen zur Frage: {question}",
-    "signAltNamed": "Verkehrszeichen: {name}",
-    "sceneAlt": "Verkehrssituation zur Frage: {question}",
-    "captionsLabel": "Deutsch",
-    "intro": {
-      "examTitle": "Probeprüfung",
-      "practiceTitle": "Theorie-Quiz",
-      "examHeading": "Prüfungssimulation",
-      "topicKicker": "Thema {code}",
-      "practiceKicker": "Gezielt üben",
-      "speechExam": "Schaffst du alle {count} Fragen mit höchstens 10 Fehlerpunkten?",
-      "speechPractice": "Schaffst du alle {count} Fragen am Stück?",
-      "stats": {
-        "questions": "Fragen",
-        "maxErrors": "Max. Fehler",
-        "lives": "Leben",
-        "points": "Punkte"
-      },
-      "start": "Quiz starten",
-      "startExam": "Prüfung starten"
     },
     "signs": {
       "50": "Zulässige Höchstgeschwindigkeit 50 km/h",
@@ -174,19 +127,19 @@
       "two-way-traffic": "Gegenverkehr",
       "uneven-road": "Unebene Fahrbahn",
       "y-junction": "Gabelung"
-    }
+    },
+    "signAlt": "Verkehrszeichen zur Frage: {question}",
+    "signAltNamed": "Verkehrszeichen: {name}",
+    "sceneAlt": "Verkehrssituation zur Frage: {question}",
+    "captionsLabel": "Deutsch"
   },
   "topics": {
-    "title": "Theorie",
-    "subtitle": "Alle Themen der Theorieprüfung – tippe ein Thema zum Üben.",
+    "title": "Themen lernen",
+    "subtitle": "Wähle ein Thema. Jedes Thema verlinkt auf die Fragen mit diesem Themen-Code.",
     "questionsHere": "{count} im Pool",
     "practiceTopic": "Thema üben",
     "grundstoff": "Grundstoff",
-    "zusatzstoff": "Zusatzstoff",
-    "doneOf": "{done} von {total} Themen gemeistert",
-    "masteredOf": "{done} von {total} Fragen richtig beantwortet",
-    "rowMeta": "{mastered} / {total} gemeistert",
-    "noQuestions": "Noch keine Fragen"
+    "zusatzstoff": "Zusatzstoff"
   },
   "search": {
     "title": "Fragen durchsuchen",
@@ -222,25 +175,14 @@
     "chooseAnother": "Andere Klasse wählen",
     "share": "Ergebnis teilen",
     "shareCopied": "Link in Zwischenablage kopiert",
-    "backHome": "Zur Startseite",
-    "noResult": "Kein abgeschlossener Test gefunden.",
-    "passedTitle": "Bestanden!",
-    "failedTitle": "Hoppla – nicht bestanden",
-    "mastered": "Quiz gemeistert!",
-    "practice": "Übung",
-    "summary": "{correct} von {total} richtig",
-    "errorPointsShort": "Fehlerpunkte",
-    "points": "Punkte",
-    "accuracy": "Genau",
-    "continue": "Weiter zu deiner Strecke",
-    "shareText": "Ich habe {accuracy} % im Führerschein-Mocktest geschafft!"
+    "backHome": "Zur Startseite"
   },
   "footer": {
     "imprint": "Impressum",
     "privacy": "Datenschutz",
     "contact": "Kontakt",
     "tagline": "Mit Power zum Lappen.",
-    "copyright": "© {year} Fahrschule Abgefahrn"
+    "copyright": "© {year} Fahrschule Mocktest"
   },
   "categories": {
     "signs": "Verkehrszeichen",
@@ -269,47 +211,6 @@
     "imageAlt": "Fahrschülerin mit bestandenem Führerschein in Düsseldorf"
   },
   "testimonials": {
-    "title": "Unsere Absolvent:innen",
     "alt": "Bestandene Fahrschüler:in der Fahrschule Abgefahrn"
-  },
-  "progress": {
-    "overall": "Gesamtfortschritt",
-    "streakDays": "{count, plural, one {# Tag} other {# Tage}}",
-    "stagesDone": "{done} von {total} Etappen abgeschlossen",
-    "roadmap": "Dein Fahrplan",
-    "stats": {
-      "attempts": "Prüfungen",
-      "passRate": "Bestanden",
-      "avgErrors": "Ø Fehlerpunkte"
-    },
-    "m": {
-      "first": "Erster Test",
-      "basics": "Grundwissen",
-      "firstPass": "Erste Prüfung bestanden",
-      "threeInRow": "3× in Folge bestanden",
-      "catalogue": "Fragenkatalog gemeistert",
-      "ready": "Bereit für die Prüfung",
-      "done": "Abgeschlossen",
-      "open": "Starte deinen ersten Test",
-      "basicsDetail": "{pct} % der Fragen gemeistert",
-      "passCount": "{count}× bestanden",
-      "streakDetail": "{count} von 3 in Folge",
-      "catalogueDetail": "{done} von {total} Fragen",
-      "readyDetail": "Dein großes Ziel"
-    },
-    "repeatWrong": "Falsche Fragen wiederholen",
-    "repeatMarked": "Markierte Fragen üben",
-    "questionsCount": "{count, plural, one {# Frage} other {# Fragen}}",
-    "history": "Deine Versuche",
-    "empty": "Noch keine Versuche – starte deine erste Probeprüfung.",
-    "start": "Probeprüfung starten",
-    "exam": "Probeprüfung",
-    "practice": "Übung",
-    "errorPoints": "{count} Fehlerpkt."
-  },
-  "notFound": {
-    "title": "Seite nicht gefunden",
-    "body": "Diese Seite existiert nicht oder wurde verschoben.",
-    "home": "Zur Startseite"
   }
 }
