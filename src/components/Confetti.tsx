@@ -11,9 +11,13 @@ interface Piece {
   color: string;
   delay: number;
   duration: number;
+  /** Total spin over the fall, so pieces tumble at different rates. */
+  spin: number;
+  /** Horizontal drift in vw. */
+  drift: number;
 }
 
-const COLORS = ['#01FE21', '#ffffff', '#01FE21', '#7FFF92'];
+const COLORS = ['#00FF24', '#ffffff', '#FFC83D', '#7FFF92'];
 
 /**
  * Lightweight CSS-only confetti — fires once on mount.
@@ -32,7 +36,9 @@ export function Confetti({ active }: { active: boolean }) {
       scale: 0.6 + Math.random() * 0.9,
       color: COLORS[i % COLORS.length],
       delay: Math.random() * 0.6,
-      duration: 1.6 + Math.random() * 1.4
+      duration: 1.6 + Math.random() * 1.4,
+      spin: (Math.random() < 0.5 ? -1 : 1) * (360 + Math.random() * 720),
+      drift: (Math.random() - 0.5) * 16
     }));
     setPieces(items);
     const t = setTimeout(() => setPieces([]), 4000);
@@ -46,14 +52,20 @@ export function Confetti({ active }: { active: boolean }) {
       {pieces.map((p) => (
         <span
           key={p.id}
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            background: p.color,
-            transform: `rotate(${p.rotation}deg) scale(${p.scale})`,
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`
-          }}
+          style={
+            {
+              left: `${p.x}%`,
+              top: `${p.y}%`,
+              background: p.color,
+              '--rot': `${p.rotation}deg`,
+              '--spin': `${p.spin}deg`,
+              '--scale': p.scale,
+              '--drift': `${p.drift}vw`,
+              transform: 'rotate(var(--rot)) scale(var(--scale))',
+              animationDelay: `${p.delay}s`,
+              animationDuration: `${p.duration}s`
+            } as React.CSSProperties
+          }
           className="absolute w-2 h-3 rounded-sm opacity-90 confetti-piece"
         />
       ))}
@@ -64,12 +76,14 @@ export function Confetti({ active }: { active: boolean }) {
           animation-fill-mode: forwards;
         }
         @keyframes fall {
+          /* Compose with each piece's own rotation / scale instead of
+             overwriting them, so every piece falls differently. */
           0% {
-            transform: translateY(0) rotate(0deg);
+            transform: translate(0, 0) rotate(var(--rot)) scale(var(--scale));
             opacity: 1;
           }
           100% {
-            transform: translateY(110vh) rotate(720deg);
+            transform: translate(var(--drift), 110vh) rotate(calc(var(--rot) + var(--spin))) scale(var(--scale));
             opacity: 0.5;
           }
         }

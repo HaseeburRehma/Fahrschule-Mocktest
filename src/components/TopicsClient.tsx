@@ -2,66 +2,80 @@
 
 import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { CaretRight, Check, Lock } from '@phosphor-icons/react';
 import { Link } from '@/i18n/routing';
-import { motion } from 'framer-motion';
-import { ChevronRight, GraduationCap } from 'lucide-react';
-import { grundstoffTopics, zusatzstoffTopicsB } from '@/data/topics';
+import { grundstoffTopics, zusatzstoffTopicsB, type Topic } from '@/data/topics';
 import { getQuestionsForClass } from '@/data/questions';
-import { pickText, isClassEnabled } from '@/data/types';
-import type { LicenseClass } from '@/data/types';
+import { classOptions, pickText, type LicenseClass } from '@/data/types';
+import { useQuiz } from '@/store/quiz';
+import { useMounted } from '@/hooks/useMounted';
 
 interface Props {
   licenseClass: LicenseClass;
 }
 
-const CLASSES: { id: LicenseClass; key: string }[] = (
-  [
-    { id: 'A',    key: 'A' },
-    { id: 'B',    key: 'B' },
-    { id: 'AB',   key: 'AB' },
-    { id: 'Mofa', key: 'Mofa' }
-  ] as const
-).filter((c) => isClassEnabled(c.id));
+interface TopicStat {
+  total: number;
+  mastered: number;
+}
 
+/** Figma "DE/Theorie": progress header + one row per topic. */
 export function TopicsClient({ licenseClass: initialClass }: Props) {
   const t = useTranslations();
   const locale = useLocale();
+  const mounted = useMounted();
   const [licenseClass, setLicenseClass] = useState<LicenseClass>(initialClass);
+  const masteredMap = useQuiz((s) => s.mastered);
 
-  // Count how many questions in the pool match each top-level topic code.
-  // We match by prefix ("G.06" matches anything whose topicCode starts with "G.06").
   const pool = useMemo(() => getQuestionsForClass(licenseClass), [licenseClass]);
-  const countFor = (code: string) =>
-    pool.filter((q) => (q.topicCode ?? '').startsWith(code)).length;
-
-  // For Mofa / A class we just show the Grundstoff list — class-B-specific
-  // Zusatzstoff topics aren't relevant. Class AB shows both.
   const showZusatzB = licenseClass === 'B' || licenseClass === 'AB';
+  const topics = useMemo(
+    () => (showZusatzB ? [...grundstoffTopics, ...zusatzstoffTopicsB] : grundstoffTopics),
+    [showZusatzB]
+  );
+
+  // One pass over the pool: questions + mastered per top-level topic code.
+  const stats = useMemo(() => {
+    const m = new Map<string, TopicStat>();
+    const mastered = mounted ? masteredMap ?? {} : {};
+    for (const topic of topics) m.set(topic.code, { total: 0, mastered: 0 });
+    for (const q of pool) {
+      const code = q.topicCode ?? '';
+      const topic = topics.find((tp) => code === tp.code || code.startsWith(`${tp.code}.`));
+      if (!topic) continue;
+      const s = m.get(topic.code)!;
+      s.total++;
+      if (mastered[q.id]) s.mastered++;
+    }
+    return m;
+  }, [pool, topics, masteredMap, mounted]);
+
+  const withQuestions = topics.filter((tp) => (stats.get(tp.code)?.total ?? 0) > 0);
+  const doneTopics = withQuestions.filter((tp) => {
+    const s = stats.get(tp.code)!;
+    return s.mastered === s.total;
+  }).length;
+  const totalQs = [...stats.values()].reduce((a, s) => a + s.total, 0);
+  const masteredQs = [...stats.values()].reduce((a, s) => a + s.mastered, 0);
+  const pct = totalQs ? Math.round((masteredQs / totalQs) * 100) : 0;
 
   return (
-    <main className="flex-1 px-4 sm:px-6 py-10 sm:py-14">
-      <header className="max-w-5xl mx-auto mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-4 py-1.5 mb-5">
-          <GraduationCap className="w-4 h-4 text-brand" />
-          <span className="text-brand text-xs font-semibold tracking-[0.2em] uppercase">
-            {t('topics.title')}
-          </span>
-        </div>
-        <h1 className="display text-[clamp(1.5rem,4.5vw,2.75rem)] uppercase leading-tight max-w-3xl">
-          {t('topics.title')}
-        </h1>
-        <p className="text-white/60 mt-3 max-w-2xl">{t('topics.subtitle')}</p>
+    <main className="relative isolate flex-1 overflow-hidden">
+      <div className="fx-hero-glow -z-10 opacity-70" aria-hidden />
+      <div className="mx-auto max-w-3xl px-4 pb-10 pt-6 sm:px-6">
+        <h1 className="text-heading-l text-white">{t('topics.title')}</h1>
+        <p className="mt-0.5 text-body-s text-muted">{t('topics.subtitle')}</p>
 
-        {CLASSES.length > 1 && (
-          <div className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] p-1">
-            {CLASSES.map(({ id, key }) => (
+        {classOptions.length > 1 && (
+          <div className="mt-4 inline-flex gap-1 rounded-full bg-ink-200 p-1">
+            {classOptions.map(({ id, key }) => (
               <button
                 key={id}
                 onClick={() => setLicenseClass(id)}
                 aria-pressed={licenseClass === id}
                 className={[
-                  'focus-brand px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition',
-                  licenseClass === id ? 'bg-brand text-black' : 'text-white/65 hover:text-white'
+                  'focus-brand rounded-full px-3.5 py-1.5 text-label-m transition',
+                  licenseClass === id ? 'bg-brand text-ink-0' : 'text-muted hover:text-white'
                 ].join(' ')}
               >
                 {t(`classes.${key}.name`)}
@@ -69,25 +83,26 @@ export function TopicsClient({ licenseClass: initialClass }: Props) {
             ))}
           </div>
         )}
-      </header>
 
-      <Section
-        title={t('topics.grundstoff')}
-        topics={grundstoffTopics}
-        countFor={countFor}
-        locale={locale}
-        licenseClass={licenseClass}
-      />
+        {/* Progress header card */}
+        <div className="card-hero mt-4 flex items-center gap-4 p-[18px]">
+          <div className="min-w-0 flex-1">
+            <p className="text-title-m text-white">
+              {t('topics.doneOf', { done: doneTopics, total: withQuestions.length })}
+            </p>
+            <p className="text-caption text-muted">{t('topics.masteredOf', { done: masteredQs, total: totalQs })}</p>
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-ink-200">
+              <div className="h-full rounded-full bg-brand shadow-glow transition-[width] duration-700" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+          <p className="text-emphasis text-[32px] leading-none">{pct}%</p>
+        </div>
 
-      {showZusatzB && (
-        <Section
-          title={t('topics.zusatzstoff')}
-          topics={zusatzstoffTopicsB}
-          countFor={countFor}
-          locale={locale}
-          licenseClass={licenseClass}
-        />
-      )}
+        <Section title={t('topics.grundstoff')} topics={grundstoffTopics} stats={stats} locale={locale} licenseClass={licenseClass} />
+        {showZusatzB && (
+          <Section title={t('topics.zusatzstoff')} topics={zusatzstoffTopicsB} stats={stats} locale={locale} licenseClass={licenseClass} />
+        )}
+      </div>
     </main>
   );
 }
@@ -95,59 +110,77 @@ export function TopicsClient({ licenseClass: initialClass }: Props) {
 function Section({
   title,
   topics,
-  countFor,
+  stats,
   locale,
   licenseClass
 }: {
   title: string;
-  topics: typeof grundstoffTopics;
-  countFor: (code: string) => number;
+  topics: Topic[];
+  stats: Map<string, TopicStat>;
   locale: string;
   licenseClass: LicenseClass;
 }) {
   const t = useTranslations();
   return (
-    <section className="max-w-5xl mx-auto mb-12">
-      <h2 className="text-xs uppercase tracking-[0.2em] text-white/45 mb-4">{title}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3">
-        {topics.map((topic, idx) => {
-          const count = countFor(topic.code);
-          // Topics with zero questions are dimmed but still listed (so the
-          // catalogue picture stays accurate).
-          return (
-            <motion.div
-              key={topic.code}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.3, delay: idx * 0.02 }}
+    <section className="mt-6">
+      <h2 className="mb-2.5 text-label-m uppercase text-muted">{title}</h2>
+      <ul className="flex flex-col gap-2">
+        {topics.map((topic) => {
+          const s = stats.get(topic.code) ?? { total: 0, mastered: 0 };
+          const empty = s.total === 0;
+          const done = !empty && s.mastered === s.total;
+          const started = s.mastered > 0;
+          const name = pickText(topic.name, locale);
+          const status = (
+            <span
+              aria-hidden
+              className={[
+                'flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-label-m',
+                done
+                  ? 'bg-brand text-ink-0 shadow-glow'
+                  : started
+                    ? 'border-2 border-brand text-brand'
+                    : 'border border-ink-300 bg-ink-200 text-muted'
+              ].join(' ')}
             >
-              <Link
-                href={`/quiz/${licenseClass}?topic=${encodeURIComponent(topic.code)}`}
-                className={[
-                  'focus-brand group flex flex-col h-full rounded-2xl border border-white/10 bg-ink-100 p-4 transition-all',
-                  count > 0
-                    ? 'hover:border-brand hover:-translate-y-0.5 hover:shadow-glow-soft'
-                    : 'opacity-50 pointer-events-none'
-                ].join(' ')}
-              >
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <span className="rounded-md border border-white/15 bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-white/70">
-                    {topic.code}
-                  </span>
-                  <ChevronRight className="w-4 h-4 text-brand opacity-0 group-hover:opacity-100 transition" />
+              {done ? <Check size={18} weight="bold" /> : empty ? <Lock size={16} /> : topic.code.replace(/^G\./, '')}
+            </span>
+          );
+          const body = (
+            <>
+              {status}
+              <span className="min-w-0 flex-1">
+                <span className="block text-title-m text-white">{name}</span>
+                <span className={`block text-caption ${started ? 'text-brand' : 'text-muted'}`}>
+                  {empty
+                    ? t('topics.noQuestions')
+                    : t('topics.rowMeta', { mastered: s.mastered, total: s.total })}
+                </span>
+              </span>
+            </>
+          );
+          return (
+            <li key={topic.code}>
+              {empty ? (
+                <div className="flex items-center gap-3 rounded-option border border-ink-300 bg-ink-100 p-3.5 opacity-50">
+                  {body}
                 </div>
-                <h3 className="font-bold text-sm sm:text-base leading-snug mb-2">
-                  {pickText(topic.name, locale)}
-                </h3>
-                <p className="mt-auto text-[11px] uppercase tracking-widest text-white/45">
-                  {t('topics.questionsHere', { count })}
-                </p>
-              </Link>
-            </motion.div>
+              ) : (
+                <Link
+                  href={`/quiz/${licenseClass}?topic=${encodeURIComponent(topic.code)}`}
+                  className={[
+                    'focus-brand group flex items-center gap-3 rounded-option border bg-ink-100 p-3.5 transition hover:border-brand/60',
+                    started && !done ? 'border-brand/50' : 'border-ink-300'
+                  ].join(' ')}
+                >
+                  {body}
+                  <CaretRight size={20} className="text-muted transition group-hover:translate-x-0.5 rtl:rotate-180" />
+                </Link>
+              )}
+            </li>
           );
         })}
-      </div>
+      </ul>
     </section>
   );
 }

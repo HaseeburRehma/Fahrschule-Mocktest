@@ -1,10 +1,8 @@
 import { defineRouting } from 'next-intl/routing';
 import { createNavigation } from 'next-intl/navigation';
+import { locales } from './locales';
 
-export const locales = ['de', 'en', 'ar', 'tr', 'ru', 'pl'] as const;
-export type Locale = (typeof locales)[number];
-
-export const rtlLocales: ReadonlyArray<Locale> = ['ar'];
+export { locales, rtlLocales, type Locale } from './locales';
 
 export const routing = defineRouting({
   locales,

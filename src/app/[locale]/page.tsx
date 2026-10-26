@@ -1,10 +1,12 @@
 import { setRequestLocale } from 'next-intl/server';
-import { CinematicHero } from '@/components/CinematicHero';
-import { ClassSelector } from '@/components/ClassSelector';
+import { HomeHero } from '@/components/home/HomeHero';
+import { HomeDashboard } from '@/components/home/HomeDashboard';
 import { QuestionFilter } from '@/components/QuestionFilter';
 import { InfoCard } from '@/components/InfoCard';
 import { SocialProof } from '@/components/SocialProof';
 import { TestimonialSlider } from '@/components/TestimonialSlider';
+import { getQuestionsForClass } from '@/data/questions';
+import { enabledClasses } from '@/data/types';
 
 export default async function HomePage({
   params
@@ -14,10 +16,15 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  // Resolved on the server: only the number crosses to the client, so the
+  // home page bundle doesn't include the question bank.
+  const licenseClass = enabledClasses[0] ?? 'B';
+  const poolSize = getQuestionsForClass(licenseClass).length;
+
   return (
     <main className="flex-1">
-      <CinematicHero />
-      <ClassSelector />
+      <HomeHero examHref={`/quiz/${licenseClass}`} />
+      <HomeDashboard licenseClass={licenseClass} poolSize={poolSize} />
       <QuestionFilter />
       <InfoCard />
       <SocialProof />

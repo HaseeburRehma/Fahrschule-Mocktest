@@ -182,7 +182,8 @@ function drawByTopic(
     } else {
       drawn.push(...pick(dedup, want, rng));
       // remaining go to the leftover pool
-      const remainingForSpill = dedup.filter((q) => !drawn.includes(q));
+      const drawnSet = new Set(drawn);
+      const remainingForSpill = dedup.filter((q) => !drawnSet.has(q));
       leftovers.push(...remainingForSpill);
     }
   }
@@ -190,7 +191,8 @@ function drawByTopic(
   // If we under-drew (sparse topics), top up from the leftover pool.
   if (drawn.length < need) {
     const allPool = [...pool.values()].flat();
-    const filler = allPool.filter((q) => !drawn.includes(q));
+    const drawnSet = new Set(drawn);
+    const filler = allPool.filter((q) => !drawnSet.has(q));
     drawn.push(...pick([...new Set([...leftovers, ...filler])], need - drawn.length, rng));
   }
 
@@ -252,7 +254,8 @@ export function buildExam(
     ];
     // Top up if either side was too small.
     if (chosen.length < EXAM_RULES.totalQuestions) {
-      const filler = eligible.filter((q) => !chosen.includes(q));
+      const chosenSet = new Set(chosen);
+      const filler = eligible.filter((q) => !chosenSet.has(q));
       chosen.push(...pick(filler, EXAM_RULES.totalQuestions - chosen.length, rng));
     }
   } else {
@@ -474,7 +477,8 @@ export function buildFilteredExam(
   // matching item even if there are fewer than 10. For class-scoped
   // filters, top up with eligible questions so the session is long enough.
   if (!ignoreClass && subset.length < 10) {
-    const filler = eligible.filter((q) => !subset.includes(q));
+    const subsetSet = new Set(subset);
+    const filler = eligible.filter((q) => !subsetSet.has(q));
     subset = [...subset, ...pick(filler, Math.max(0, 10 - subset.length), rng)];
   }
 

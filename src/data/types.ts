@@ -26,6 +26,13 @@ export function isClassEnabled(id: LicenseClass): boolean {
   return enabledClasses.includes(id);
 }
 
+/** The class chooser options shown in the UI (home, topics, search). */
+export const classOptions: readonly { id: LicenseClass; key: string }[] = (
+  ['A', 'B', 'AB', 'Mofa'] as const
+)
+  .filter((id) => isClassEnabled(id))
+  .map((id) => ({ id, key: id }));
+
 export type QuestionLocale = 'de' | 'en' | 'ar' | 'tr' | 'ru' | 'pl';
 
 /**

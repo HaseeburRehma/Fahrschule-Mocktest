@@ -1,12 +1,16 @@
 {
   "meta": {
-    "title": "Alman Ehliyet Teori Deneme Sınavı – A, B, AB & Mofa Sınıfları | Abgefahrn",
-    "description": "Alman ehliyet teori sınavı için ücretsiz çevrimiçi deneme. 6 dilde, A / B / AB / Mofa sınıfları, TÜV ve DEKRA gibi resimli ve videolu sorular."
+    "title": "Alman Ehliyet Teori Deneme Sınavı – B Sınıfı | Fahrschule Abgefahrn",
+    "description": "B sınıfı Alman ehliyet teori sınavı için ücretsiz online deneme sınavı. 6 dil, TÜV ve DEKRA’daki gibi resimli ve videolu sorular."
   },
   "nav": {
     "home": "Ana sayfa",
     "exit": "Çıkış",
-    "language": "Dil"
+    "language": "Dil",
+    "main": "Ana menü",
+    "topics": "Teori",
+    "search": "Ara",
+    "progress": "İlerleme"
   },
   "home": {
     "tag": "Güçle ehliyete",
@@ -15,7 +19,7 @@
     "cinemaHeadline": "Ehliyet Teorisi — Çevrimiçi Deneme",
     "cinemaLine1": "Ehliyet Teorisi",
     "cinemaLine2": "Deneme Sınavı",
-    "cinemaSubheadline": "Resmi Alman ehliyet teori sınavını 6 dilde ücretsiz çalış — A, B, A+B ve Mofa sınıfları. 250'den fazla özgün soru, TÜV ve DEKRA'daki gibi resimli ve videolu soruları içerir.",
+    "cinemaSubheadline": "Resmi Alman B sınıfı teori sınavını 6 dilde ücretsiz çalış — TÜV ve DEKRA’daki gibi resimli ve videolu 240’tan fazla özgün soru.",
     "mascotSpeech": "Hazır mısın? O zaman başlayalım.",
     "scrollHint": "Daha fazlasını keşfet",
     "ctaPrimary": "Hemen başla",
@@ -36,19 +40,36 @@
     "filter": {
       "heading": "Konuya göre çalış",
       "subheading": "Belirli bir soru tipini çalışmak için bir filtre seç.",
-      "topics":    "Konuları öğren",
-      "search":    "Ara",
-      "signs":     "Trafik işaretleri",
-      "tough":     "En zor sorular",
-      "wrong":     "Yanlış sorular",
-      "marked":    "İşaretli sorular",
-      "picture":   "Resimli soru",
-      "video":     "Videolu soru",
+      "topics": "Konuları öğren",
+      "search": "Ara",
+      "signs": "Trafik işaretleri",
+      "tough": "En zor sorular",
+      "wrong": "Yanlış sorular",
+      "marked": "İşaretli sorular",
+      "picture": "Resimli soru",
+      "video": "Videolu soru",
       "selection": "Seçim sorusu",
-      "numbers":   "Sayı sorusu",
-      "new":       "Yeni sorular",
-      "random":    "Rastgele"
-    }
+      "numbers": "Sayı sorusu",
+      "new": "Yeni sorular",
+      "random": "Rastgele"
+    },
+    "journey1": "Ehliyete giden",
+    "journey2": "yolun",
+    "nextStep": "Sonraki adım",
+    "nextFirstTitle": "İlk deneme sınavı",
+    "nextFirstBody": "30 soru – tıpkı TÜV ve DEKRA’daki gibi",
+    "nextAgainTitle": "Sonraki deneme sınavı",
+    "lastPassed": "Son sınav geçildi – {points} hata puanı",
+    "lastFailed": "Son sınav: {points} hata puanı – devam et!",
+    "tiles": {
+      "passed": "Geçildi",
+      "mastered": "Öğrenildi",
+      "wrong": "Yanlış"
+    },
+    "examTitle": "Sınav simülasyonu",
+    "examAll": "Tüm konular",
+    "examMeta": "{count} soru · en fazla {points} hata puanı",
+    "streak": "{count} gün üst üste çalışıldı"
   },
   "classes": {
     "A": {
@@ -75,14 +96,16 @@
     "multiHint": "Birden fazla cevap doğru olabilir.",
     "previous": "Önceki",
     "next": "Sonraki soru",
-    "check": "Cevabı kontrol et",
-    "finish": "Sınavı bitir",
-    "exit": "Sınavdan çık",
+    "check": "Kontrol et",
+    "finish": "Teslim et",
+    "exit": "Quizden çık",
     "exitConfirm": "Sınavdan çıkmak istediğine emin misin? İlerlemen silinecek.",
     "feedback": {
       "correct": "Doğru!",
       "partial": "Kısmen doğru",
-      "wrong": "Yanlış"
+      "wrong": "Maalesef yanlış",
+      "correctIs": "Doğru cevap: {answer}",
+      "toResults": "Sonuca git"
     },
     "explanation": "Açıklama",
     "loading": "Sorular yükleniyor…",
@@ -95,7 +118,7 @@
     "mark": "İşaretle",
     "marked": "İşaretli",
     "submit": "Teslim et",
-    "navigator": "Sorular",
+    "navigator": "Genel bakış",
     "empty": {
       "title": "„{filter}“ altında soru yok",
       "titleGeneric": "Henüz soru yok",
@@ -109,15 +132,61 @@
       "details": "Teknik detaylar",
       "reset": "Sıfırla ve yeniden başla",
       "home": "Ana sayfa"
+    },
+    "exitTitle": "Gerçekten bırakmak mı istiyorsun?",
+    "keepGoing": "Çalışmaya devam et",
+    "livesLeft": "{count} can kaldı",
+    "signAlt": "Soru için trafik işareti: {question}",
+    "signAltNamed": "Trafik işareti: {name}",
+    "sceneAlt": "Soru için trafik durumu: {question}",
+    "captionsLabel": "Türkçe",
+    "intro": {
+      "examTitle": "Deneme sınavı",
+      "practiceTitle": "Teori quizi",
+      "examHeading": "Sınav simülasyonu",
+      "topicKicker": "Konu {code}",
+      "practiceKicker": "Hedefli çalışma",
+      "speechExam": "{count} sorunun hepsini en fazla 10 hata puanıyla çözebilir misin?",
+      "speechPractice": "{count} sorunun hepsini art arda bilebilir misin?",
+      "stats": {
+        "questions": "Soru",
+        "maxErrors": "Maks. hata",
+        "lives": "Can",
+        "points": "Puan"
+      },
+      "start": "Quizi başlat",
+      "startExam": "Sınavı başlat"
+    },
+    "signs": {
+      "50": "Azami hız 50 km/s",
+      "cattle": "Hayvan geçidi",
+      "crossroads": "Kavşak",
+      "dip": "Çukur yol",
+      "double-bend": "Çift viraj",
+      "hairpin-curve": "Keskin viraj",
+      "narrow-bridge": "Dar köprü",
+      "narrow-one-side": "Tek taraftan daralan yol",
+      "narrow-road": "Daralan yol",
+      "right-curve": "Sağa viraj",
+      "road-works": "Yol çalışması",
+      "side-road-right": "Sağdan yan yol",
+      "t-junction": "T kavşak",
+      "two-way-traffic": "İki yönlü trafik",
+      "uneven-road": "Bozuk yol",
+      "y-junction": "Yol ayrımı"
     }
   },
   "topics": {
-    "title": "Konuya göre öğren",
-    "subtitle": "Bir konu seç. Her konu, o konunun kataloğuna bağlı sorulara gider.",
+    "title": "Teori",
+    "subtitle": "Teori sınavının tüm konuları – çalışmak için bir konuya dokun.",
     "questionsHere": "Havuzda {count}",
     "practiceTopic": "Konuyu çalış",
     "grundstoff": "Temel",
-    "zusatzstoff": "Sınıfa özel"
+    "zusatzstoff": "Sınıfa özel",
+    "doneOf": "{total} konudan {done} tanesi öğrenildi",
+    "masteredOf": "{total} sorudan {done} tanesi doğru cevaplandı",
+    "rowMeta": "{mastered} / {total} öğrenildi",
+    "noQuestions": "Henüz soru yok"
   },
   "search": {
     "title": "Soru ara",
@@ -153,14 +222,25 @@
     "chooseAnother": "Başka sınıf seç",
     "share": "Sonucu paylaş",
     "shareCopied": "Bağlantı kopyalandı",
-    "backHome": "Ana sayfaya dön"
+    "backHome": "Ana sayfaya dön",
+    "noResult": "Tamamlanmış sınav bulunamadı.",
+    "passedTitle": "Geçtin!",
+    "failedTitle": "Hoppala – geçemedin",
+    "mastered": "Quiz tamamlandı!",
+    "practice": "Alıştırma",
+    "summary": "{total} sorudan {correct} doğru",
+    "errorPointsShort": "Hata puanı",
+    "points": "Puan",
+    "accuracy": "Doğruluk",
+    "continue": "Yoluna devam et",
+    "shareText": "Ehliyet deneme sınavında %{accuracy} başarı elde ettim!"
   },
   "footer": {
     "imprint": "Künye",
     "privacy": "Gizlilik",
     "contact": "İletişim",
     "tagline": "Güçle ehliyete.",
-    "copyright": "© {year} Fahrschule Mocktest"
+    "copyright": "© {year} Fahrschule Abgefahrn"
   },
   "categories": {
     "signs": "Trafik işaretleri",
@@ -180,5 +260,56 @@
     "seconds": "sn",
     "or": "veya",
     "loading": "Yükleniyor…"
+  },
+  "socialProof": {
+    "rating": "5,0 puan",
+    "title": "Geçenler:",
+    "city": "Düsseldorf",
+    "body": "Binlerce öğrenci eğitim formatımızla ehliyetini aldı – resmi teori sınavına şimdi hazırlan.",
+    "imageAlt": "Düsseldorf’ta ehliyet sınavını geçen öğrenci"
+  },
+  "testimonials": {
+    "title": "Mezunlarımız",
+    "alt": "Fahrschule Abgefahrn ile sınavı geçen öğrenci"
+  },
+  "progress": {
+    "overall": "Genel ilerleme",
+    "streakDays": "{count} gün",
+    "stagesDone": "{total} aşamadan {done} tanesi tamamlandı",
+    "roadmap": "Yol haritan",
+    "stats": {
+      "attempts": "Sınavlar",
+      "passRate": "Geçme",
+      "avgErrors": "Ort. hata"
+    },
+    "m": {
+      "first": "İlk test",
+      "basics": "Temel bilgiler",
+      "firstPass": "İlk sınav geçildi",
+      "threeInRow": "3 kez art arda geçildi",
+      "catalogue": "Soru bankası öğrenildi",
+      "ready": "Sınava hazır",
+      "done": "Tamamlandı",
+      "open": "İlk testine başla",
+      "basicsDetail": "Soruların %{pct} kadarı öğrenildi",
+      "passCount": "{count} kez geçildi",
+      "streakDetail": "3’te {count} art arda",
+      "catalogueDetail": "{total} sorudan {done}",
+      "readyDetail": "Büyük hedefin"
+    },
+    "repeatWrong": "Yanlış soruları tekrarla",
+    "repeatMarked": "İşaretli soruları çalış",
+    "questionsCount": "{count} soru",
+    "history": "Denemelerin",
+    "empty": "Henüz deneme yok – ilk deneme sınavına başla.",
+    "start": "Deneme sınavını başlat",
+    "exam": "Deneme sınavı",
+    "practice": "Alıştırma",
+    "errorPoints": "{count} hata puanı"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "body": "Bu sayfa mevcut değil veya taşındı.",
+    "home": "Ana sayfaya dön"
   }
 }

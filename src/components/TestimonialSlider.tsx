@@ -3,15 +3,16 @@
 /**
  * Auto-scrolling 3-row testimonial marquee. Each row loops infinitely
  * (rows 1 + 3 left, row 2 right). Hover anywhere in the strip pauses
- * all three rows. Edges fade so cards bleed off-canvas inside the
- * page-aligned container.
+ * all three rows. Edges fade so cards bleed off-canvas.
  *
- * Container: same `max-w-6xl mx-auto px-6` rhythm the other home
- * sections use, so the slider lines up with the hero, class grid,
- * info card, and social-proof block above it.
+ * Photos are self-hosted in /public/images/testimonials and rendered with
+ * next/image — nothing is pulled from the WordPress site at runtime.
  */
 
-const BASE = 'https://fahrschule-abgefahrn.de/wp-content/uploads/2026/04/';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+
+const BASE = '/images/testimonials/';
 
 const photos = [
   'abgefahrn-dusseldorf.webp',
@@ -64,37 +65,52 @@ const row3Items = [
 
 function MarqueeRow({
   items,
-  variant
+  variant,
+  alt
 }: {
   items: string[];
   variant: 'l1' | 'r' | 'l2';
+  alt: string;
 }) {
   const doubled = [...items, ...items];
   return (
     <div className={`ab-row ab-row--${variant}`}>
-      {doubled.map((src, i) => (
-        <div key={`${variant}-${i}`} className="ab-card">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`${BASE}${src}`} alt="Bestandene Fahrschüler" loading="lazy" />
-        </div>
-      ))}
+      {doubled.map((src, i) => {
+        // The second copy only exists for the seamless loop — hide it from AT.
+        const clone = i >= items.length;
+        return (
+          <div key={`${variant}-${i}`} className="ab-card" aria-hidden={clone || undefined}>
+            <Image
+              src={`${BASE}${src}`}
+              alt={clone ? '' : alt}
+              width={220}
+              height={260}
+              sizes="(max-width: 640px) 150px, 220px"
+              loading="lazy"
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 export function TestimonialSlider() {
+  const t = useTranslations('testimonials');
   return (
     <>
-      {/* Page-aligned wrapper — matches the rest of the home sections */}
-      <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20">
+      <section aria-labelledby="testimonials-heading" className="mx-auto w-full max-w-6xl px-4 pt-8 sm:px-6">
+        <h2 id="testimonials-heading" className="mb-3 text-heading-m text-white">
+          {t('title')}
+        </h2>
         {/* dir="ltr" prevents the marquee from breaking on RTL locales (Arabic):
             without it, `width: max-content` rows anchor to the right edge of
             the wrap and the translateX(-50%) cycle ends up off-screen. */}
-        <div dir="ltr" className="ab-outer rounded-3xl border border-white/10">
+        <div dir="ltr" className="ab-outer rounded-card border border-ink-300">
           <div className="ab-wrap">
-            <MarqueeRow items={row1Items} variant="l1" />
-            <MarqueeRow items={row2Items} variant="r" />
-            <MarqueeRow items={row3Items} variant="l2" />
+            <MarqueeRow items={row1Items} variant="l1" alt={t('alt')} />
+            <MarqueeRow items={row2Items} variant="r" alt={t('alt')} />
+            <MarqueeRow items={row3Items} variant="l2" alt={t('alt')} />
           </div>
         </div>
       </section>
@@ -106,14 +122,14 @@ export function TestimonialSlider() {
           position: relative;
           width: 100%;
           overflow: hidden;
-          background: #0a0a0a;
+          background: #121412;
           /* Belt-and-suspenders alongside dir="ltr" — guarantees the
              marquee runs left-to-right even inside an RTL locale tree. */
           direction: ltr;
         }
         .ab-wrap {
           overflow: hidden;
-          background: #0a0a0a;
+          background: #121412;
           padding: 24px 0;
           display: flex;
           flex-direction: column;
@@ -144,11 +160,11 @@ export function TestimonialSlider() {
           height: 180px;
           border-radius: 14px;
           overflow: hidden;
-          border: 2px solid rgba(100, 230, 60, 0.18);
+          border: 1.5px solid #2a2d2a;
           box-shadow:
             0 4px 32px rgba(0, 0, 0, 0.45),
             0 0 0 1px rgba(255, 255, 255, 0.04);
-          background: #111;
+          background: #1c1e1c;
           transition:
             transform 0.3s ease,
             box-shadow 0.3s ease,
@@ -174,7 +190,7 @@ export function TestimonialSlider() {
             0 0 20px rgba(142, 255, 161, 0.35),
             0 0 60px rgba(0, 255, 36, 0.1),
             0 12px 48px rgba(0, 255, 36, 0.1);
-          border: 1px solid rgba(80, 255, 120, 0.6);
+          border: 1px solid rgba(0, 255, 36, 0.6);
           z-index: 10;
         }
         .ab-card img {
@@ -216,11 +232,11 @@ export function TestimonialSlider() {
         }
         .ab-outer::before {
           left: 0;
-          background: linear-gradient(to right, #0a0a0a, transparent);
+          background: linear-gradient(to right, #121412, transparent);
         }
         .ab-outer::after {
           right: 0;
-          background: linear-gradient(to left, #0a0a0a, transparent);
+          background: linear-gradient(to left, #121412, transparent);
         }
         @media (prefers-reduced-motion: reduce) {
           .ab-row--l1,

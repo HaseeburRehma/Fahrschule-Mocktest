@@ -1,81 +1,75 @@
-import Image from 'next/image';
+'use client';
+
 import { useTranslations } from 'next-intl';
-import { Instagram, Facebook, Youtube } from 'lucide-react';
+import { FacebookLogo, InstagramLogo, TiktokLogo, YoutubeLogo } from '@phosphor-icons/react';
+import { usePathname } from '@/i18n/routing';
+import { SCHOOL_LINKS } from '@/lib/site';
+import { Logo } from './ui/Logo';
+import { isImmersiveRoute } from './nav';
+
+const socials = [
+  { Icon: InstagramLogo, label: 'Instagram', href: SCHOOL_LINKS.instagram },
+  { Icon: FacebookLogo, label: 'Facebook', href: SCHOOL_LINKS.facebook },
+  { Icon: TiktokLogo, label: 'TikTok', href: SCHOOL_LINKS.tiktok },
+  { Icon: YoutubeLogo, label: 'YouTube', href: SCHOOL_LINKS.youtube }
+];
 
 export function Footer() {
   const t = useTranslations();
+  const pathname = usePathname();
+  if (isImmersiveRoute(pathname)) return null;
   const year = new Date().getFullYear();
 
+  // Imprint / privacy are legally required in Germany (§5 DDG, DSGVO) —
+  // they live on the driving school's main site.
+  const legal = [
+    { label: t('footer.imprint'), href: SCHOOL_LINKS.imprint },
+    { label: t('footer.privacy'), href: SCHOOL_LINKS.privacy },
+    { label: t('footer.contact'), href: SCHOOL_LINKS.contact }
+  ];
+
   return (
-    <footer className="mt-16 sm:mt-20 border-t border-white/10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12 grid gap-6 sm:gap-8 md:grid-cols-3 text-center md:text-left">
-        <div className="flex flex-col items-center md:items-start">
-          {/* Same Fahrschule Abgefahrn logos used in the header —
-              mark on mobile, full wordmark on sm+. */}
-          <div className="inline-flex items-center">
-            <Image
-              src="https://fahrschule-abgefahrn.de/wp-content/uploads/2024/05/Logo-Mark-Driving-School.svg"
-              alt="Fahrschule Abgefahrn"
-              width={36}
-              height={36}
-              unoptimized
-              className="h-9 w-9 sm:hidden"
-            />
-            <Image
-              src="https://fahrschule-abgefahrn.de/wp-content/uploads/2022/02/logo.png"
-              alt="Fahrschule Abgefahrn"
-              width={180}
-              height={40}
-              unoptimized
-              className="hidden sm:block h-9 w-auto"
-            />
-          </div>
-          <p className="text-sm text-white/55 mt-3 max-w-xs leading-relaxed">
-            {t('footer.tagline')}
-          </p>
+    <footer className="mt-12 border-t border-ink-300 pb-[calc(88px+env(safe-area-inset-bottom))] md:pb-0">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:px-6 md:grid-cols-3 md:items-start">
+        <div className="flex flex-col items-center gap-3 md:items-start">
+          <Logo className="h-8 w-auto" />
+          <p className="max-w-xs text-center text-body-s text-muted md:text-start">{t('footer.tagline')}</p>
         </div>
 
-        <ul className="flex flex-wrap items-start gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-3 text-sm justify-center">
-          <li>
-            <a href="#" className="text-white/70 hover:text-brand transition-colors">
-              {t('footer.imprint')}
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-white/70 hover:text-brand transition-colors">
-              {t('footer.privacy')}
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-white/70 hover:text-brand transition-colors">
-              {t('footer.contact')}
-            </a>
-          </li>
+        <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {legal.map(({ label, href }) => (
+            <li key={href}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-brand rounded text-body-s text-muted transition-colors hover:text-brand"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        <ul className="flex items-start gap-3 justify-center md:justify-end">
-          {[
-            { Icon: Instagram, label: 'Instagram', href: '#' },
-            { Icon: Facebook, label: 'Facebook', href: '#' },
-            { Icon: Youtube, label: 'YouTube', href: '#' }
-          ].map(({ Icon, label, href }) => (
+        <ul className="flex justify-center gap-2 md:justify-end">
+          {socials.map(({ Icon, label, href }) => (
             <li key={label}>
               <a
                 href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={label}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-brand hover:border-brand/60 transition-colors"
+                className="icon-btn focus-brand text-muted hover:text-brand"
               >
-                <Icon className="w-4 h-4" />
+                <Icon size={20} />
               </a>
             </li>
           ))}
         </ul>
       </div>
-      <div className="border-t border-white/5 py-4">
-        <p className="max-w-6xl mx-auto px-4 sm:px-6 text-[11px] sm:text-xs text-white/40 text-center md:text-left">
-          {t('footer.copyright', { year })}
-        </p>
-      </div>
+      <p className="border-t border-ink-300/60 px-4 py-4 text-center text-caption text-subtle">
+        {t('footer.copyright', { year })}
+      </p>
     </footer>
   );
 }

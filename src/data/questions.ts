@@ -2113,13 +2113,31 @@ export const questions: Question[] = [
  * Pick the questions that should appear for a given licence class.
  * Class AB is the union of A and B (so the combined exam is broader and longer).
  */
+const poolCache = new Map<LicenseClass, Question[]>();
+
 export function getQuestionsForClass(licenseClass: LicenseClass): Question[] {
-  if (licenseClass === 'AB') {
-    return questions.filter(
-      (q) => q.classes.includes('AB') || q.classes.includes('A') || q.classes.includes('B')
-    );
+  const cached = poolCache.get(licenseClass);
+  if (cached) return cached;
+  const pool =
+    licenseClass === 'AB'
+      ? questions.filter(
+          (q) => q.classes.includes('AB') || q.classes.includes('A') || q.classes.includes('B')
+        )
+      : questions.filter((q) => q.classes.includes(licenseClass));
+  poolCache.set(licenseClass, pool);
+  return pool;
+}
+
+const byIdCache = new Map<LicenseClass, Map<string, Question>>();
+
+/** O(1) id → question lookup for a class pool. */
+export function getQuestionMap(licenseClass: LicenseClass): Map<string, Question> {
+  let map = byIdCache.get(licenseClass);
+  if (!map) {
+    map = new Map(getQuestionsForClass(licenseClass).map((q) => [q.id, q]));
+    byIdCache.set(licenseClass, map);
   }
-  return questions.filter((q) => q.classes.includes(licenseClass));
+  return map;
 }
 
 export function maxScoreFor(licenseClass: LicenseClass): number {

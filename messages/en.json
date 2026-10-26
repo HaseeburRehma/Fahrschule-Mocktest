@@ -1,12 +1,16 @@
 {
   "meta": {
-    "title": "German Driving Theory Mock Test – Class A, B, AB & Mofa | Abgefahrn",
-    "description": "Free online mock test for the German driving licence theory exam (Führerschein-Theorieprüfung). 6 languages, class A / B / AB / Mofa, picture and video questions just like TÜV and DEKRA."
+    "title": "German Driving Theory Mock Test – Class B | Fahrschule Abgefahrn",
+    "description": "Free online mock test for the German class B driving theory exam. 6 languages, picture and video questions just like TÜV and DEKRA."
   },
   "nav": {
     "home": "Home",
     "exit": "Exit",
-    "language": "Language"
+    "language": "Language",
+    "main": "Main navigation",
+    "topics": "Theory",
+    "search": "Search",
+    "progress": "Progress"
   },
   "home": {
     "tag": "With power to your licence",
@@ -15,7 +19,7 @@
     "cinemaHeadline": "German Driving Theory — Mock Test Online",
     "cinemaLine1": "Driving Theory",
     "cinemaLine2": "Mock Test Online",
-    "cinemaSubheadline": "Practise the official German Führerschein theory exam for free in 6 languages — class A, B, A+B and Mofa. Over 250 original questions with picture and video items, just like the TÜV and DEKRA exam.",
+    "cinemaSubheadline": "Practise the official German class B theory exam for free in 6 languages — over 240 original questions with picture and video items, just like TÜV and DEKRA.",
     "mascotSpeech": "Ready? Let's get you behind the wheel.",
     "scrollHint": "Explore more",
     "ctaPrimary": "Start now",
@@ -36,19 +40,36 @@
     "filter": {
       "heading": "Practice by topic",
       "subheading": "Pick a filter to drill a specific kind of question.",
-      "topics":    "Learn topics",
-      "search":    "Search",
-      "signs":     "Traffic signs",
-      "tough":     "Top tough questions",
-      "wrong":     "Wrong questions",
-      "marked":    "Marked questions",
-      "picture":   "Picture question",
-      "video":     "Video question",
+      "topics": "Learn topics",
+      "search": "Search",
+      "signs": "Traffic signs",
+      "tough": "Top tough questions",
+      "wrong": "Wrong questions",
+      "marked": "Marked questions",
+      "picture": "Picture question",
+      "video": "Video question",
       "selection": "Selection question",
-      "numbers":   "Numbers question",
-      "new":       "New questions",
-      "random":    "Random"
-    }
+      "numbers": "Numbers question",
+      "new": "New questions",
+      "random": "Random"
+    },
+    "journey1": "Your road",
+    "journey2": "to your licence",
+    "nextStep": "Next step",
+    "nextFirstTitle": "First mock exam",
+    "nextFirstBody": "30 questions – just like TÜV & DEKRA",
+    "nextAgainTitle": "Next mock exam",
+    "lastPassed": "Last test passed – {points} error points",
+    "lastFailed": "Last test: {points} error points – keep going!",
+    "tiles": {
+      "passed": "Passed",
+      "mastered": "Mastered",
+      "wrong": "Wrong"
+    },
+    "examTitle": "Exam simulation",
+    "examAll": "All topics",
+    "examMeta": "{count} questions · max. {points} error points",
+    "streak": "Practised {count, plural, one {# day} other {# days}} in a row"
   },
   "classes": {
     "A": {
@@ -75,14 +96,16 @@
     "multiHint": "More than one answer can be correct.",
     "previous": "Back",
     "next": "Next question",
-    "check": "Check answer",
-    "finish": "Finish exam",
-    "exit": "Exit exam",
+    "check": "Check",
+    "finish": "Submit",
+    "exit": "Leave quiz",
     "exitConfirm": "Do you really want to exit the exam? Your progress will be lost.",
     "feedback": {
       "correct": "Correct!",
       "partial": "Partially correct",
-      "wrong": "Incorrect"
+      "wrong": "Not quite",
+      "correctIs": "Correct answer: {answer}",
+      "toResults": "See result"
     },
     "explanation": "Explanation",
     "loading": "Loading questions…",
@@ -95,7 +118,7 @@
     "mark": "Mark",
     "marked": "Marked",
     "submit": "Submit",
-    "navigator": "Questions",
+    "navigator": "Overview",
     "empty": {
       "title": "No questions in \"{filter}\" yet",
       "titleGeneric": "No questions yet",
@@ -109,15 +132,61 @@
       "details": "Technical details",
       "reset": "Reset & start fresh",
       "home": "Back to home"
+    },
+    "exitTitle": "Really stop?",
+    "keepGoing": "Keep practising",
+    "livesLeft": "{count, plural, one {# life} other {# lives}} left",
+    "signAlt": "Traffic sign for the question: {question}",
+    "signAltNamed": "Traffic sign: {name}",
+    "sceneAlt": "Traffic scene for the question: {question}",
+    "captionsLabel": "English",
+    "intro": {
+      "examTitle": "Mock exam",
+      "practiceTitle": "Theory quiz",
+      "examHeading": "Exam simulation",
+      "topicKicker": "Topic {code}",
+      "practiceKicker": "Targeted practice",
+      "speechExam": "Can you do all {count} questions with at most 10 error points?",
+      "speechPractice": "Can you get all {count} questions in a row?",
+      "stats": {
+        "questions": "Questions",
+        "maxErrors": "Max. errors",
+        "lives": "Lives",
+        "points": "Points"
+      },
+      "start": "Start quiz",
+      "startExam": "Start exam"
+    },
+    "signs": {
+      "50": "Speed limit 50 km/h",
+      "cattle": "Cattle crossing",
+      "crossroads": "Crossroads or junction",
+      "dip": "Dip in the road",
+      "double-bend": "Double bend",
+      "hairpin-curve": "Sharp bend",
+      "narrow-bridge": "Narrow bridge",
+      "narrow-one-side": "Road narrows on one side",
+      "narrow-road": "Road narrows",
+      "right-curve": "Bend to the right",
+      "road-works": "Road works",
+      "side-road-right": "Side road from the right",
+      "t-junction": "T-junction",
+      "two-way-traffic": "Two-way traffic",
+      "uneven-road": "Uneven road",
+      "y-junction": "Fork in the road"
     }
   },
   "topics": {
-    "title": "Learn by topic",
-    "subtitle": "Pick a topic to drill down. Each topic links to the questions tagged with that catalogue code.",
+    "title": "Theory",
+    "subtitle": "Every topic of the theory exam – tap one to practise.",
     "questionsHere": "{count} in pool",
     "practiceTopic": "Practice topic",
     "grundstoff": "Basic (Grundstoff)",
-    "zusatzstoff": "Class-specific (Zusatzstoff)"
+    "zusatzstoff": "Class-specific (Zusatzstoff)",
+    "doneOf": "{done} of {total} topics mastered",
+    "masteredOf": "{done} of {total} questions answered correctly",
+    "rowMeta": "{mastered} / {total} mastered",
+    "noQuestions": "No questions yet"
   },
   "search": {
     "title": "Search questions",
@@ -153,14 +222,25 @@
     "chooseAnother": "Choose another class",
     "share": "Share result",
     "shareCopied": "Link copied to clipboard",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "noResult": "No finished test found.",
+    "passedTitle": "Passed!",
+    "failedTitle": "Oops – not passed",
+    "mastered": "Quiz mastered!",
+    "practice": "Practice",
+    "summary": "{correct} of {total} correct",
+    "errorPointsShort": "Error points",
+    "points": "Points",
+    "accuracy": "Accuracy",
+    "continue": "Continue your journey",
+    "shareText": "I scored {accuracy}% in the driving licence mock test!"
   },
   "footer": {
     "imprint": "Imprint",
     "privacy": "Privacy",
     "contact": "Contact",
     "tagline": "With power to your licence.",
-    "copyright": "© {year} Fahrschule Mocktest"
+    "copyright": "© {year} Fahrschule Abgefahrn"
   },
   "categories": {
     "signs": "Traffic signs",
@@ -180,5 +260,56 @@
     "seconds": "sec",
     "or": "or",
     "loading": "Loading…"
+  },
+  "socialProof": {
+    "rating": "5.0 rating",
+    "title": "Passed in",
+    "city": "Düsseldorf",
+    "body": "Thousands of learners got their licence with our training format – start preparing for the official theory exam now.",
+    "imageAlt": "Learner driver who passed the licence exam in Düsseldorf"
+  },
+  "testimonials": {
+    "title": "Our graduates",
+    "alt": "Learner who passed with Fahrschule Abgefahrn"
+  },
+  "progress": {
+    "overall": "Overall progress",
+    "streakDays": "{count, plural, one {# day} other {# days}}",
+    "stagesDone": "{done} of {total} stages completed",
+    "roadmap": "Your roadmap",
+    "stats": {
+      "attempts": "Exams",
+      "passRate": "Passed",
+      "avgErrors": "Avg. errors"
+    },
+    "m": {
+      "first": "First test",
+      "basics": "The basics",
+      "firstPass": "First exam passed",
+      "threeInRow": "Passed 3× in a row",
+      "catalogue": "Question bank mastered",
+      "ready": "Ready for the exam",
+      "done": "Completed",
+      "open": "Start your first test",
+      "basicsDetail": "{pct}% of questions mastered",
+      "passCount": "Passed {count}×",
+      "streakDetail": "{count} of 3 in a row",
+      "catalogueDetail": "{done} of {total} questions",
+      "readyDetail": "Your big goal"
+    },
+    "repeatWrong": "Repeat wrong answers",
+    "repeatMarked": "Practise marked questions",
+    "questionsCount": "{count, plural, one {# question} other {# questions}}",
+    "history": "Your attempts",
+    "empty": "No attempts yet – start your first mock exam.",
+    "start": "Start mock exam",
+    "exam": "Mock exam",
+    "practice": "Practice",
+    "errorPoints": "{count} error pts"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page does not exist or has been moved.",
+    "home": "Back to home"
   }
 }

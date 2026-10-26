@@ -53,9 +53,11 @@ export function evaluate(
   let correctCount = 0;
   let wrongCount = 0;
   let skippedCount = 0;
+  let total = 0;
+  const byId = new Map(pool.map((q) => [q.id, q]));
 
   for (const id of snapshot.order) {
-    const q = pool.find((p) => p.id === id);
+    const q = byId.get(id);
     if (!q) continue;
     const ans = snapshot.answers[id];
     const selectedIds = ans?.selectedIds ?? [];
@@ -73,7 +75,7 @@ export function evaluate(
       const selectedSet = new Set(selectedIds);
       const exact =
         correctSet.size === selectedSet.size &&
-        [...correctSet].every((id) => selectedSet.has(id));
+        [...correctSet].every((optionId) => selectedSet.has(optionId));
       if (exact) {
         verdict = 'correct';
         questionEarned = q.points;
@@ -92,6 +94,7 @@ export function evaluate(
     }
 
     earned += questionEarned;
+    total += q.points;
     perQuestion.push({ question: q, selectedIds, verdict, earned: questionEarned });
 
     const cat = q.category;
@@ -99,10 +102,6 @@ export function evaluate(
     byCategory[cat].total += 1;
     if (verdict === 'correct') byCategory[cat].correct += 1;
   }
-
-  const total = pool
-    .filter((q) => snapshot.order.includes(q.id))
-    .reduce((s, q) => s + q.points, 0);
 
   // Apply German pass rules.
   let passed = errorPoints <= EXAM_RULES.maxErrorPoints;
